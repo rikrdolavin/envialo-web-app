@@ -1,4 +1,4 @@
-import LayoutClientWrapper from "./LayoutClientWrapper";
+import LayoutClientWrapper from "@/common/layout/LayoutClientWrapper";
 import { Locale } from "@/models/language";
 
 interface LayoutProps {
