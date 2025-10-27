@@ -4,7 +4,7 @@ export interface ApiPaginationResponse {
   limit: number;
   offset: number;
   count: number;
-  results: unknown[];
+  results?: unknown[];
   filters?: ApiPaginationResponseFilters;
 }
 

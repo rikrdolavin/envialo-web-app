@@ -1,6 +1,6 @@
 import { Locale } from "@/models/language";
 import { getDictionary } from "../dictionaries";
-import { getProducts } from "@/lib/cart";
+import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "./components/ProductsList";
 

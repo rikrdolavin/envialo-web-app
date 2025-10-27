@@ -24,3 +24,8 @@ export interface ProductLocation {
 export interface ProductsPaginatedResponse extends ApiPaginationResponse {
   results: Product[];
 }
+
+export interface ProductDetailsResponse {
+  status: string;
+  result: Product;
+}

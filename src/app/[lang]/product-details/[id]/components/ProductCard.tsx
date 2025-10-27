@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Card, Button, InputNumber } from "antd";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { ShoppingOutlined } from "@ant-design/icons";
 
 interface ProductCardProps {
@@ -11,8 +10,8 @@ interface ProductCardProps {
   lang: string;
   name: string;
   price: number;
-  imageUrl: string;
   onAddToCart?: (productId: string, quantity: number) => void;
+  descripcion: string;
 }
 
 export default function ProductCard({
@@ -20,8 +19,8 @@ export default function ProductCard({
   lang,
   name,
   price,
-  imageUrl,
   onAddToCart,
+  descripcion,
 }: Readonly<ProductCardProps>) {
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
@@ -46,13 +45,6 @@ export default function ProductCard({
     >
       <div className="flex flex-col h-full">
         <div className="cursor-pointer" onClick={handleNavigate}>
-          <Image
-            src={imageUrl}
-            alt={name}
-            width={300}
-            height={300}
-            className="object-contain w-full h-40"
-          />
           <p className="line-clamp-2 my-2">{name}</p>
         </div>
 
@@ -97,6 +89,9 @@ export default function ProductCard({
                 icon={<ShoppingOutlined />}
               />
             </div>
+          </div>
+          <div className="w-full sm:w-auto">
+            <p>{descripcion}</p>
           </div>
         </div>
       </div>
