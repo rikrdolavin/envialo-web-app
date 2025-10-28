@@ -1,9 +1,13 @@
 "use client";
 
+import { useAuth } from "@/context/AuthContext";
+import { LoginRequest, SignUpRequest } from "@/models/auth";
 import { Locale } from "@/models/language";
+import { InternalApiResponse } from "@/types/api";
 import { Button, Card, Form, Input, Switch } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 
 interface SignUpFormProps {
   lang: Locale["locale"];
@@ -13,11 +17,14 @@ interface SignUpFormProps {
 export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
   const [form] = Form.useForm();
   const termaAndConditions = Form.useWatch("terms", form);
+  const router = useRouter();
+  const params = useParams<{ callbackUrl: string }>();
+  const { setUser } = useAuth();
+
   const onFinish = async () => {
     const values = form.getFieldsValue();
-    console.log(values);
 
-    let authData;
+    let authData: LoginRequest | SignUpRequest;
     if (isSignUp) {
       authData = {
         email: values.email,
@@ -40,7 +47,16 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
       },
       body: JSON.stringify(authData),
     });
-    console.log(response);
+
+    const loginresponse: InternalApiResponse = await response.json();
+    if (loginresponse.success) {
+      setUser((loginresponse.data as { user_email: string }).user_email);
+      if (params.callbackUrl) {
+        router.push(params.callbackUrl);
+      } else {
+        router.push(`/${lang}/home`);
+      }
+    }
   };
 
   return (

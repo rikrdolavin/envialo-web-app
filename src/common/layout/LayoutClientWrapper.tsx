@@ -6,6 +6,7 @@ import { Content, Footer } from "antd/es/layout/layout";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import NavHeader from "./NavHeader";
 import "@ant-design/v5-patch-for-react-19";
+import { AuthProvider } from "@/context/AuthContext";
 
 interface LayoutClientWrapperProps {
   children: React.ReactNode;
@@ -19,11 +20,13 @@ export default function LayoutClientWrapper({
   return (
     <AntdRegistry>
       <Layout>
-        <NavHeader lang={lang} />
-        <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
-          {children}
-        </Content>
-        <Footer>Footer</Footer>
+        <AuthProvider>
+          <NavHeader lang={lang} />
+          <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
+            {children}
+          </Content>
+          <Footer>Footer</Footer>
+        </AuthProvider>
       </Layout>
     </AntdRegistry>
   );

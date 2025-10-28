@@ -45,7 +45,17 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isApiRoute = pathname.startsWith("/api");
 
+  const accessToken = request.cookies.get("access_token");
+  const session = request.cookies.get("session");
+  const isAuthRoute = /\/[a-z]{2}\/auth\/(login|signup)(\/|$)/i.test(pathname);
+
   const { currentLocale } = getCurrentLanguageAndPathnameSegments(pathname);
+
+  if (isAuthRoute && accessToken?.value && session?.value) {
+    return NextResponse.redirect(
+      new URL(`/${currentLocale}/home`, request.url)
+    );
+  }
 
   if (isApiRoute) {
     const referer = request.headers.get("referer");

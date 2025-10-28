@@ -3,6 +3,14 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface LoginResponse {
+  token: string;
+  expiration: string;
+  email: string;
+  role: string;
+  userId: string;
+}
+
 export interface SignUpRequest {
   firstName: string;
   lastName: string;

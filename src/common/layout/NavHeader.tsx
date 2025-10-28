@@ -2,26 +2,70 @@ import { Header } from "antd/es/layout/layout";
 import Image from "next/image";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { Locale } from "@/models/language";
-import { UserOutlined } from "@ant-design/icons";
+import { LoginOutlined, LogoutOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 interface NavHeaderProps {
   lang: Locale["locale"];
 }
 
 export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
-  const items: MenuProps["items"] = [
-    {
-      key: 0,
-      label: <Link href={`/${lang}/auth/login`}>{"Iniciar sesión"}</Link>,
-    },
-    {
-      key: 1,
-      label: <Link href={`/${lang}/auth/signup`}>{"Crear cuenta"}</Link>,
-    },
-  ];
+  const pathname = usePathname();
+  const { user, loading, logout } = useAuth();
+
+  const getMenuItems = (): MenuProps["items"] => {
+    if (loading) return [];
+    
+    if (user) {
+      // Usuario autenticado
+      return [
+        {
+          key: 'profile',
+          icon: <UserOutlined />,
+          label: (
+            <Link href={`/${lang}/profile`}>
+              Mi perfil
+            </Link>
+          ),
+        },
+        {
+          type: 'divider',
+        },
+        {
+          key: 'logout',
+          icon: <LogoutOutlined />,
+          label: 'Cerrar sesión',
+          onClick: () => logout(),
+        },
+      ];
+    } else {
+      // Usuario no autenticado
+      return [
+        {
+          key: 'login',
+          icon: <LoginOutlined />,
+          label: (
+            <Link href={`/${lang}/auth/login?callbackUrl=${pathname}`}>
+              Iniciar sesión
+            </Link>
+          ),
+        },
+        {
+          key: 'signup',
+          icon: <UserAddOutlined />,
+          label: (
+            <Link href={`/${lang}/auth/signup?callbackUrl=${pathname}`}>
+              Crear cuenta
+            </Link>
+          ),
+        },
+      ];
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +103,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         </Link>
         <div className="flex items-center gap-4">
           <LanguageSwitcher currentLang={lang} />
-          <Dropdown menu={{ items }} trigger={["click"]}>
+          <Dropdown menu={{ items: getMenuItems() }} trigger={["click"]}>
             <Avatar size="large" icon={<UserOutlined />} />
           </Dropdown>
         </div>

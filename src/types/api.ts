@@ -11,3 +11,10 @@ export interface ApiPaginationResponse {
 export interface ApiPaginationResponseFilters {
   available_categories: string[];
 }
+
+export interface InternalApiResponse<T = unknown> {
+  status: string;
+  success: boolean;
+  httpStatus: number;
+  data: T;
+}

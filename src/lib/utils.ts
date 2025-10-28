@@ -32,6 +32,7 @@ export async function doFetch({
       return await response.json();
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    return { success: false, error: error };
   }
 }
