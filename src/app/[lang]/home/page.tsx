@@ -12,14 +12,14 @@ export default async function Page({ params }: Readonly<PageProps>) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  const products: ProductsPaginatedResponse = await getProducts({
-    limit: 20,
-    offset: 0,
-  });
+  // const products: ProductsPaginatedResponse = await getProducts({
+  //   limit: 20,
+  //   offset: 0,
+  // });
 
   return (
-    <div>
-      <ProductsList lang={lang} products={products.results} />
+    <div className="min-h-screen">
+      {/* <ProductsList lang={lang} products={products.results} /> */}
     </div>
   );
 }
