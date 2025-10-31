@@ -32,7 +32,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const session = await createSession({ userId: response.userId });
+    const session = await createSession({
+      userId: response.userId,
+      email: response.email,
+    });
 
     // Guardar cookie de sesión JWT propia
     _response.cookies.set("session", session, {
@@ -54,6 +57,7 @@ export async function POST(request: NextRequest) {
 
     return _response;
   } catch (err) {
+    console.error(err);
     return NextResponse.json(
       {
         status: "ERROR",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
-import { LoginRequest, SignUpRequest } from "@/models/auth";
+import { LoginRequest, LoginResponse, SignUpRequest } from "@/models/auth";
 import { Locale } from "@/models/language";
 import { InternalApiResponse } from "@/types/api";
 import { Button, Card, Form, Input, Switch } from "antd";
@@ -48,9 +48,10 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
       body: JSON.stringify(authData),
     });
 
-    const loginresponse: InternalApiResponse = await response.json();
-    if (loginresponse.success) {
-      setUser((loginresponse.data as { user_email: string }).user_email);
+    const authResponse: InternalApiResponse = await response.json();
+    if (authResponse.success) {
+      const userData: LoginResponse = authResponse.data as LoginResponse;
+      setUser({ userId: userData.userId });
       if (params.callbackUrl) {
         router.push(params.callbackUrl);
       } else {

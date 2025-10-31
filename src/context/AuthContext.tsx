@@ -6,9 +6,10 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useMemo,
 } from "react";
 import { usePathname } from "next/navigation";
-import { verifySession } from "@/lib/session";
+import { SessionCookieData } from "@/types/session";
 
 type User = {
   userId: string;
@@ -18,8 +19,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   loading: boolean;
-  logout: () => Promise<void>;
-  setUser: (data: any) => void;
+  setUser: (data: User | null) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -33,19 +33,16 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
   useEffect(() => {
     async function loadUserFromSession() {
       try {
-        const session = document.cookie
-          .split("; ")
-          .find((row) => row.startsWith("session="))
-          ?.split("=")[1];
+        const res = await fetch("/api/auth/session", {
+          credentials: "include",
+        });
+        const sessionPayload: SessionCookieData = await res.json();
 
-        if (session) {
-          const payload = await verifySession(session);
-          if (payload) {
-            setUser({
-              userId: payload.userId as string,
-              email: payload.email as string,
-            });
-          }
+        if (sessionPayload?.email && sessionPayload?.userId) {
+          setUser({
+            userId: sessionPayload.userId,
+            email: sessionPayload.email,
+          });
         }
       } catch (error) {
         console.error("Error al verificar la sesión:", error);
@@ -57,24 +54,17 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
     loadUserFromSession();
   }, [pathname]);
 
-  const logout = async () => {
-    // Eliminar cookies
-    document.cookie =
-      "session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie =
-      "access_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
-    // Limpiar el estado
-    setUser(null);
-
-    // Redirigir a la página de inicio
-    location.href = "/" + pathname.split("/")[1] + "/home";
-  };
+  const authValue = useMemo(
+    () => ({
+      user,
+      loading,
+      setUser,
+    }),
+    [user, loading, setUser]
+  );
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout, setUser }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
 }
 

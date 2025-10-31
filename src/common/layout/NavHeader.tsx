@@ -2,7 +2,12 @@ import { Header } from "antd/es/layout/layout";
 import Image from "next/image";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { Locale } from "@/models/language";
-import { LoginOutlined, LogoutOutlined, UserAddOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  LoginOutlined,
+  LogoutOutlined,
+  UserAddOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Avatar, Dropdown, MenuProps } from "antd";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -15,38 +20,42 @@ interface NavHeaderProps {
 
 export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   const pathname = usePathname();
-  const { user, loading, logout } = useAuth();
+  const { user, loading, setUser } = useAuth();
 
   const getMenuItems = (): MenuProps["items"] => {
     if (loading) return [];
-    
+
     if (user) {
       // Usuario autenticado
       return [
         {
-          key: 'profile',
+          key: "profile",
           icon: <UserOutlined />,
-          label: (
-            <Link href={`/${lang}/profile`}>
-              Mi perfil
-            </Link>
-          ),
+          label: <Link href={`/${lang}/profile`}>Mi perfil</Link>,
         },
         {
-          type: 'divider',
+          type: "divider",
         },
         {
-          key: 'logout',
+          key: "logout",
           icon: <LogoutOutlined />,
-          label: 'Cerrar sesión',
-          onClick: () => logout(),
+          label: "Cerrar sesión",
+          onClick: () => {
+            try {
+              setUser(null);
+              fetch("/api/auth/logout", { credentials: "include" });
+              return;
+            } catch (error) {
+              console.error(error);
+            }
+          },
         },
       ];
     } else {
       // Usuario no autenticado
       return [
         {
-          key: 'login',
+          key: "login",
           icon: <LoginOutlined />,
           label: (
             <Link href={`/${lang}/auth/login?callbackUrl=${pathname}`}>
@@ -55,7 +64,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           ),
         },
         {
-          key: 'signup',
+          key: "signup",
           icon: <UserAddOutlined />,
           label: (
             <Link href={`/${lang}/auth/signup?callbackUrl=${pathname}`}>
