@@ -1,4 +1,8 @@
-import { API_PRODUCTS,API_PRODUCTS_DETAILS, API_PRODUCTS_DETAILS_PARAM } from "@/constants/products/endpoints";
+import {
+  API_PRODUCTS,
+  API_PRODUCTS_DETAILS,
+  API_PRODUCTS_DETAILS_PARAM,
+} from "@/constants/products/endpoints";
 
 import { doFetch } from "./utils";
 
@@ -27,10 +31,9 @@ export async function getProducts({
 }
 
 export async function getProductDetails(id: string) {
-  
   return await doFetch({
     data: null,
     method: "GET",
-    endpoint: API_PRODUCTS_DETAILS.replace(API_PRODUCTS_DETAILS_PARAM,id),
+    endpoint: API_PRODUCTS_DETAILS.replace(API_PRODUCTS_DETAILS_PARAM, id),
   });
 }
