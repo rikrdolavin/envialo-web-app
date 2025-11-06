@@ -4,17 +4,17 @@ const sections = [
   {
     title: "Servicio al cliente",
     links: [
-      { label: "Pagos", href: "#" },
-      { label: "Entregas", href: "#" },
-      { label: "Preguntas Frecuentes", href: "#" },
+      { label: "Pagos", href: "/payments" },
+      { label: "Entregas", href: "/delivery" },
+      { label: "Preguntas Frecuentes", href: "/faq" },
     ],
   },
   {
     title: "Otros",
     links: [
-      { label: "Política de privacidad", href: "#" },
-      { label: "Términos y condiciones", href: "#" },
-      { label: "Política de devoluciones", href: "#" },
+      { label: "Política de privacidad", href: "/privacy-policies" },
+      { label: "Términos y condiciones", href: "/terms-conditions" },
+      { label: "Política de devoluciones", href: "/returns-and-refunds" },
     ],
   },
   {
