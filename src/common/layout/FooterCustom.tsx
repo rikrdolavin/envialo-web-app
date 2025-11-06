@@ -1,131 +1,104 @@
 import Image from "next/image";
 import { Locale } from "@/models/language";
+import InputWithButton from "./footer/InputWithButton";
+import { Divider } from "antd";
+import MailIcon from "../icons/MailIcon";
+import PhoneIcon from "../icons/PhoneIcon";
+import FaceBookIcon from "../icons/FaceBookIcon";
+import WhatsAppIcon from "../icons/WhatsAppIcon";
+import TelegramIcon from "../icons/TelegramIcon";
+import FooterSections from "./footer/FooterSections";
 
 interface FooterProps {
   lang: Locale["locale"];
-  imageUrl: string
 }
 
-export default function FooterCustom({ lang,imageUrl }: Readonly<FooterProps>) {
+export default function FooterCustom({ lang }: Readonly<FooterProps>) {
   return (
-    <footer className="bg-orange-500 text-white py-8">
-      <div className="container mx-auto  px-4">
-        {/* Fila 1 */}
-        <div className="border-b border-white/40 pb-6 mb-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <h2 className="text-lg font-semibold">
-                {" "}
-                Suscríbete aquí para conocer más de nuestras ofertas
-              </h2>
-              <p className="text-sm">
+    <footer>
+      <div className="flex flex-col transition-shadow bg-[#EB593D] text-white gap-2 px-3 py-10">
+        <div className="max-w-[1420px] mx-auto">
+          <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-50">
+            <div className="flex flex-col">
+              <p className="text-[20px]">
+                <b>Suscríbete aquí para conocer más de nuestras ofertas</b>
+              </p>
+              <p>
                 Regístrese ahora para recibir las últimas actualizaciones sobre
-                promociones y cupones. ¡No te preocupes, no enviamos spam!
+                promociones y cupones. !No te preocupes, no enviamos spam!
               </p>
             </div>
-            <div>
-              <h2 className="text-lg font-semibold mb-2">
-                Suscríbete a nuestro boletín
-              </h2>
-              <form className="flex mb-2">
-                <input
-                  type="email"
-                  placeholder="Correo electrónico*"
-                  className="flex-grow px-2 py-2 text-gray-800 bg-white rounded-l-md focus:outline-none"
+            <div className="flex flex-col gap-2 items-center">
+              <InputWithButton></InputWithButton>
+              <p>
+                Al suscribirte aceptas nuestros Términos y condiciones y
+                Política de privacidad
+              </p>
+            </div>
+          </div>
+
+          <Divider className="bg-white h-px" />
+
+          <div className="flex flex-wrap justify-between md:flex-nowrap">
+            <div className="flex flex-col gap-5 pl-5 text-[17px] sm:gap-11">
+              <div style={{ color: "white" }}>
+                <Image
+                  src="/assets/footer.webp"
+                  alt="Logo"
+                  width={300}
+                  height={90}
                 />
-                <button
-                  type="submit"
-                  className="bg-green-700 text-white-600 px-4 py-2 rounded-r-md font-semibold hover:bg-orange-100 transition"
-                >
-                  Enviar
-                </button>
-              </form>
-              <p className="text-sm text-white/80">
-                Rellena este campo obligatorio.<br/><br/>
-                Al suscribirte aceptas nuestros <a href="#">Términos y condiciones</a> y <a href="#"> Política de privacidad</a>
-              </p>
-            </div>
-          </div>
-        </div>
+              </div>
+              <div className="text-[18px]">
+                <p>Donde estés</p>
+              </div>
+              <div className="flex flex-col justify-start sm:items-center gap-5 sm:flex-row sm:mx-0 mx-auto">
+                <div className="flex justify-start gap-2">
+                  <PhoneIcon />
 
-        {/* Fila 2 */}
-        <div className="col-span-2 border-b border-white/40 pb-4 grid grid-cols-2 gap-6">
-          <div className="row-span-2" >
-            <div className="cursor-pointer">
-                      <Image
-                        src={imageUrl}
-                        alt={""}
-                        width={300}
-                        height={300}
-                        className="object-contain w-full h-40"
-                      />
-                      <p className="line-clamp-2 my-2"></p>
-             </div>
-              <div className="col-span-2">
-                <div>
-                 <p>Lunes a Sábado 8:00 am a 5:00 pm. 
-                      +5350800288  
-                      </p>
-                </div>
-                <div>  
-                      <p> ¿Necesitas ayuda con tu pedido? 
-                      soporte@brincoxpress.com 
-                      </p>
-                </div>
-                    
-             </div>
-                 
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <h3 className="font-semibold mb-2">Recursos</h3>
-              <ul className="text-sm space-y-1">
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Ayuda</a>
-                </li>
-                <li>
-                  <a href="#">Soporte</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Recursos</h3>
-              <ul className="text-sm space-y-1">
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Ayuda</a>
-                </li>
-                <li>
-                  <a href="#">Soporte</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Recursos</h3>
-              <ul className="text-sm space-y-1">
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Ayuda</a>
-                </li>
-                <li>
-                  <a href="#">Soporte</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+                  <div className="text-white">
+                    <p className="text-[14px]">
+                      Lunes a sábado 8:00 am a 5:00 pm
+                    </p>
 
-        {/* Fila 3 - Copyright */}
-        <div className="col-span-3 text-center text-sm pt-2">
-           BrincoXpress ©{new Date().getFullYear()} . Todos los derechos
-          reservados
+                    <p className="text-[18px]">
+                      <b>+5350800288</b>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-start gap-2">
+                  <MailIcon />
+
+                  <div>
+                    <p className="text-[14px]">
+                      Necesitas ayuda con tu pedido?
+                    </p>
+
+                    <p className="text-[18px]">
+                      <b>soporte@brincoxpress.com</b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap justify-start text-[15px] pl-5 gap-3 pr-13 pt-6 sm:gap-10">
+              <FooterSections />
+            </div>
+          </div>
+
+          <div className="flex justify-start gap-4 pl-5 mr-2 sm:justify-end sm:items-end">
+            <FaceBookIcon />
+            <WhatsAppIcon />
+            <TelegramIcon />
+          </div>
+
+          <Divider className="bg-white h-px" />
+
+          <section className="flex justify-center text-center items-center text-[15px]">
+            <p>BrincoExpress &copy; 2025. Todos los derechos reservados</p>
+          </section>
         </div>
       </div>
     </footer>

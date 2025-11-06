@@ -26,7 +26,7 @@ export default function LayoutClientWrapper({
           <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
             {children}
           </Content>
-          <FooterCustom imageUrl="" lang={lang} />
+          <FooterCustom lang={lang} />
         </AuthProvider>
       </Layout>
     </AntdRegistry>
