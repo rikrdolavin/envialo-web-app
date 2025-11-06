@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Card, Button, InputNumber } from "antd";
+import { Card } from "antd";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ShoppingOutlined } from "@ant-design/icons";
+import AddProductCart from "./product-card/AddProductCart";
 
 interface ProductCardProps {
   id: string;
@@ -12,7 +11,6 @@ interface ProductCardProps {
   name: string;
   price: number;
   imageUrl: string;
-  onAddToCart?: (productId: string, quantity: number) => void;
 }
 
 export default function ProductCard({
@@ -21,17 +19,11 @@ export default function ProductCard({
   name,
   price,
   imageUrl,
-  onAddToCart,
 }: Readonly<ProductCardProps>) {
-  const [quantity, setQuantity] = useState(1);
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/${lang}/product/${id}`);
-  };
-
-  const handleAddToCart = () => {
-    if (onAddToCart) onAddToCart(id, quantity);
+    router.push(`/${lang}/product-details/${id}`);
   };
 
   return (
@@ -56,49 +48,7 @@ export default function ProductCard({
           <p className="line-clamp-2 my-2">{name}</p>
         </div>
 
-        <div className="flex flex-col justify-end grow mt-4 gap-2 sm:gap-0">
-          <div className="text-lg font-semibold text-red-500">
-            ${price.toFixed(2).replace(".", ",")}
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-0 gap-2 sm:gap-0">
-            <div className="flex items-center gap-1 w-full">
-              <Button
-                style={{ padding: 0, width: 30 }}
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              >
-                -
-              </Button>
-              <div className="w-full sm:max-w-20">
-                <InputNumber
-                  style={{ width: "100%" }}
-                  min={1}
-                  value={quantity}
-                  onChange={(value) => setQuantity(value || 1)}
-                />
-              </div>
-              <Button
-                style={{ padding: 0, width: 30 }}
-                onClick={() => setQuantity((q) => q + 1)}
-              >
-                +
-              </Button>
-            </div>
-
-            <div className="w-full sm:w-auto">
-              <Button
-                type="primary"
-                onClick={handleAddToCart}
-                style={{ width: "100%", padding: "0 4px" }}
-                styles={{
-                  icon: { fontSize: 25 },
-                }}
-                size="middle"
-                icon={<ShoppingOutlined />}
-              />
-            </div>
-          </div>
-        </div>
+        <AddProductCart price={price} productId={id} />
       </div>
     </Card>
   );

@@ -33,5 +33,6 @@ export async function doFetch({
     }
   } catch (error) {
     console.error(error);
+    return { success: false, error: error };
   }
 }
