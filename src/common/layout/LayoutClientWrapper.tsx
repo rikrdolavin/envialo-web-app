@@ -8,11 +8,19 @@ import NavHeader from "./NavHeader";
 import FooterCustom from "./FooterCustom";
 import { AuthProvider } from "@/context/AuthContext";
 import "@ant-design/v5-patch-for-react-19";
+import HomeCarousel from "@/app/[lang]/home/components/HomeCarousel";
 
 interface LayoutClientWrapperProps {
   children: React.ReactNode;
   lang: Locale["locale"];
 }
+
+const carouselImages = ["/assets/images/car_img1_PC.webp",
+                        "/assets/images/car_img2_PC.webp",
+                        "/assets/images/car_img3_PC.webp",
+                        "/assets/images/car_img4_PC.webp",
+                        "/assets/images/car_img5_PC.webp"];
+
 
 export default function LayoutClientWrapper({
   children,
@@ -23,6 +31,7 @@ export default function LayoutClientWrapper({
       <Layout>
         <AuthProvider>
           <NavHeader lang={lang} />
+          <HomeCarousel images={carouselImages}/>
           <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
             {children}
           </Content>

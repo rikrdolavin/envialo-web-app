@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Locale } from "@/models/language";
-import InputWithButton from "./footer/InputWithButton";
 import { Divider } from "antd";
 import MailIcon from "../icons/MailIcon";
 import PhoneIcon from "../icons/PhoneIcon";
@@ -8,6 +7,7 @@ import FaceBookIcon from "../icons/FaceBookIcon";
 import WhatsAppIcon from "../icons/WhatsAppIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 import FooterSections from "./footer/FooterSections";
+import FooterSubscriptionForm from "./footer/FooterSubscriptionForm";
 
 interface FooterProps {
   lang: Locale["locale"];
@@ -29,7 +29,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
               </p>
             </div>
             <div className="flex flex-col gap-2 items-center">
-              <InputWithButton></InputWithButton>
+              <FooterSubscriptionForm></FooterSubscriptionForm>
               <p>
                 Al suscribirte aceptas nuestros Términos y condiciones y
                 Política de privacidad
