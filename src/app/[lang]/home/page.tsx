@@ -3,6 +3,7 @@ import { getDictionary } from "../dictionaries";
 import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "./components/ProductsList";
+import HomeCarousel from "./components/HomeCarousel"
 import Link from "next/link";
 
 interface PageProps {
@@ -20,18 +21,25 @@ export default async function Page({ params }: Readonly<PageProps>) {
 
   if (products.status == "success") {
     return (
+     
       <div>
-        {products.results && (
+         <HomeCarousel/>
+         {products.results && (
           <ProductsList lang={lang} products={products.results} />
         )}
       </div>
+     
+      
     );
   } else {
     return (
-      <div className="h-screen">
+           
+       <div className="h-screen">
+       <HomeCarousel/>
         Hubo un error al cargar los productos{" "}
-        <Link href={`/${lang}/home`}>Recargar</Link>
-      </div>
+       <Link href={`/${lang}/home`}>Recargar</Link>
+       </div>
+         
     );
   }
 }
