@@ -18,7 +18,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
     <footer>
       <div className="flex flex-col transition-shadow bg-[#EB593D] text-white gap-2 px-3 py-10">
         <div className="max-w-[1420px] mx-auto">
-          <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-50">
+          <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-35">
             <div className="flex flex-col">
               <p className="text-[20px]">
                 <b>Suscríbete aquí para conocer más de nuestras ofertas</b>
