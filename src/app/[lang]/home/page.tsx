@@ -4,6 +4,7 @@ import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "./components/ProductsList";
 import HomeCarousel from "./components/HomeCarousel"
+import PromocionalBanner from "@/common/PromocionalBanner";
 import Link from "next/link";
 
 interface PageProps {
@@ -20,6 +21,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
   });
 
   if (products.status == "success") {
+     console.log(products);
     return (
      
       <div>
@@ -27,6 +29,8 @@ export default async function Page({ params }: Readonly<PageProps>) {
          {products.results && (
           <ProductsList lang={lang} products={products.results} />
         )}
+        <PromocionalBanner/>
+
       </div>
      
       
@@ -38,6 +42,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
        <HomeCarousel/>
         Hubo un error al cargar los productos{" "}
        <Link href={`/${lang}/home`}>Recargar</Link>
+        <PromocionalBanner/>
        </div>
          
     );
