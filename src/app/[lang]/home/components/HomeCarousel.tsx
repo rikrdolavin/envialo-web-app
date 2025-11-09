@@ -4,10 +4,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Carousel as AntCarousel } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import type { CarouselRef } from "antd/es/carousel";
+import Image from "next/image";
 
 const HomeCarousel: React.FC = () => {
   const carouselRef = useRef<CarouselRef>(null);
-
 
   const carouselImagesDesktop = [
     "/assets/images/carousel/pc/car_img1_PC.webp",
@@ -25,7 +25,6 @@ const HomeCarousel: React.FC = () => {
     "/assets/images/carousel/mb/car_img5_mb.webp",
   ];
 
-  // Estado del ancho de ventana
   const [width, setWidth] = useState<number>(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
@@ -36,59 +35,71 @@ const HomeCarousel: React.FC = () => {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // Definimos el breakpoint
   const breakpoint = 768;
-
-  // Elegimos imágenes según el tamaño de pantalla
   const currentImages = useMemo(() => {
-    const isMobile = width <= breakpoint;
-    return isMobile ? carouselImagesMobile : carouselImagesDesktop;
+    return width <= breakpoint ? carouselImagesMobile : carouselImagesDesktop;
   }, [width]);
 
-  // Handlers de navegación
   const handlePrev = () => carouselRef.current?.prev();
   const handleNext = () => carouselRef.current?.next();
 
   return (
-    <div className="relative w-full h-ful">
-      <AntCarousel
-        ref={carouselRef}
-        autoplay
-        dots={false}
-        arrows={false}
-        effect="scrollx"
-      >
-        {currentImages.map((image, index) => (
-          <div key={index}>
-            <img
-              src={image}
-              alt={`Imagen ${index + 1}`}
-               className="w-full h-[300px] sm:h-[400px] md:h-auto object-cover"
-               loading="lazy"
-            />
-          </div>
-        ))}
-      </AntCarousel>
+    <div className="relative w-full">
+     
+      <div className="relative w-full overflow-hidden">
+        <AntCarousel
+          ref={carouselRef}
+          autoplay
+          dots={false}
+          arrows={false}
+          effect="scrollx"
+          className="w-full"
+        >
+          {currentImages.map((image, index) => (
+            <div
+              key={index}
+              className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 2xl:h-[700px] 3xl:h-[800px]"
+            >
+              <Image
+                src={image}
+                alt={`Imagen ${index + 1}`}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </AntCarousel>
 
-      {/* Flecha Izquierda */}
-      <button
-        onClick={handlePrev}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 
-          text-white text-[14px] sm:text-2xl bg-green-800 rounded-full w-8 h-8 sm:w-10 sm:h-10
-          flex items-center justify-center hover:bg-black/70"
-      >
-        <LeftOutlined />
-      </button>
+        <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+        
+          <button
+            onClick={handlePrev}
+            className="pointer-events-auto
+              bg-green-800 text-white
+              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20
+              rounded-full flex items-center justify-center
+              hover:bg-black/70 hover:scale-110 transition-all duration-200
+              focus:outline-none focus:ring-0 border-none shadow-lg"
+          >
+            <LeftOutlined className="text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl" />
+          </button>
 
-      {/* Flecha Derecha */}
-      <button
-        onClick={handleNext}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 
-          text-white text-[14px] sm:text-2xl bg-green-800 rounded-full w-8 h-8 sm:w-10 sm:h-10
-          flex items-center justify-center hover:bg-black/70"
-      >
-        <RightOutlined />
-      </button>
+          {/* Flecha derecha */}
+          <button
+            onClick={handleNext}
+            className="pointer-events-auto
+              bg-green-800 text-white
+              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20
+              rounded-full flex items-center justify-center
+              hover:bg-black/70 hover:scale-110 transition-all duration-200
+              focus:outline-none focus:ring-0 border-none shadow-lg"
+          >
+            <RightOutlined className="text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
