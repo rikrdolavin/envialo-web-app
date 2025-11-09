@@ -45,7 +45,6 @@ const HomeCarousel: React.FC = () => {
 
   return (
     <div className="relative w-full">
-     
       <div className="relative w-full overflow-hidden">
         <AntCarousel
           ref={carouselRef}
@@ -56,7 +55,10 @@ const HomeCarousel: React.FC = () => {
           className="w-full"
         >
           {currentImages.map((image, index) => (
-            <div key={index} className="relative w-full aspect-video sm:aspect-16/8 md:aspect-4/3 lg:aspect-video 2xl:aspect-16/7">
+            <div
+              key={index}
+              className="relative w-full aspect-video sm:aspect-16/8 md:aspect-4/3 lg:aspect-video 2xl:aspect-16/7"
+            >
               <Image
                 src={image}
                 alt={`Imagen ${index + 1}`}
@@ -70,7 +72,6 @@ const HomeCarousel: React.FC = () => {
         </AntCarousel>
 
         <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
-        
           <button
             onClick={handlePrev}
             className="pointer-events-auto

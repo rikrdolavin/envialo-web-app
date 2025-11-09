@@ -15,10 +15,6 @@ interface LayoutClientWrapperProps {
   lang: Locale["locale"];
 }
 
-
-
-
-
 export default function LayoutClientWrapper({
   children,
   lang,
@@ -27,10 +23,9 @@ export default function LayoutClientWrapper({
     <AntdRegistry>
       <Layout>
         <AuthProvider>
-         <NavHeader lang={lang} />
-        
-         <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
-          
+          <NavHeader lang={lang} />
+
+          <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
             {children}
           </Content>
           <FooterCustom lang={lang} />

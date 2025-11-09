@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Locale } from "@/models/language";
-import InputWithButton from "./footer/InputWithButton";
 import { Divider } from "antd";
 import MailIcon from "../icons/MailIcon";
 import PhoneIcon from "../icons/PhoneIcon";
@@ -8,6 +7,7 @@ import FaceBookIcon from "../icons/FaceBookIcon";
 import WhatsAppIcon from "../icons/WhatsAppIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 import FooterSections from "./footer/FooterSections";
+import FooterSubscriptionForm from "./footer/FooterSubscriptionForm";
 
 interface FooterProps {
   lang: Locale["locale"];
@@ -18,7 +18,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
     <footer>
       <div className="flex flex-col transition-shadow bg-[#EB593D] text-white gap-2 px-3 py-10">
         <div className="max-w-[1420px] mx-auto">
-          <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-50">
+          <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-35">
             <div className="flex flex-col">
               <p className="text-[20px]">
                 <b>Suscríbete aquí para conocer más de nuestras ofertas</b>
@@ -29,7 +29,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
               </p>
             </div>
             <div className="flex flex-col gap-2 items-center">
-              <InputWithButton></InputWithButton>
+              <FooterSubscriptionForm></FooterSubscriptionForm>
               <p>
                 Al suscribirte aceptas nuestros Términos y condiciones y
                 Política de privacidad
