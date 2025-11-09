@@ -5,6 +5,7 @@ import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "./components/ProductsList";
 import PromocionalBanner from "@/common/PromocionalBanner";
 import Link from "next/link";
+import HomeCarousel from "./components/HomeCarousel";
 
 interface PageProps {
   params: Promise<{ lang: Locale["locale"] }>;
@@ -22,16 +23,22 @@ export default async function Page({ params }: Readonly<PageProps>) {
   if (products.status == "success") {
      console.log(products);
     return (
-     
-       <div>
       
+       
+
+      <div>
+         
+         <HomeCarousel/>
+
          {products.results && (
           <ProductsList lang={lang} products={products.results} />
         )}
         <PromocionalBanner/>
 
-      </div>
+       </div>
      
+      
+       
       
       
     );

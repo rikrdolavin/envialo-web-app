@@ -56,17 +56,14 @@ const HomeCarousel: React.FC = () => {
           className="w-full"
         >
           {currentImages.map((image, index) => (
-            <div
-              key={index}
-              className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] 2xl:h-[700px] 3xl:h-[800px]"
-            >
+            <div key={index} className="relative w-full aspect-video sm:aspect-16/8 md:aspect-4/3 lg:aspect-video 2xl:aspect-16/7">
               <Image
                 src={image}
                 alt={`Imagen ${index + 1}`}
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
           ))}
@@ -78,7 +75,7 @@ const HomeCarousel: React.FC = () => {
             onClick={handlePrev}
             className="pointer-events-auto
               bg-green-800 text-white
-              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20
+              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 3xl:w-20 3xl:h-20
               rounded-full flex items-center justify-center
               hover:bg-black/70 hover:scale-110 transition-all duration-200
               focus:outline-none focus:ring-0 border-none shadow-lg"
@@ -91,7 +88,7 @@ const HomeCarousel: React.FC = () => {
             onClick={handleNext}
             className="pointer-events-auto
               bg-green-800 text-white
-              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 2xl:w-16 2xl:h-16 3xl:w-20 3xl:h-20
+              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 3xl:w-20 3xl:h-20
               rounded-full flex items-center justify-center
               hover:bg-black/70 hover:scale-110 transition-all duration-200
               focus:outline-none focus:ring-0 border-none shadow-lg"

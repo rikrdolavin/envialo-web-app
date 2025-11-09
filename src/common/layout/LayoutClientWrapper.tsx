@@ -9,7 +9,6 @@ import FooterCustom from "./FooterCustom";
 
 import { AuthProvider } from "@/context/AuthContext";
 import "@ant-design/v5-patch-for-react-19";
-import HomeCarousel from "@/app/[lang]/home/components/HomeCarousel";
 
 interface LayoutClientWrapperProps {
   children: React.ReactNode;
@@ -29,7 +28,7 @@ export default function LayoutClientWrapper({
       <Layout>
         <AuthProvider>
          <NavHeader lang={lang} />
-         <HomeCarousel/>
+        
          <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
           
             {children}
