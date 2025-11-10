@@ -25,9 +25,7 @@ export default function LayoutClientWrapper({
         <AuthProvider>
           <NavHeader lang={lang} />
 
-          <Content className="py-8 bg-[#edf7fa] px-4 lg:px-16">
-            {children}
-          </Content>
+          <Content className="bg-[#edf7fa]">{children}</Content>
           <FooterCustom lang={lang} />
         </AuthProvider>
       </Layout>

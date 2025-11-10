@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import  FloatingWhatsAppButton from "@/common/FloatingWhatsAppButton";
+import FloatingWhatsAppButton from "@/common/FloatingWhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,8 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}
-      <FloatingWhatsAppButton/>
+      <body>
+        {children}
+        <FloatingWhatsAppButton />
       </body>
     </html>
   );

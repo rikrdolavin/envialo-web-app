@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import WrapperContainer from "./WrapperContainer";
 
 interface NavHeaderProps {
   lang: Locale["locale"];
@@ -106,7 +107,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         zIndex: 999,
       }}
     >
-      <div className="flex items-center justify-between w-full px-2 md:px-10">
+      <WrapperContainer className="flex items-center justify-between w-full px-2 md:px-10 mx-auto">
         <Link href={`/${lang}/home`} className="cursor-pointer">
           <Image src="/assets/logo.png" alt="Logo" width={200} height={200} />
         </Link>
@@ -116,7 +117,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
             <Avatar size="large" icon={<UserOutlined />} />
           </Dropdown>
         </div>
-      </div>
+      </WrapperContainer>
     </Header>
   );
 }

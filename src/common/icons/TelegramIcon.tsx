@@ -1,5 +1,3 @@
-import React from "react";
-
 const TelegramIcon = () => {
   return (
     <div data-testid="MailOutlineIcon">

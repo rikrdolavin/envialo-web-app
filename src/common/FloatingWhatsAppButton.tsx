@@ -1,13 +1,15 @@
-"use client";
+import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
 const FloatingWhatsAppButton = () => {
   const phoneNumber = "+50764954941";
   const message = "Hola Brincoxpress 👋🏻, necesito ayuda";
-  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
 
   return (
-    <a
+    <Link
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
@@ -25,7 +27,7 @@ const FloatingWhatsAppButton = () => {
       aria-label="Contáctanos por WhatsApp"
     >
       <FaWhatsapp className="text-3xl" />
-    </a>
+    </Link>
   );
 };
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 const FaceBookIcon = () => {
   return (
     <div data-testid="MailOutlineIcon">

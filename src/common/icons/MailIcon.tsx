@@ -1,5 +1,3 @@
-import React from "react";
-
 const MailIcon = () => {
   return (
     <div data-testid="MailOutlineIcon">

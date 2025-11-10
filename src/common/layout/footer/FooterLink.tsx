@@ -5,7 +5,10 @@ interface FooterLinkProps {
   children: React.ReactNode;
 }
 
-export default function FooterLink({ href, children }: FooterLinkProps) {
+export default function FooterLink({
+  href,
+  children,
+}: Readonly<FooterLinkProps>) {
   return (
     <p className=" ps-[22px] pr-1 hover:bg-gray-600/10 hover:cursor-pointer">
       {" "}
