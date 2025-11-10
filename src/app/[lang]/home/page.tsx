@@ -22,7 +22,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
   });
  
   if (products.status == "success") {
-  
+
     return (
       
        
@@ -40,10 +40,6 @@ export default async function Page({ params }: Readonly<PageProps>) {
 
        </div>
      
-      
-       
-      
-      
     );
   } else {
     return (
