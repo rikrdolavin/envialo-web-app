@@ -32,6 +32,9 @@ export default async function Page({ params }: Readonly<PageProps>) {
           )}
 
           <PromotionalBanner />
+          {products.results && (
+            <ProductsList lang={lang} products={products.results} />
+          )}
           <PromotionalPayBanner />
         </WrapperContainer>
       </div>
