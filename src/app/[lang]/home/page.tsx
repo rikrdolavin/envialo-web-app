@@ -3,9 +3,10 @@ import { getDictionary } from "../dictionaries";
 import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "./components/ProductsList";
-import PromocionalBanner from "@/common/PromocionalBanner";
 import Link from "next/link";
 import HomeCarousel from "./components/HomeCarousel";
+import PromotionalBanner from "@/common/PromotionalBanner";
+import PromotionalPayBanner from "@/common/PromotionalPayBanner";
 
 interface PageProps {
   params: Promise<{ lang: Locale["locale"] }>;
@@ -21,7 +22,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
   });
  
   if (products.status == "success") {
-     console.log(products);
+  
     return (
       
        
@@ -33,7 +34,9 @@ export default async function Page({ params }: Readonly<PageProps>) {
          {products.results && (
           <ProductsList lang={lang} products={products.results} />
         )}
-        <PromocionalBanner/>
+        <PromotionalBanner/>
+
+        <PromotionalPayBanner/>
 
        </div>
      
@@ -44,11 +47,13 @@ export default async function Page({ params }: Readonly<PageProps>) {
     );
   } else {
     return (
-           
        <div className="h-screen">
+        <HomeCarousel/>
+
         Hubo un error al cargar los productos{" "}
        <Link href={`/${lang}/home`}>Recargar</Link>
-        <PromocionalBanner/>
+        <PromotionalBanner/>
+        <PromotionalPayBanner/>
        </div>
          
     );

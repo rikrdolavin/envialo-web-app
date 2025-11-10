@@ -37,7 +37,7 @@ const HomeCarousel: React.FC = () => {
 
   const breakpoint = 768;
   const currentImages = useMemo(() => {
-    return width <= breakpoint ? carouselImagesMobile : carouselImagesDesktop;
+    return width < breakpoint ? carouselImagesMobile : carouselImagesDesktop;
   }, [width]);
 
   const handlePrev = () => carouselRef.current?.prev();
@@ -45,61 +45,78 @@ const HomeCarousel: React.FC = () => {
 
   return (
     <div className="relative w-full">
-      <div className="relative w-full overflow-hidden">
-        <AntCarousel
-          ref={carouselRef}
-          autoplay
-          dots={false}
-          arrows={false}
-          effect="scrollx"
-          className="w-full"
-        >
-          {currentImages.map((image, index) => (
-            <div
-              key={index}
-              className="relative w-full aspect-video sm:aspect-16/8 md:aspect-4/3 lg:aspect-video 2xl:aspect-16/7"
-            >
-              <Image
-                src={image}
-                alt={`Imagen ${index + 1}`}
-                fill
-                priority={index === 0}
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-            </div>
-          ))}
-        </AntCarousel>
-
-        <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
-          <button
-            onClick={handlePrev}
-            className="pointer-events-auto
-              bg-green-800 text-white
-              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 3xl:w-20 3xl:h-20
-              rounded-full flex items-center justify-center
-              hover:bg-black/70 hover:scale-110 transition-all duration-200
-              focus:outline-none focus:ring-0 border-none shadow-lg"
+     <div className="relative w-full overflow-hidden">
+       <div
+      className="relative w-full h-auto mb-2 sm:mb-4"      
+    >
+      <AntCarousel
+        ref={carouselRef}
+        autoplay
+        dots={false}
+        arrows={false}
+        effect="scrollx"
+        className="w-full"
+      >
+        {currentImages.map((image, index) => (
+          <div
+            key={index}
+            className={`relative w-full ${
+              width < 320
+                ? "h-[280px]"
+                : width < 375
+                ? "h-80"
+                : width < 425
+                ? "h-[360px]"
+                : width < breakpoint
+                ? "h-[420px]"
+                : "aspect-32/10"
+            }`}
           >
-            <LeftOutlined className="text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl" />
-          </button>
+            <Image
+              src={image}
+              alt={`Imagen ${index + 1}`}
+              fill
+              priority={index === 0}
+              className={`${
+                width < breakpoint ? "object-contain" : "object-cover"
+              } object-center`}
+            />
+          </div>
+        ))}
+      </AntCarousel>
 
-          {/* Flecha derecha */}
-          <button
-            onClick={handleNext}
-            className="pointer-events-auto
-              bg-green-800 text-white
-              w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-13 xl:h-13 2xl:w-15 2xl:h-15 3xl:w-20 3xl:h-20
-              rounded-full flex items-center justify-center
-              hover:bg-black/70 hover:scale-110 transition-all duration-200
-              focus:outline-none focus:ring-0 border-none shadow-lg"
-          >
-            <RightOutlined className="text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl" />
-          </button>
-        </div>
-      </div>
+      {/* Botón izquierda */}
+      <button
+        onClick={handlePrev}
+        className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full flex items-center justify-center hover:bg-black/70 hover:scale-110 transition-all duration-200 focus:outline-none border-none shadow-lg ${
+          width < breakpoint ? "left-4 w-9 h-9" : "left-4 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
+        }`}
+      >
+        <LeftOutlined
+          className={`${
+            width < breakpoint ? "text-[18px]" : "text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl"
+          }`}
+        />
+      </button>
+
+      {/* Botón derecha */}
+      <button
+        onClick={handleNext}
+        className={`absolute top-1/2 transform -translate-y-1/2 z-10 bg-green-800 text-white rounded-full flex items-center justify-center hover:bg-black/70 hover:scale-110 transition-all duration-200 focus:outline-none border-none shadow-lg ${
+          width < breakpoint ? "right-4 w-9 h-9" : "right-4 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
+        }`}
+      >
+        <RightOutlined
+          className={`${
+            width < breakpoint ? "text-[18px]" : "text-[14px] sm:text-2xl lg:text-3xl xl:text-4xl"
+          }`}
+        />
+      </button>
     </div>
+     </div>
+     </div>
   );
 };
 
 export default HomeCarousel;
+
