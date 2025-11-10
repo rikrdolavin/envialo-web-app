@@ -21,7 +21,6 @@ export default function ProductsList({
           lang={lang}
           name={el.name}
           price={el.price_cost}
-          onAddToCart={() => {}}
           key={el.id}
         />
       ))}
