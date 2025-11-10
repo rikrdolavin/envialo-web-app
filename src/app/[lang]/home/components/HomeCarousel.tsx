@@ -26,7 +26,7 @@ const HomeCarousel: React.FC = () => {
   ];
 
   const [width, setWidth] = useState<number>(
-    typeof window !== "undefined" ? window.innerWidth : 1024
+    typeof window !== "undefined" ? window.innerWidth : 1024,
   );
 
   useEffect(() => {
@@ -62,12 +62,12 @@ const HomeCarousel: React.FC = () => {
                   width < 320
                     ? "h-[280px]"
                     : width < 375
-                    ? "h-80"
-                    : width < 425
-                    ? "h-[360px]"
-                    : width < breakpoint
-                    ? "h-[420px]"
-                    : "aspect-32/10"
+                      ? "h-80"
+                      : width < 425
+                        ? "h-[360px]"
+                        : width < breakpoint
+                          ? "h-[420px]"
+                          : "aspect-32/10"
                 }`}
               >
                 <Image

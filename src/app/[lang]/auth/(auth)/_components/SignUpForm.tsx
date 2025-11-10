@@ -137,7 +137,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Los correos electrónicos no coinciden")
+                      new Error("Los correos electrónicos no coinciden"),
                     );
                   },
                 }),
@@ -175,7 +175,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        new Error("Las contraseñas no coinciden")
+                        new Error("Las contraseñas no coinciden"),
                       );
                     },
                   }),

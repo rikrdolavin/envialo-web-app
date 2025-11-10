@@ -7,9 +7,9 @@ export default async function Page() {
       <p className="mb-4 text-lg">
         ENVIALO acepta pagos con tarjetas de crédito, débito, prepago y
         virtuales, además de métodos de pagos alternativos. Los precios se
-        expresan en dólares estadounidenses (USD). ENVIALO no interviene
-        ni asume responsabilidad por posibles cargos adicionales aplicados por
-        las entidades emisoras. No se aceptan pagos en efectivo.
+        expresan en dólares estadounidenses (USD). ENVIALO no interviene ni
+        asume responsabilidad por posibles cargos adicionales aplicados por las
+        entidades emisoras. No se aceptan pagos en efectivo.
       </p>
 
       <p className="mb-4 text-lg">

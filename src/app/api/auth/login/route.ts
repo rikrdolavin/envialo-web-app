@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
           httpStatus: 401,
           data: null,
         },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
         httpStatus: 500,
         data: null,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

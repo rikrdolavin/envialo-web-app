@@ -31,14 +31,14 @@ export async function POST(request: NextRequest) {
         maxAge: 60 * 60, // 15 minutos, ajustar según expiración del token
         sameSite: "lax",
         path: "/",
-      }
+      },
     );
 
     return NextResponse.json({ data: response }, { status: 200 });
   } catch (err) {
     return NextResponse.json(
       { error: "Internal server error", message: err.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -53,7 +53,7 @@ export function proxy(request: NextRequest) {
 
   if (isAuthRoute && accessToken?.value && session?.value) {
     return NextResponse.redirect(
-      new URL(`/${currentLocale}/home`, request.url)
+      new URL(`/${currentLocale}/home`, request.url),
     );
   }
 
@@ -79,7 +79,7 @@ export function proxy(request: NextRequest) {
   // Redirect root path to /home
   if (pathname === "/") {
     return NextResponse.redirect(
-      new URL(`/${currentLocale}/home`, request.url)
+      new URL(`/${currentLocale}/home`, request.url),
     );
   }
 
