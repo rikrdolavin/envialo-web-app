@@ -8,6 +8,7 @@ import HomeCarousel from "./components/HomeCarousel";
 import WrapperContainer from "@/common/layout/WrapperContainer";
 import PromotionalBanner from "./components/PromotionalBanner";
 import PromotionalPayBanner from "./components/PromotionalPayBanner";
+import BreadCrumbs from "@/common/BreadCrumbs";
 
 interface PageProps {
   params: Promise<{ lang: Locale["locale"] }>;
@@ -26,6 +27,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
     return (
       <div>
         <HomeCarousel />
+          <BreadCrumbs/>
         <WrapperContainer className="mx-auto my-10 px-4">
           {products.results && (
             <ProductsList lang={lang} products={products.results} />
@@ -43,6 +45,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
     return (
       <div className="h-screen">
         <HomeCarousel />
+        <BreadCrumbs/>
         Hubo un error al cargar los productos{" "}
         <Link href={`/${lang}/home`}>Recargar</Link>
         <PromotionalBanner />
