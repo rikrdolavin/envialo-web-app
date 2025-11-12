@@ -13,8 +13,7 @@ const FooterSubscriptionForm = () => {
           fontSize: "16px",
           height: "3rem",
           borderRadius: "0.25rem 0 0 0.25rem",
-          border: "1px solid #ccc", //,
-          //padding: "0.5rem"
+          border: "1px solid #ccc",
         }}
       />
 
