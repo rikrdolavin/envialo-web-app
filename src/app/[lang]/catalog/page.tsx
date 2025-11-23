@@ -10,6 +10,7 @@ import ProductsList from "../home/components/ProductsList";
 import { Button } from "antd";
 import { Pagination } from 'antd';
 import Filter from "./components/Filter";
+import { FilterOutlined, SearchOutlined } from "@ant-design/icons";
 
 
 interface PageProps {
@@ -30,13 +31,31 @@ export default async function Page({ params }: Readonly<PageProps>) {
       <div >
          
         <WrapperContainer className="mx-auto my-10 px-4">
-            <div className="flex justify-between items-center  mb-2  bg-[#ffffff] text-3xl text-shadow-black">
-             <p className="ml-4 mb-2"> 
-            <h2> <b>Lista de Productos</b></h2>
-            <span>Se encontraron {products.total} resultados</span>
-          </p>
-          <Button className=" mr-4 bg-[#2c8254]! text-5xl text-white!"> Mostrar Filtros </Button>
-          </div>  
+                <div className="flex justify-between items-center mb-2 bg-[#ffffff] text-[25px] text-shadow-black">
+                  <p className="ml-4 mb-2">
+                    <h2><b>Lista de Productos</b></h2>
+                    <span className="text-[22px]">Se encontraron {products.total} resultados</span>
+                  </p>
+                  <Button 
+                    className="mr-4"
+                    style={{
+                      backgroundColor: "#fff",
+                      borderColor: "#2c8254",
+                      color: "#2c8254",
+                      height: 48,
+                      fontSize: 18,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontWeight: 500,
+                      padding: "0 16px"
+                    }}
+                   icon={<FilterOutlined style={{ color: "#23c55e", fontSize: 20, backgroundColor: "#2c8254", borderRadius: "50%", padding: "4px" }} />}
+                  >
+                    Mostrar Filtros
+                  </Button>
+                </div>
+
 
            <div className="flex gap-2 sm:flex-col-1  md:flex lg:flex xl:flex">
 

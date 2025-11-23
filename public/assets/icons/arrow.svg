@@ -1,0 +1,14 @@
+<svg
+  width="40"
+  height="40"
+  viewBox="0 0 1024 1024"
+  style={{ transform: "rotate(-320deg) scaleX(-1)" }}
+>
+  <path
+    d="M512 128c-212 0-384 172-384 384h128l-160 160 160 160H128c0-282 230-512 512-512s512 230 512 512H896l160-160-160-160h128c0-212-172-384-384-384z"
+    fill="none"          // color relleno
+    stroke="black"        // color del borde
+    strokeWidth={8}       // grosor del borde
+  />
+</svg>
+
