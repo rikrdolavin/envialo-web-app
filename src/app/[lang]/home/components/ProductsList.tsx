@@ -6,14 +6,16 @@ import { Product } from "@/models/products";
 interface ProductsListProps {
   products: Product[];
   lang: string;
+  gridClassName:string;
 }
 
 export default function ProductsList({
   products,
   lang,
+  gridClassName
 }: Readonly<ProductsListProps>) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 w-full">
+    <div className={gridClassName}>
       {products.map((el) => (
         <ProductCard
           id={el.id.toString()}

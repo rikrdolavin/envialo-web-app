@@ -64,7 +64,7 @@ const RangePriceSlider: React.FC = () => {
   const ringSize = 44;
 
   return (
-    <div className="w-full flex flex-col gap-6 mt-6 relative">
+    <div className="w-full flex flex-col gap-6 mt-2 relative">
       <div className="relative w-full h-6" ref={sliderRef}>
         <div className="absolute top-1/2 -translate-y-1/2 w-full h-2 bg-gray-300 rounded-full" />
 
