@@ -31,7 +31,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
       <div >
          
         <WrapperContainer className="mx-auto my-10 px-4">
-                <div className="flex justify-between items-center mb-2 bg-[#ffffff] text-[25px] text-shadow-black">
+                <div className="flex justify-between items-center mb-4 bg-[#ffffff] text-[25px] text-shadow-black">
                   <p className="ml-4 mb-2">
                     <h2><b>Lista de Productos</b></h2>
                     <span className="text-[22px]">Se encontraron {products.total} resultados</span>
