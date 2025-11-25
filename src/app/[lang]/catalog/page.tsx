@@ -4,6 +4,7 @@ import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import Link from "next/link";
 import FilterSection from "./components/FilterSection";
+import WrapperContainer from "@/common/layout/WrapperContainer";
 
 interface PageProps {
   params: Promise<{ lang: Locale["locale"] }>;
@@ -13,13 +14,15 @@ export default async function Page({ params }: Readonly<PageProps>) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const products: ProductsPaginatedResponse = await getProducts({
-    limit: 10,
+    limit: 20,
     offset: 0,
   });
 
   if (products.status == "success") {
     return (
+      <WrapperContainer>
       <FilterSection products={products} lang={lang} dict={dict} />
+      </WrapperContainer>
     );
   } else {
     return (

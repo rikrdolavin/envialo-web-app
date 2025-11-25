@@ -46,12 +46,12 @@ const Filter: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="w-auto sm:w-[400px] bg-white px-5 ml-5 mr-5  mt-0.5 rounded-lg transition-all duration-300 overflow-hidden"
+      className="w-auto h-auto sm:w-[400px] bg-white px-5 ml-5 mr-5  mt-0.5 rounded-lg transition-all duration-300 overflow-hidden"
     >
       {/* HEADER */}
-      <div className="flex items-center justify-start gap-2 ml-3 mb-4 mt-16 text-2xl font-semibold text-gray-800">
+      <div className="flex items-center justify-start gap-2 ml-3 mb-4 mt-12 text-2xl font-semibold text-gray-800">
         <Image width={30} height={30} src="/assets/icons/filterp.svg" alt="Icono de Sustítulo de filtro" />
-        <span className="text-[35px]">Filtros</span>
+        <span className="text-[30px]">Filtros</span>
       </div>
 
       <Collapse
@@ -87,62 +87,62 @@ const Filter: React.FC = () => {
         ghost={true}
       >
         {/* PRECIO */}
-        <Panel header={<b className="text-[22px]">Precio</b>} key="0" className="py-1 mb-0">
+        <Panel header={<b className="text-[18px]">Precio</b>} key="0" >
           <RangePriceSlider />
         </Panel>
 
         {/* CATEGORÍAS: Links personalizados */}
-        <Panel header={<b className="text-[22px]">Categorías</b>} key="1" className="py-1 mb-0">
-          <div className="flex flex-col gap-2">
-            <Link href="/categoria/alimentos" className="categoria-link">Alimentos y Bebidas</Link>
-            <Link href="/categoria/electrodomesticos" className="categoria-link">Electrodomésticos</Link>
-            <Link href="/categoria/ferreteria" className="categoria-link">Ferretería y Construcción</Link>
-            <Link href="/categoria/aseo" className="categoria-link">Aseo y Limpieza</Link>
-            <Link href="/categoria/hogar" className="categoria-link">Hogar</Link>
-            <Link href="/categoria/automotriz" className="categoria-link">Automotriz</Link>
+        <Panel header={<b className="text-[18px]">Categorías</b>} key="1">
+          <div className="flex flex-col gap-1 ">
+            <Link href="/categoria/alimentos" className="text-[17px]! categoria-link">Alimentos y Bebidas</Link>
+            <Link href="/categoria/electrodomesticos" className="text-[17px]! categoria-link">Electrodomésticos</Link>
+            <Link href="/categoria/ferreteria" className="text-[17px]! categoria-link">Ferretería y Construcción</Link>
+            <Link href="/categoria/aseo" className="text-[17px]! categoria-link">Aseo y Limpieza</Link>
+            <Link href="/categoria/hogar" className="text-[17px]! categoria-link">Hogar</Link>
+            <Link href="/categoria/automotriz" className="text-[17px]! categoria-link">Automotriz</Link>
           </div>
         </Panel>
 
         {/* PROMOCIONES */}
-        <Panel header={<b className="text-[22px]">Promociones</b>} key="2" className="py-1 mb-0">
-          <div className="flex flex-col gap-3 text-[22px]">
+        <Panel header={<b className="text-[18px]">Promociones</b>} key="2">
+          <div className="flex flex-col gap-3 text-[16px]">
             {["Productos recientes", "Productos en oferta", "Productos con entrega gratis"].map((texto, i) => (
-              <label key={i} className="flex items-center gap-3 cursor-pointer">
+              <label key={i} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={checkedPromos[i]}
                   onChange={() => handlePromoCheck(i)}
-                  className="w-3 h-3 accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
-                  style={{ minWidth: "1.5rem", minHeight: "1.5rem" }}
+                  className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
+                  style={{ minWidth: "1rem", minHeight: "1rem" }}
                 />
-                <span className="text-[22px]">{texto}</span>
+                <span className="text-[18px]">{texto}</span>
               </label>
             ))}
           </div>
         </Panel>
 
         {/* PUNTUACIÓN */}
-        <Panel header={<b className="text-[22px]">Puntuación</b>} key="3" className="py-1 mb-0">
-          <div className="flex flex-col justify-center items-center gap-2 text-[24px]">
+        <Panel header={<b className="text-[18px]">Puntuación</b>} key="3">
+          <div className="flex flex-col justify-center items-center gap-2 text-[18px]">
             {ratingRows.map((filledStars, i) => (
-              <label key={i} className="flex items-center gap-3 cursor-pointer" style={{alignItems: 'center'}}>
+              <label key={i} className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={checkedRatings[i]}
                   onChange={() => handleRatingCheck(i)}
-                  className="w-2 h-2 md:w-2 md:h-2 accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
-                  style={{ minWidth: "1.5rem", minHeight: "1.5rem" }}
+                  className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
+                  style={{ minWidth: "1rem", minHeight: "1rem" }}
                 />
-                <div className="flex items-center gap-1">
+                <div className="flex gap-0.5">
                   {Array.from({ length: 5 }, (_, j) =>
                     j < filledStars ? (
-                      <span key={j} className="text-[28px] xl:text-[35px]" style={{ color: "#f5b301"}}>★</span>
+                      <span key={j} className="text-[28px] " style={{ color: "#f5b301"}}>★</span>
                     ) : (
-                      <span key={j} className="text-[28px] xl:text-[35px]" style={{ color: "#f5b301" }}>☆</span>
+                      <span key={j} className="text-[28px] " style={{ color: "#f5b301" }}>☆</span>
                     )
                   )}
                 </div>
-                <span className=" text-gray-700 text-[18px] xl:text-[24px]">y más</span>
+                <span className=" text-gray-700 text-[15px]">y más</span>
               </label>
             ))}
           </div>
@@ -153,8 +153,8 @@ const Filter: React.FC = () => {
 
       {/* BOTÓN */}
       <div className="flex justify-center">
-        <button className="flex mb-4 sm:mb-0 items-center gap-2 text-red-600 font-light text-xl capitalize hover:text-red-500">
-          <ReloadOutlined style={{ transform: "rotate(-320deg) scaleX(-1)", fontSize: 24 }} />
+        <button className="flex mb-4 sm:mb-0 items-center gap-2 text-red-600 font-light text-[14px] capitalize hover:text-red-500">
+          <ReloadOutlined style={{ transform: "rotate(-320deg) scaleX(-1)", fontSize: 16 }} />
           Borrar filtros
         </button>
       </div>

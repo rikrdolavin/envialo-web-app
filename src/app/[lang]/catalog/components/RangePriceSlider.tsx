@@ -175,13 +175,13 @@ const RangePriceSlider: React.FC = () => {
           type="number"
           value={minValue}
           readOnly
-          className="w-20 h-11 text-center border border-black rounded-xl text-xl font-medium"
+          className="w-18 h-9 text-center border border-black rounded-xl text-xl font-medium"
         />
         <input
           type="number"
           value={maxValue}
           readOnly
-          className="w-20 h-11 text-center border border-black rounded-xl text-xl font-medium"
+          className="w-18 h-9 text-center border border-black rounded-xl text-xl font-medium"
         />
       </div>
     </div>
