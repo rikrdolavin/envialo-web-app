@@ -30,12 +30,12 @@ export default async function Page({ params }: Readonly<PageProps>) {
           <BreadCrumbs/>
         <WrapperContainer className="mx-auto my-10 px-4">
           {products.results && (
-            <ProductsList lang={lang} products={products.results} />
+            <ProductsList lang={lang} products={products.results} gridClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 w-full" />
           )}
 
           <PromotionalBanner />
           {products.results && (
-            <ProductsList lang={lang} products={products.results} />
+            <ProductsList lang={lang} products={products.results} gridClassName="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 w-full" />
           )}
           <PromotionalPayBanner />
         </WrapperContainer>
