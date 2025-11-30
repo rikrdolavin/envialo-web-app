@@ -6,26 +6,30 @@ import { Collapse, Divider } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import RangePriceSlider from "./RangePriceSlider";
 import Image from "next/image";
-const { Panel } = Collapse;
 
 const Filter: React.FC = () => {
   const [activeKeys, setActiveKeys] = useState<string[]>([]);
   const [checkedPromos, setCheckedPromos] = useState([false, false, false]);
-  const [checkedRatings, setCheckedRatings] = useState([false, false, false, false, false]);
+  const [checkedRatings, setCheckedRatings] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
   const ratingRows = [5, 4, 3, 2, 1];
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (containerRef.current) {
       if (activeKeys.length === 0) {
-        containerRef.current.style.height = "490px";
+        containerRef.current.style.height = "390px";
       } else {
         containerRef.current.style.height = "auto";
       }
     }
   }, [activeKeys]);
 
-  // handler para checkboxes de promociones
   const handlePromoCheck = (index: number) => {
     setCheckedPromos((prev) => {
       const copy = [...prev];
@@ -34,7 +38,6 @@ const Filter: React.FC = () => {
     });
   };
 
-  // handler para checkboxes de puntuación
   const handleRatingCheck = (index: number) => {
     setCheckedRatings((prev) => {
       const copy = [...prev];
@@ -43,15 +46,132 @@ const Filter: React.FC = () => {
     });
   };
 
+  // NUEVO: items para Collapse en lugar de Panel como children
+  const collapseItems = [
+    {
+      key: "0",
+      label: <b className="text-[18px]">Precio</b>,
+      children: <RangePriceSlider />,
+    },
+    {
+      key: "1",
+      label: <b className="text-[18px]">Categorías</b>,
+      children: (
+        <div className="flex flex-col gap-1 ">
+          <Link
+            href="/categoria/alimentos"
+            className="text-[17px]! categoria-link"
+          >
+            Alimentos y Bebidas
+          </Link>
+          <Link
+            href="/categoria/electrodomesticos"
+            className="text-[17px]! categoria-link"
+          >
+            Electrodomésticos
+          </Link>
+          <Link
+            href="/categoria/ferreteria"
+            className="text-[17px]! categoria-link"
+          >
+            Ferretería y Construcción
+          </Link>
+          <Link href="/categoria/aseo" className="text-[17px]! categoria-link">
+            Aseo y Limpieza
+          </Link>
+          <Link href="/categoria/hogar" className="text-[17px]! categoria-link">
+            Hogar
+          </Link>
+          <Link
+            href="/categoria/automotriz"
+            className="text-[17px]! categoria-link"
+          >
+            Automotriz
+          </Link>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: <b className="text-[18px]">Promociones</b>,
+      children: (
+        <div className="flex flex-col gap-3 text-[16px]">
+          {[
+            "Productos recientes",
+            "Productos en oferta",
+            "Productos con entrega gratis",
+          ].map((texto, i) => (
+            <label key={i} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={checkedPromos[i]}
+                onChange={() => handlePromoCheck(i)}
+                className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
+                style={{ minWidth: "1rem", minHeight: "1rem" }}
+              />
+              <span className="text-[18px]">{texto}</span>
+            </label>
+          ))}
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: <b className="text-[18px]">Puntuación</b>,
+      children: (
+        <div className="flex flex-col justify-center items-center gap-2 text-[18px]">
+          {ratingRows.map((filledStars, i) => (
+            <label key={i} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={checkedRatings[i]}
+                onChange={() => handleRatingCheck(i)}
+                className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
+                style={{ minWidth: "1rem", minHeight: "1rem" }}
+              />
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }, (_, j) =>
+                  j < filledStars ? (
+                    <span
+                      key={j}
+                      className="text-[28px] "
+                      style={{ color: "#f5b301" }}
+                    >
+                      ★
+                    </span>
+                  ) : (
+                    <span
+                      key={j}
+                      className="text-[28px] "
+                      style={{ color: "#f5b301" }}
+                    >
+                      ☆
+                    </span>
+                  )
+                )}
+              </div>
+              <span className=" text-gray-700 text-[15px]">y más</span>
+            </label>
+          ))}
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div
       ref={containerRef}
-      className="w-auto h-auto sm:w-[400px] bg-white px-5 ml-5 mr-5  mt-0.5 rounded-lg transition-all duration-300 overflow-hidden"
+      className="w-auto h-auto sm:w-[450px] bg-white pt-12  px-3 gap-1 rounded-lg transition-all duration-300 overflow-hidden"
     >
       {/* HEADER */}
-      <div className="flex items-center justify-start gap-2 ml-3 mb-4 mt-12 text-2xl font-semibold text-gray-800">
-        <Image width={30} height={30} src="/assets/icons/filterp.svg" alt="Icono de Sustítulo de filtro" />
-        <span className="text-[30px]">Filtros</span>
+      <div className="flex items-center  justify-baseline  px-3 pb-2 gap-2 text-2xl font-semibold text-gray-800">
+        <Image
+          width={23}
+          height={23}
+          src="/assets/icons/filterp.svg"
+          alt="Icono de Sustítulo de filtro"
+        />
+        <span className="text-[28px]">Filtros</span>
       </div>
 
       <Collapse
@@ -76,7 +196,7 @@ const Filter: React.FC = () => {
                 -0.3px 0 0 #757575,
                 0 0.3px 0 #757575,
                 0 -0.3px 0 #757575
-              `
+              `,
             }}
           >
             ⌵
@@ -85,76 +205,19 @@ const Filter: React.FC = () => {
         expandIconPosition="end"
         bordered={false}
         ghost={true}
-      >
-        {/* PRECIO */}
-        <Panel header={<b className="text-[18px]">Precio</b>} key="0" >
-          <RangePriceSlider />
-        </Panel>
+        items={collapseItems} 
+      />
 
-        {/* CATEGORÍAS: Links personalizados */}
-        <Panel header={<b className="text-[18px]">Categorías</b>} key="1">
-          <div className="flex flex-col gap-1 ">
-            <Link href="/categoria/alimentos" className="text-[17px]! categoria-link">Alimentos y Bebidas</Link>
-            <Link href="/categoria/electrodomesticos" className="text-[17px]! categoria-link">Electrodomésticos</Link>
-            <Link href="/categoria/ferreteria" className="text-[17px]! categoria-link">Ferretería y Construcción</Link>
-            <Link href="/categoria/aseo" className="text-[17px]! categoria-link">Aseo y Limpieza</Link>
-            <Link href="/categoria/hogar" className="text-[17px]! categoria-link">Hogar</Link>
-            <Link href="/categoria/automotriz" className="text-[17px]! categoria-link">Automotriz</Link>
-          </div>
-        </Panel>
+      <Divider className="border-gray-300" />
 
-        {/* PROMOCIONES */}
-        <Panel header={<b className="text-[18px]">Promociones</b>} key="2">
-          <div className="flex flex-col gap-3 text-[16px]">
-            {["Productos recientes", "Productos en oferta", "Productos con entrega gratis"].map((texto, i) => (
-              <label key={i} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={checkedPromos[i]}
-                  onChange={() => handlePromoCheck(i)}
-                  className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
-                  style={{ minWidth: "1rem", minHeight: "1rem" }}
-                />
-                <span className="text-[18px]">{texto}</span>
-              </label>
-            ))}
-          </div>
-        </Panel>
-
-        {/* PUNTUACIÓN */}
-        <Panel header={<b className="text-[18px]">Puntuación</b>} key="3">
-          <div className="flex flex-col justify-center items-center gap-2 text-[18px]">
-            {ratingRows.map((filledStars, i) => (
-              <label key={i} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={checkedRatings[i]}
-                  onChange={() => handleRatingCheck(i)}
-                  className="w-[7px] h-[7px] accent-[#2c8254] border-2 border-[#666666] rounded transition-all"
-                  style={{ minWidth: "1rem", minHeight: "1rem" }}
-                />
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }, (_, j) =>
-                    j < filledStars ? (
-                      <span key={j} className="text-[28px] " style={{ color: "#f5b301"}}>★</span>
-                    ) : (
-                      <span key={j} className="text-[28px] " style={{ color: "#f5b301" }}>☆</span>
-                    )
-                  )}
-                </div>
-                <span className=" text-gray-700 text-[15px]">y más</span>
-              </label>
-            ))}
-          </div>
-        </Panel>
-      </Collapse>
-
-      <Divider className="mt-1 mb-0 border-gray-300" />
-
-      {/* BOTÓN */}
       <div className="flex justify-center">
-        <button className="flex mb-4 sm:mb-0 items-center gap-2 text-red-600 font-light text-[14px] capitalize hover:text-red-500">
-          <ReloadOutlined style={{ transform: "rotate(-320deg) scaleX(-1)", fontSize: 16 }} />
+        <button className="flex items-center gap-2 text-red-600 font-light text-[14px] capitalize hover:text-red-500">
+          <ReloadOutlined
+            style={{
+              transform: "rotate(-320deg) scaleX(-1)",
+              fontSize: 16,
+            }}
+          />
           Borrar filtros
         </button>
       </div>

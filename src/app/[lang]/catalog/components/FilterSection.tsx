@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, Pagination } from "antd";
-import IconoFiltro from "./FilterIcon"; // solo cambia ruta si lo mueves
+import IconoFiltro from "./FilterIcon"; 
 import Filter from "./Filter";
 import { ProductsPaginatedResponse } from "@/models/products";
 import ProductsList from "../../home/components/ProductsList";
@@ -18,14 +18,12 @@ export default function FilterSection({ products, lang, dict }: Props) {
 
   return (
     <div>
-     {/* Header y botón */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mx-5 mb-4 mt-20 bg-white text-shadow-black rounded-sm">
-        <p className="flex flex-col ml-4 mb-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center  px-3 py-3  mb-3  bg-white text-shadow-black rounded-sm">
+        <p className="flex flex-col">
             <span className="text-[22px] font-bold">Lista de Productos</span>
             <span className="text-[18px]">Se encontraron {products.total} resultados</span>
         </p>
         <Button
-            className="mb-4 sm:mr-4 sm:mb-0"
             style={{
             backgroundColor: showFilter ? "#fff" : "#2c8254",
             borderColor: "#2c8254",
@@ -52,14 +50,13 @@ export default function FilterSection({ products, lang, dict }: Props) {
         </div>
 
 
-      {/* Filtro y grid de productos */}
       <div className="flex flex-col  gap-2 sm:flex-row">
         {showFilter && <Filter />}
-        <div className={`flex flex-col ml-5 mr-5 flex-wrap gap-3 transition-all duration-300 ${showFilter ? "sm:ml-0" : "ml-5"}`}>
+        <div className="flex flex-col0 flex-wrap gap-3 transition-all duration-300">
           {products.results && (
-            <ProductsList lang={lang} products={products.results} gridClassName={`grid grid-cols-2 md:grid-cols-2  gap-3 w-full ${showFilter ?"lg:grid-cols-3 xl:grid-cols-5 2xl:grid-col-6":"lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7"} `}/>
+            <ProductsList lang={lang} products={products.results} variant={`${showFilter ? 'filtercatalog':'catalog'}`}/>
           )}
-          <div className="flex justify-center my-5 sm:my-10 ">
+          <div className="flex justify-center">
             <Pagination defaultCurrent={1} total={products.total} />
           </div>
         </div>

@@ -20,16 +20,18 @@ export default async function Page({ params }: Readonly<PageProps>) {
 
   if (products.status == "success") {
     return (
-      <WrapperContainer>
+      <WrapperContainer className="mx-auto my-10 px-4">
       <FilterSection products={products} lang={lang} dict={dict} />
       </WrapperContainer>
     );
   } else {
     return (
+        <WrapperContainer className="mx-auto my-10 px-4">
       <div className="h-screen">
         Hubo un error al cargar los productos{" "}
         <Link href={`/${lang}/home`}>Recargar</Link>
       </div>
+      </WrapperContainer>
     );
   }
 }

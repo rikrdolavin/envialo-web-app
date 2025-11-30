@@ -42,7 +42,7 @@ const RangePriceSlider: React.FC = () => {
 
   /** Tooltip más abajo y pegado al anillo **/
   const tooltipStyle = {
-    top: "-2.55rem", // <-- bajado un poquito
+    top: "-2.40rem", // <-- bajado un poquito
     left: "50%",
     transform: "translateX(-50%)",
     transition: "top 0.18s ease-out",
@@ -57,19 +57,19 @@ const RangePriceSlider: React.FC = () => {
     height: 0,
     borderLeft: "6px solid transparent",
     borderRight: "6px solid transparent",
-    borderTop: "6px solid #7a7a7a", // <-- flecha oscurecida también
+    borderTop: "6px solid #7a7a7a", 
   };
 
-  const size = 22;
-  const ringSize = 44;
+  const size = 19;//22;
+  const ringSize = 38;//44;
 
   return (
     <div className="w-full flex flex-col gap-6 mt-2 relative">
       <div className="relative w-full h-6" ref={sliderRef}>
-        <div className="absolute top-1/2 -translate-y-1/2 w-full h-2 bg-gray-300 rounded-full" />
+        <div className="absolute top-1/2 -translate-y-1/2 w-full h-1.5 bg-gray-300 rounded-full" />
 
         <div
-          className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full"
+          className="absolute top-1/2 -translate-y-1/2 h-1.5 rounded-full"
           style={{
             backgroundColor: "#2c8254",
             left: `${(minValue / MAX) * 100}%`,
@@ -175,13 +175,13 @@ const RangePriceSlider: React.FC = () => {
           type="number"
           value={minValue}
           readOnly
-          className="w-18 h-9 text-center border border-black rounded-xl text-xl font-medium"
+          className="w-16 h-8 text-center border border-black rounded-xl text-[16px] font-medium"
         />
         <input
           type="number"
           value={maxValue}
           readOnly
-          className="w-18 h-9 text-center border border-black rounded-xl text-xl font-medium"
+          className="w-16 h-8 text-center border border-black rounded-xl text-[16px] font-medium"
         />
       </div>
     </div>
