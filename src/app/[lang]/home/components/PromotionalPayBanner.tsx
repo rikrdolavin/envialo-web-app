@@ -3,7 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PromotionalPayBanner() {
+interface PromotionalPayBannerProps {
+ 
+  lang: string;
+ 
+}
+
+export default function PromotionalPayBanner({
+  lang
+}: Readonly<PromotionalPayBannerProps>) {
   return (
     <section className="w-full bg-transparent py-4 mt-3">
       <div className="container mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2 px-5">
@@ -18,11 +26,18 @@ export default function PromotionalPayBanner() {
             de pago preferido.
           </p>
 
-          <button className="bg-[#2c8254] h-auto w-[150px] hover:bg-olive-700 text-white text-[17px] py-2 px-6 rounded-full transition-all duration-200">
+          <Link
+             href={`/${lang}/catalog`}
+            className="bg-[#2c8254]! w-[150px] hover:bg-olive-700 text-white! text-[17px] py-2 px-6 rounded-full transition-all duration-200 text-center inline-flex items-center justify-center no-underline"
+          >
+            Ver más
+          </Link>
+
+         {/* <button className="bg-[#2c8254] h-auto w-[150px] hover:bg-olive-700 text-white text-[17px] py-2 px-6 rounded-full transition-all duration-200">
             <Link className="text-white!" href={"#"}>
               Ver más
             </Link>
-          </button>
+          </button>*/}
         </div>
 
         <div className="w-full lg:w-1/2 flex justify-center">

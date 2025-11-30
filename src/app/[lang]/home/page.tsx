@@ -37,7 +37,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
           {products.results && (
             <ProductsList lang={lang} products={products.results} variant='home' />
           )}
-          <PromotionalPayBanner />
+          <PromotionalPayBanner lang={lang} />
         </WrapperContainer>
       </div>
     );
@@ -49,7 +49,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
         Hubo un error al cargar los productos{" "}
         <Link href={`/${lang}/home`}>Recargar</Link>
         <PromotionalBanner />
-        <PromotionalPayBanner />
+        <PromotionalPayBanner lang={lang} />
       </div>
     );
   }

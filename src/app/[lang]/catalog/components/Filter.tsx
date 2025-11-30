@@ -161,7 +161,7 @@ const Filter: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="w-auto h-auto sm:w-[450px] bg-white pt-12  px-3 gap-1 rounded-lg transition-all duration-300 overflow-hidden"
+      className="w-auto h-auto sm:w-[450px] bg-white pt-12 pb-3  px-3 gap-1 rounded-lg transition-all duration-300 overflow-hidden"
     >
       {/* HEADER */}
       <div className="flex items-center  justify-baseline  px-3 pb-2 gap-2 text-2xl font-semibold text-gray-800">
