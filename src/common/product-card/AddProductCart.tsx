@@ -102,6 +102,9 @@ export default function AddProductCart({
                 backgroundColor: "transparent",
                 boxShadow: "none",
               }),
+              ...(variant === "small-card" && {
+                backgroundColor: "#00a63e",
+              }),
             }}
             styles={{
               icon: { fontSize: 25 },
