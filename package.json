@@ -3,20 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@ant-design/icons": "5.x",
-    "@ant-design/nextjs-registry": "^1.1.0",
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
-    "antd": "^5.27.6",
+    "@ant-design/icons": "6.x",
+    "@ant-design/nextjs-registry": "^1.3.0",
+    "antd": "^6.1.2",
     "jose": "^6.1.0",
-    "next": "^16.0.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "next": "^16.1.1",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
@@ -25,7 +24,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
-    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "tailwindcss": "^4",
