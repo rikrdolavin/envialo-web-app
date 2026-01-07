@@ -104,7 +104,7 @@ const HomeCarousel: React.FC = () => {
   return (
     <div className="relative w-full">
       <div className="relative w-full overflow-hidden">
-        <div className="relative w-full h-auto mb-2 sm:mb-4">
+        <div className="relative w-full h-auto pb-2 sm:pb-4">
           <AntCarousel
             ref={carouselRef}
             autoplay

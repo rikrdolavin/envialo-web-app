@@ -8,7 +8,7 @@ interface PageProps {
 export default async function Page({ params }: Readonly<PageProps>) {
   const { lang } = await params;
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-10">
       <AuthForm lang={lang} isSignUp={true} />
     </div>
   );

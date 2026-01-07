@@ -1,4 +1,4 @@
-import FooterLink from "./FooterLink"; // importa tu componente personalizado
+import FooterLink from "./FooterLink";
 
 const sections = [
   {
