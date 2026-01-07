@@ -17,13 +17,13 @@ export async function ProductDetailsCard({
           src={product.image ?? "/assets/no_image.png"}
           width={500}
           height={500}
-          className="mx-auto"
+          className="mx-auto shadow-lg rounded-lg"
           alt=""
         />
       </div>
       <div className="flex flex-col gap-5">
         {/* category tag */}
-        <p className="py-0.5 px-2 bg-green-600 w-min rounded-2xl text-white text-sm">
+        <p className="py-0.5 px-2 bg-brinco w-min rounded-2xl text-white text-sm">
           Categoria
         </p>
 

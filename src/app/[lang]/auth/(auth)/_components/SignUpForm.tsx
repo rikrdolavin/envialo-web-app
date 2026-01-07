@@ -61,7 +61,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
   };
 
   return (
-    <Card className="w-4xl">
+    <Card className="w-4xl rounded-2xl!">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
         <Image
           className="w-full h-full object-cover hidden md:block rounded-2xl"
@@ -137,7 +137,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Los correos electrónicos no coinciden"),
+                      new Error("Los correos electrónicos no coinciden")
                     );
                   },
                 }),
@@ -175,7 +175,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        new Error("Las contraseñas no coinciden"),
+                        new Error("Las contraseñas no coinciden")
                       );
                     },
                   }),
@@ -203,7 +203,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
             <Button
               disabled={isSignUp && !termaAndConditions}
               loading={false}
-              className="w-full"
+              className="w-full shadow-none!"
               type="primary"
               htmlType="submit"
             >

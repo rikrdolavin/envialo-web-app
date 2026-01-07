@@ -33,7 +33,7 @@ export default function AddProductCart({
         className={`${
           variant === "small-card"
             ? "text-lg text-red-500 font-semibold"
-            : "text-3xl text-green-600 font-bold"
+            : "text-3xl text-brinco font-bold"
         }`}
       >
         {price.toFixed(2).replace(".", ",")} USD
@@ -98,13 +98,7 @@ export default function AddProductCart({
             style={{
               width: "100%",
               padding: `${variant === "small-card" ? "0 4px" : "0"}`,
-              ...(variant === "product-detail" && {
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              }),
-              ...(variant === "small-card" && {
-                backgroundColor: "#00a63e",
-              }),
+              boxShadow: "none",
             }}
             styles={{
               icon: { fontSize: 25 },
@@ -113,7 +107,7 @@ export default function AddProductCart({
             icon={variant === "small-card" ? <ShoppingOutlined /> : null}
           >
             {variant === "product-detail" && (
-              <p className="text-xl py-1 px-5 font-semibold bg-green-600 rounded-xl w-full sm:w-auto">
+              <p className="text-xl py-1 px-5 font-semibold rounded-xl w-full sm:w-auto">
                 Añadir al carrito
               </p>
             )}

@@ -13,6 +13,7 @@ interface PageProps {
 export default async function Page({ params }: Readonly<PageProps>) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+
   const products: ProductsPaginatedResponse = await getProducts({
     limit: 20,
     offset: 0,
@@ -20,17 +21,18 @@ export default async function Page({ params }: Readonly<PageProps>) {
 
   if (products.status == "success") {
     return (
-      <WrapperContainer className="mx-auto my-10 px-4">
-      <FilterSection products={products} lang={lang} dict={dict} />
+      <WrapperContainer className="mx-auto py-10 px-4">
+        <FilterSection products={products} lang={lang} />
       </WrapperContainer>
     );
   } else {
+    // temporal para cuando no carguen los productos
     return (
-        <WrapperContainer className="mx-auto my-10 px-4">
-      <div className="h-screen">
-        Hubo un error al cargar los productos{" "}
-        <Link href={`/${lang}/home`}>Recargar</Link>
-      </div>
+      <WrapperContainer className="mx-auto py-10 px-4">
+        <div className="h-screen">
+          Hubo un error al cargar los productos{" "}
+          <Link href={`/${lang}/home`}>Recargar</Link>
+        </div>
       </WrapperContainer>
     );
   }

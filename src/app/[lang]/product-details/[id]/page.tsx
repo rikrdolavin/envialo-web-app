@@ -4,7 +4,7 @@ import { getProductDetails } from "@/lib/products";
 import { ProductDetailsResponse } from "@/models/products";
 import { ProductDetailsCard } from "./components/ProductDetailCard";
 import WrapperContainer from "@/common/layout/WrapperContainer";
-import BreadCrumbs from "@/common/BreadCrumbs";
+// import BreadCrumbs from "@/common/BreadCrumbs";
 
 interface PageProps {
   params: Promise<{ lang: Locale["locale"]; id: string }>;
@@ -17,8 +17,8 @@ export default async function Page({ params }: Readonly<PageProps>) {
   const product: ProductDetailsResponse = await getProductDetails(id);
 
   return (
-    <WrapperContainer className="min-h-screen my-10 mx-auto px-4">
-    <BreadCrumbs/>
+    <WrapperContainer className="min-h-screen py-10 mx-auto px-4">
+      {/* <BreadCrumbs /> */}
 
       {product && <ProductDetailsCard product={product.result} />}
     </WrapperContainer>

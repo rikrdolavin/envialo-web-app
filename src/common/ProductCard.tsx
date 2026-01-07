@@ -28,7 +28,8 @@ export default function ProductCard({
 
   return (
     <Card
-      className="w-full max-w-sm shadow-sm"
+      className="w-full max-w-sm shadow-md rounded-2xl! border border-gray-200/70!"
+      variant="outlined"
       styles={{
         body: {
           padding: "1rem",
@@ -36,14 +37,14 @@ export default function ProductCard({
         },
       }}
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full min-h-96">
         <div className="cursor-pointer" onClick={handleNavigate}>
           <Image
             src={imageUrl}
             alt={name}
             width={300}
             height={300}
-            className="object-contain w-full h-40"
+            className="object-contain w-full h-52"
           />
           <p className="line-clamp-2 my-2">{name}</p>
         </div>
