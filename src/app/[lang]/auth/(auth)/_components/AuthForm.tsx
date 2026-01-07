@@ -9,12 +9,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
-interface SignUpFormProps {
+interface AuthFormProps {
   lang: Locale["locale"];
   isSignUp: boolean;
 }
 
-export function AuthForm({ lang, isSignUp }: Readonly<SignUpFormProps>) {
+export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
   const [form] = Form.useForm();
   const termaAndConditions = Form.useWatch("terms", form);
   const router = useRouter();

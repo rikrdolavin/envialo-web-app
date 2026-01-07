@@ -1,5 +1,5 @@
 import { Locale } from "@/models/language";
-import { AuthForm } from "../_components/SignUpForm";
+import { AuthForm } from "../_components/AuthForm";
 
 interface PageProps {
   params: Promise<{
