@@ -67,11 +67,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         {
           key: "signup",
           icon: <UserAddOutlined />,
-          label: (
-            <Link href={`/${lang}/auth/signup?callbackUrl=${pathname}`}>
-              Crear cuenta
-            </Link>
-          ),
+          label: <Link href={`/${lang}/auth/signup`}>Crear cuenta</Link>,
         },
       ];
     }

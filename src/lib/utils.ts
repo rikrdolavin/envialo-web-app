@@ -6,13 +6,15 @@ export async function doFetch({
   endpoint,
   method,
   lang,
+  apiBase = process.env.API_BASE_URL,
 }: {
   endpoint: string;
   data: unknown;
   method: HTTP_METHOD;
   lang?: Locale["locale"];
+  apiBase?: string;
 }) {
-  const url = process.env.API_BASE_URL;
+  const url = apiBase ?? process.env.API_BASE_URL;
 
   const hasBody = method != "GET";
 

@@ -1,18 +1,26 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { loginAction, signupAction } from "@/app/actions/auth";
 import { LoginRequest, LoginResponse, SignUpRequest } from "@/models/auth";
 import { Locale } from "@/models/language";
-import { InternalApiResponse } from "@/types/api";
-import { Button, Card, Form, Input, Switch } from "antd";
+import { ApiResponse } from "@/types/api";
+import { Alert, Button, Card, Form, Input, Switch } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { ErrorCode } from "@/constants/errorCodes";
+import { useState } from "react";
 
 interface AuthFormProps {
   lang: Locale["locale"];
   isSignUp: boolean;
 }
+
+const ErrorFormInitialState = {
+  show: false,
+  message: "",
+};
 
 export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
   const [form] = Form.useForm();
@@ -21,43 +29,72 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
   const params = useParams<{ callbackUrl: string }>();
   const { setUser } = useAuth();
 
-  const onFinish = async () => {
+  const [showFromErrorAlert, setShowFromErrorAlert] = useState<{
+    show: boolean;
+    message: string;
+  }>(ErrorFormInitialState);
+  const [submitting, setSubmitting] = useState(false);
+
+  // region submit methods
+  const buildAuthData = (isSignUp: boolean) => {
     const values = form.getFieldsValue();
+    return isSignUp
+      ? {
+          email: values.email,
+          password: values.password,
+          repeatPassword: values.repeatPassword,
+          firstName: values.firstName,
+          lastName: values.lastName,
+        }
+      : {
+          email: values.email,
+          password: values.password,
+        };
+  };
 
-    let authData: LoginRequest | SignUpRequest;
-    if (isSignUp) {
-      authData = {
-        email: values.email,
-        password: values.password,
-        firstName: values.firstName,
-        lastName: values.lastName,
-      };
+  const resolveRedirect = (callbackUrl: string | undefined, lang: string) => {
+    const cb = callbackUrl?.trim();
+    const isValid =
+      cb && cb.startsWith("/") && !cb.toLowerCase().includes("auth");
+    return isValid ? cb : `/${lang}/home`;
+  };
+
+  const handleError = (authResponse: ApiResponse) => {
+    if (
+      authResponse.errorCode === ErrorCode.MSG19 ||
+      authResponse.errorCode === ErrorCode.MSG18
+    ) {
+      setShowFromErrorAlert({
+        show: true,
+        message: "Ingresó un usuario o contraseña incorrecta.",
+      });
     } else {
-      authData = {
-        email: values.email,
-        password: values.password,
-      };
+      setShowFromErrorAlert({
+        show: true,
+        message:
+          "Ha ocurrido un error, compruebe su conexión e inténtelo nuevamente.",
+      });
+    }
+  };
+
+  const onFinish = async () => {
+    setSubmitting(true);
+
+    const authData = buildAuthData(isSignUp);
+    const authResponse = isSignUp
+      ? ((await signupAction(authData as SignUpRequest)) as ApiResponse)
+      : ((await loginAction(authData as LoginRequest)) as LoginResponse);
+
+    if (authResponse.success && !authResponse.errorCode) {
+      const aR = authResponse as LoginResponse;
+      setUser({ userId: aR.data.id, email: aR.data.email });
+
+      router.push(resolveRedirect(params.callbackUrl, lang));
+    } else if (!isSignUp) {
+      handleError(authResponse);
     }
 
-    const url = isSignUp ? "/api/auth/signup" : "/api/auth/login";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(authData),
-    });
-
-    const authResponse: InternalApiResponse = await response.json();
-    if (authResponse.success) {
-      const userData: LoginResponse = authResponse.data as LoginResponse;
-      setUser({ userId: userData.userId });
-      if (params.callbackUrl) {
-        router.push(params.callbackUrl);
-      } else {
-        router.push(`/${lang}/home`);
-      }
-    }
+    setSubmitting(false);
   };
 
   return (
@@ -75,12 +112,27 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
           form={form}
           variant="outlined"
           layout="vertical"
+          disabled={submitting}
         >
           {isSignUp ? (
             <p className="text-2xl font-semibold">Crea tu cuenta</p>
           ) : (
             <p className="text-2xl font-semibold">Inicia sesion</p>
           )}
+
+          {!isSignUp && showFromErrorAlert.show && (
+            <Alert
+              title={showFromErrorAlert.message}
+              type="error"
+              className="my-5!"
+              closable={{
+                closeIcon: true,
+                onClose: () => setShowFromErrorAlert(ErrorFormInitialState),
+                "aria-label": "close",
+              }}
+            />
+          )}
+
           {isSignUp && (
             <div className="flex items-center md:flex-row flex-col md:gap-5">
               <Form.Item
@@ -189,7 +241,9 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
                   <p>
                     Aceptar{" "}
                     <span>
-                      <Link href="#">Términos y condiciones</Link>
+                      <Link href="/terms-conditions">
+                        Términos y condiciones
+                      </Link>
                     </span>
                   </p>
                 }
@@ -202,7 +256,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
           <Form.Item>
             <Button
               disabled={isSignUp && !termaAndConditions}
-              loading={false}
+              loading={submitting}
               className="w-full shadow-none!"
               type="primary"
               htmlType="submit"

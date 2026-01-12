@@ -6,7 +6,7 @@ import NavHeader from "./NavHeader";
 import FooterCustom from "./FooterCustom";
 
 import { AuthProvider } from "@/context/AuthContext";
-import { ConfigProvider } from "antd";
+import { App as AntdApp, ConfigProvider } from "antd";
 
 interface LayoutClientWrapperProps {
   children: React.ReactNode;
@@ -27,11 +27,13 @@ export default function LayoutClientWrapper({
           },
         }}
       >
-        <AuthProvider>
-          <NavHeader lang={lang} />
-          <main className="bg-brinco-bg">{children}</main>
-          <FooterCustom lang={lang} />
-        </AuthProvider>
+        <AntdApp>
+          <AuthProvider>
+            <NavHeader lang={lang} />
+            <main className="bg-brinco-bg">{children}</main>
+            <FooterCustom lang={lang} />
+          </AuthProvider>
+        </AntdApp>
       </ConfigProvider>
     </AntdRegistry>
   );

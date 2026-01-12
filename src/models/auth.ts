@@ -1,14 +1,19 @@
+import { ApiResponse } from "@/types/api";
+
 export interface LoginRequest {
   email: string;
   password: string;
 }
 
-export interface LoginResponse {
-  token: string;
-  expiration: string;
+export interface LoginResponse extends ApiResponse {
+  data: LoginResponseData;
+}
+
+export interface LoginResponseData {
+  id: string;
   email: string;
-  role: string;
-  userId: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface SignUpRequest {
@@ -16,18 +21,9 @@ export interface SignUpRequest {
   lastName: string;
   email: string;
   password: string;
+  repeatPassword: string;
 }
 
-export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-}
-
-export interface SignupResponse {
-  user: User;
-  access_token: string;
-  refresh_token: string;
+export interface SignupResponse extends ApiResponse {
+  data: null;
 }

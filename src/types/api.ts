@@ -18,3 +18,10 @@ export interface InternalApiResponse<T = unknown> {
   httpStatus: number;
   data: T;
 }
+
+export interface ApiResponse<T = unknown> {
+  success: boolean;
+  errorCode: string | null;
+  message: string | null;
+  data: T | null;
+}
