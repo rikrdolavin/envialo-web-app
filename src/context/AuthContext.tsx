@@ -60,7 +60,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
       loading,
       setUser,
     }),
-    [user, loading, setUser],
+    [user, loading, setUser]
   );
 
   return (

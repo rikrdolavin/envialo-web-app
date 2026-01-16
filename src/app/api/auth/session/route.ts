@@ -8,5 +8,13 @@ export async function GET() {
   if (!sessionCookie) return Response.json(null);
 
   const payload = await verifySession(sessionCookie);
+
+  if (!payload) {
+    cookieStore.delete("session");
+    cookieStore.delete("access_token");
+    cookieStore.delete("refresh_token");
+    return Response.json(null);
+  }
+
   return Response.json(payload);
 }

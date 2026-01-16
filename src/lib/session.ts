@@ -23,7 +23,7 @@ export async function verifySession(session: string | undefined) {
     const { payload } = await jwtVerify(session, encodedKey);
     return payload;
   } catch (err) {
-    console.error(err);
+    console.error(`Exception while verifying session: ${err}`);
     return null;
   }
 }
