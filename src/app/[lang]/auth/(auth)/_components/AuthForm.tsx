@@ -6,6 +6,7 @@ import { LoginRequest, LoginResponse, SignUpRequest } from "@/models/auth";
 import { Locale } from "@/models/language";
 import { ApiResponse } from "@/types/api";
 import { Alert, Button, Card, Form, Input, Switch } from "antd";
+import type { Rule } from "antd/es/form";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -96,6 +97,25 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
 
     setSubmitting(false);
   };
+
+  const signupRules: Rule[] = [
+    {
+      min: 8,
+      message: "Debe tener al menos 8 caracteres.",
+    },
+    {
+      pattern: /(?=.*[A-Z])/,
+      message: "Debe contener al menos una letra mayúscula.",
+    },
+    {
+      pattern: /(?=.*\d)/,
+      message: "Debe contener al menos un número.",
+    },
+    {
+      pattern: /(?=.*[!@#$%^&*(),.?":{}|<>])/,
+      message: "Debe contener al menos un carácter especial.",
+    },
+  ];
 
   return (
     <Card className="w-4xl rounded-2xl!">
@@ -201,12 +221,14 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
           <Form.Item
             name="password"
             label="Contraseña"
-            rules={[
-              {
-                required: true,
-                message: "Por favor, ingresa tu contraseña",
-              },
-            ]}
+            rules={(
+              [
+                {
+                  required: true,
+                  message: "Por favor, ingresa tu contraseña",
+                },
+              ] as Rule[]
+            ).concat(isSignUp ? signupRules : [])}
           >
             <Input.Password />
           </Form.Item>
