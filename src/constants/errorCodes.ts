@@ -58,6 +58,28 @@ export enum ErrorCode {
   MSG48 = "MSG48",
   MSG49 = "MSG49",
   MSG50 = "MSG50",
+
+  // User Registration - Public
+  MSG51 = "MSG51",
+  MSG52 = "MSG52",
+  MSG53 = "MSG53",
+  MSG54 = "MSG54",
+  MSG55 = "MSG55",
+  MSG56 = "MSG56",
+  MSG57 = "MSG57",
+
+  // Password Policy
+  MSG58 = "MSG58",
+  MSG59 = "MSG59",
+  MSG60 = "MSG60",
+  MSG61 = "MSG61",
+  MSG62 = "MSG62",
+
+  // System Error
+  MSG63 = "MSG63",
+
+  // Role Management - Additional
+  MSG64 = "MSG64",
 }
 
 export const ErrorMessages: Record<ErrorCode, string> = {
@@ -110,4 +132,26 @@ export const ErrorMessages: Record<ErrorCode, string> = {
   [ErrorCode.MSG48]: "One or more permissions do not exist.",
   [ErrorCode.MSG49]: "Permissions to remove not found.",
   [ErrorCode.MSG50]: "System permissions cannot be removed.",
+
+  // User Registration - Public
+  [ErrorCode.MSG51]: "The email address is required.",
+  [ErrorCode.MSG52]: "Must be a valid email.",
+  [ErrorCode.MSG53]: "First name is required.",
+  [ErrorCode.MSG54]: "Last name is required.",
+  [ErrorCode.MSG55]: "Password is required.",
+  [ErrorCode.MSG56]: "You must confirm the password.",
+  [ErrorCode.MSG57]: "Passwords do not match.",
+
+  // Password Policy
+  [ErrorCode.MSG58]: "Must contain at least 8 characters.",
+  [ErrorCode.MSG59]: "Must contain at least one uppercase letter.",
+  [ErrorCode.MSG60]: "Must contain at least one lowercase letter.",
+  [ErrorCode.MSG61]: "Must contain at least one number.",
+  [ErrorCode.MSG62]: "Must contain at least one special character.",
+
+  // System Error
+  [ErrorCode.MSG63]: "An internal server error occurred.",
+
+  // Role Management - Additional
+  [ErrorCode.MSG64]: "Role not found.",
 };

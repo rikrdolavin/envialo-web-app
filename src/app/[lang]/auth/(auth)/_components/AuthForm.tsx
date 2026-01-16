@@ -61,21 +61,20 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
   };
 
   const handleError = (authResponse: ApiResponse) => {
-    if (
-      authResponse.errorCode === ErrorCode.MSG19 ||
-      authResponse.errorCode === ErrorCode.MSG18
+    let message =
+      "Ha ocurrido un error, compruebe su conexión e inténtelo nuevamente.";
+
+    if (isSignUp && authResponse.errorCode === ErrorCode.MSG24) {
+      message = "El correo electrónico ya existe.";
+    } else if (
+      !isSignUp &&
+      (authResponse.errorCode === ErrorCode.MSG18 ||
+        authResponse.errorCode === ErrorCode.MSG19)
     ) {
-      setShowFromErrorAlert({
-        show: true,
-        message: "Ingresó un usuario o contraseña incorrecta.",
-      });
-    } else {
-      setShowFromErrorAlert({
-        show: true,
-        message:
-          "Ha ocurrido un error, compruebe su conexión e inténtelo nuevamente.",
-      });
+      message = "Ingresó un usuario o contraseña incorrecta.";
     }
+
+    setShowFromErrorAlert({ show: true, message });
   };
 
   const onFinish = async () => {
@@ -91,7 +90,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
       setUser({ userId: aR.data.id, email: aR.data.email });
 
       router.push(resolveRedirect(params.callbackUrl, lang));
-    } else if (!isSignUp) {
+    } else {
       handleError(authResponse);
     }
 
@@ -140,7 +139,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
             <p className="text-2xl font-semibold">Inicia sesion</p>
           )}
 
-          {!isSignUp && showFromErrorAlert.show && (
+          {showFromErrorAlert.show && (
             <Alert
               title={showFromErrorAlert.message}
               type="error"

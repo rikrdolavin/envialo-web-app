@@ -1,218 +1,368 @@
-# Application Messages Documentation
+# Message Codes Documentation
 
-> **Language**: English 🇺🇸
-
-This document contains all validation and exception messages used throughout the application, indexed with unique message codes for error tracking and localization purposes.
+This document contains all validation and exception messages used throughout the application. Each message is prefixed with a unique code in the format `MSG#` for easy reference and tracking.
 
 ---
 
-## Validation Messages
+## Authentication & Login Messages
 
-### Authentication Endpoints
+### MSG1
+**Message:** `The email address is required.`  
+**Location:** LoginUserRequestDTO validator  
+**Type:** Validation
 
-#### Login Endpoint
-| Code | Message |
-|------|---------|
-| MSG1 | The email address is required. |
-| MSG2 | It must be a valid email address. |
-| MSG3 | The password is required. |
+### MSG2
+**Message:** `It must be a valid email address.`  
+**Location:** LoginUserRequestDTO validator  
+**Type:** Validation
 
-#### Refresh Token Endpoint
-| Code | Message |
-|------|---------|
-| MSG4 | The user ID is required. |
-| MSG5 | The refresh token is mandatory. |
+### MSG3
+**Message:** `The password is required.`  
+**Location:** LoginUserRequestDTO validator  
+**Type:** Validation
 
-#### Change Password Endpoint
-| Code | Message |
-|------|---------|
-| MSG6 | The previous password is required. |
-| MSG7 | A new password is required. |
-| MSG8 | The new password cannot be the same as the old one. |
-| MSG9 | You must repeat the new password. |
-| MSG10 | The passwords do not match. |
+### MSG18
+**Message:** `The email address is incorrect or inactive.`  
+**Location:** AuthService.Login  
+**Type:** Exception
 
-#### Activate User Endpoint
-| Code | Message |
-|------|---------|
-| MSG11 | The token is required. |
-
-#### Forgot Password Endpoint
-| Code | Message |
-|------|---------|
-| MSG12 | The email address is required. |
-| MSG13 | It must be a valid email address. |
-
-#### Reset Password Endpoint
-| Code | Message |
-|------|---------|
-| MSG14 | The token is required. |
-| MSG15 | The new password is required. |
-| MSG16 | You must confirm the new password. |
-| MSG17 | The passwords do not match. |
-
-### User Management
-
-#### Register User By Admin Endpoint
-| Code | Message |
-|------|---------|
-| MSG26 | The email address is required. |
-| MSG27 | Must be a valid email. |
-| MSG28 | First name is required. |
-| MSG29 | Last name is required. |
-| MSG30 | Password is required. |
-| MSG31 | You must confirm the password. |
-| MSG32 | Passwords do not match. |
-| MSG33 | You must specify at least one role id. |
-| MSG34 | The roles list cannot be empty. |
-
-### Role Management
-
-#### Create/Update Role Endpoint
-| Code | Message |
-|------|---------|
-| MSG35 | The role name is required. |
-| MSG36 | Must contain at least 3 characters. |
-| MSG37 | Must contain maximum 50 characters. |
-| MSG38 | The description is required. |
-| MSG39 | Must contain maximum 200 characters. |
-
-#### Assign Permissions Endpoint
-| Code | Message |
-|------|---------|
-| MSG40 | You must specify at least one permission id. |
-| MSG41 | The permission list cannot be empty. |
+### MSG19
+**Message:** `The email address or password is incorrect.`  
+**Location:** AuthService.Login  
+**Type:** Exception
 
 ---
 
-## Exception Messages
+## Token & Refresh Token Messages
 
-### Authentication Service
+### MSG4
+**Message:** `The user ID is required.`  
+**Location:** RefreshTokenRequestDTO validator  
+**Type:** Validation
 
-#### Login Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG18 | The email address is incorrect or inactive. | ValidationException |
-| MSG19 | The email address or password is incorrect. | ValidationException |
+### MSG5
+**Message:** `The refresh token is mandatory.`  
+**Location:** RefreshTokenRequestDTO validator  
+**Type:** Validation
 
-#### Refresh Token Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG20 | Invalid refresh token. | ValidationException |
+### MSG11
+**Message:** `The token is required.`  
+**Location:** ActivateRequestDTO validator  
+**Type:** Validation
 
-#### Change Password Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG21 | Invalid old password. | ValidationException |
-| MSG22 | User not found. | ValidationException |
+### MSG14
+**Message:** `The token is required.`  
+**Location:** ResetPasswordRequestDTO validator  
+**Type:** Validation
 
-#### Activate User Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG23 | Invalid or expired token. | ValidationException |
+### MSG20
+**Message:** `Invalid refresh token.`  
+**Location:** AuthService.RefreshToken  
+**Type:** Exception
 
-#### Request Password Reset Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG24 | Email not found. | ValidationException |
+### MSG23
+**Message:** `Invalid or expired token.`  
+**Location:** AuthService.ActivationUser  
+**Type:** Exception
 
-#### Reset Password Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG25 | Invalid or expired token. | ValidationException |
-
-### Role Service
-
-#### Create Role Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG42 | This role name already exists. | ValidationException |
-
-#### Update Role Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG43 | Role not found. | KeyNotFoundException |
-| MSG44 | System roles cannot be modified. | ValidationException |
-| MSG45 | The role name already exists. | ValidationException |
-
-#### Get Role By ID Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG43 | Role not found. | KeyNotFoundException |
-
-#### Assign Permission To Role Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG46 | Role not found. | KeyNotFoundException |
-| MSG48 | One or more permissions do not exist. | ValidationException |
-
-#### Remove Permissions From Role Operation
-| Code | Message | Exception Type |
-|------|---------|-----------------|
-| MSG49 | Permissions to remove not found. | KeyNotFoundException |
-| MSG50 | System permissions cannot be removed. | ValidationException |
+### MSG25
+**Message:** `Invalid or expired token.`  
+**Location:** AuthService.ResetPassword  
+**Type:** Exception
 
 ---
 
-## Message Code Summary
+## Password Management Messages
 
-**Total Messages**: 50
+### MSG6
+**Message:** `The previous password is required.`  
+**Location:** ChangeUserPasswordRequestDTO validator  
+**Type:** Validation
 
-### Distribution by Category
-- **Validation Messages**: 34 (MSG1-MSG17, MSG26-MSG41)
-- **Exception Messages**: 16 (MSG18-MSG25, MSG42-MSG50)
+### MSG7
+**Message:** `A new password is required.`  
+**Location:** ChangeUserPasswordRequestDTO validator  
+**Type:** Validation
 
-### Distribution by Module
-- **Authentication**: 17 messages (MSG1-MSG17, MSG18-MSG25)
-- **User Management**: 9 messages (MSG26-MSG34)
-- **Role Management**: 13 messages (MSG35-MSG50)
+### MSG8
+**Message:** `The new password cannot be the same as the old one.`  
+**Location:** ChangeUserPasswordRequestDTO validator  
+**Type:** Validation
 
-### Distribution by Operation Type
-- **Validation Rules**: 34 messages
-- **Business Logic Exceptions**: 16 messages
+### MSG9
+**Message:** `You must repeat the new password.`  
+**Location:** ChangeUserPasswordRequestDTO validator  
+**Type:** Validation
+
+### MSG10
+**Message:** `The passwords do not match.`  
+**Location:** ChangeUserPasswordRequestDTO validator  
+**Type:** Validation
+
+### MSG12
+**Message:** `The email address is required.`  
+**Location:** PasswordResetRequestDTO validator  
+**Type:** Validation
+
+### MSG13
+**Message:** `It must be a valid email address.`  
+**Location:** PasswordResetRequestDTO validator  
+**Type:** Validation
+
+### MSG15
+**Message:** `The new password is required.`  
+**Location:** ResetPasswordRequestDTO validator  
+**Type:** Validation
+
+### MSG16
+**Message:** `You must confirm the new password.`  
+**Location:** ResetPasswordRequestDTO validator  
+**Type:** Validation
+
+### MSG17
+**Message:** `The passwords do not match.`  
+**Location:** ResetPasswordRequestDTO validator  
+**Type:** Validation
+
+### MSG21
+**Message:** `Invalid old password.`  
+**Location:** AuthService.ChangeUserPassword  
+**Type:** Exception
+
+### MSG22
+**Message:** `User not found.`  
+**Location:** AuthService.ChangeUserPassword  
+**Type:** Exception
+
+### MSG24
+**Message:** `Email already exists.`  
+**Location:** AuthService.NotExistsEmail  
+**Type:** Exception
+
+### MSG24
+**Message:** `Email not found.`  
+**Location:** AuthService.RequestPasswordReset  
+**Type:** Exception
 
 ---
 
-## Implementation Details
+## User Registration Messages (Admin)
 
-All messages are prefixed with their corresponding message code (MSG1, MSG2, etc.) in the format:
+### MSG26
+**Message:** `The email address is required.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
 
-```
-"MSG{number} {message text}"
-```
+### MSG27
+**Message:** `Must be a valid email.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
 
-This format enables:
-- **Error Tracking**: Easy identification of error sources in logs
-- **Localization**: Support for multi-language implementations
-- **Documentation**: Clear mapping between codes and messages
-- **Debugging**: Quick reference for developers during troubleshooting
+### MSG28
+**Message:** `First name is required.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG29
+**Message:** `Last name is required.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG30
+**Message:** `Password is required.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG31
+**Message:** `You must confirm the password.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG32
+**Message:** `Passwords do not match.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG33
+**Message:** `You must specify at least one role id.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
+
+### MSG34
+**Message:** `The roles list cannot be empty.`  
+**Location:** RegisterUserByAdminRequestDTO validator  
+**Type:** Validation
 
 ---
 
-## Related Files
+## User Registration Messages (Public)
 
-### Controllers
-- `Controllers/AuthController.cs`
+### MSG51
+**Message:** `The email address is required.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
 
-### Services
-- `Services/AuthService.cs`
-- `Services/RoleService.cs`
+### MSG52
+**Message:** `Must be a valid email.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
 
-### DTOs with Validators - Authentication
-- `DTOs/UserDTOs/LoginUserRequestDTO.cs`
-- `DTOs/UserDTOs/RefreshTokenRequestDTO.cs`
-- `DTOs/UserDTOs/ChangeUserPasswordRequestDTO.cs`
-- `DTOs/UserDTOs/ActivateRequestDTO.cs`
-- `DTOs/UserDTOs/PasswordResetRequestDTO.cs`
-- `DTOs/UserDTOs/ResetPasswordRequestDTO.cs`
+### MSG53
+**Message:** `First name is required.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
 
-### DTOs with Validators - User Management
-- `DTOs/UserDTOs/RegisterUserByAdminRequestDTO.cs`
+### MSG54
+**Message:** `Last name is required.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
 
-### DTOs with Validators - Role Management
-- `DTOs/RoleDTOs/CreateUpdRolRequestDTO.cs`
-- `DTOs/RoleDTOs/AssignPermissionsRequestDTO.cs`
+### MSG55
+**Message:** `Password is required.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
+
+### MSG56
+**Message:** `You must confirm the password.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
+
+### MSG57
+**Message:** `Passwords do not match.`  
+**Location:** RegisterUserRequestDTO validator  
+**Type:** Validation
 
 ---
 
-*Last Updated: January 8, 2026*
+## Password Policy Messages
+
+### MSG58
+**Message:** `Must contain at least 8 characters.`  
+**Location:** PasswordRules.PasswordPolicy  
+**Type:** Validation
+
+### MSG59
+**Message:** `Must contain at least one uppercase letter.`  
+**Location:** PasswordRules.PasswordPolicy  
+**Type:** Validation
+
+### MSG60
+**Message:** `Must contain at least one lowercase letter.`  
+**Location:** PasswordRules.PasswordPolicy  
+**Type:** Validation
+
+### MSG61
+**Message:** `Must contain at least one number.`  
+**Location:** PasswordRules.PasswordPolicy  
+**Type:** Validation
+
+### MSG62
+**Message:** `Must contain at least one special character.`  
+**Location:** PasswordRules.PasswordPolicy  
+**Type:** Validation
+
+---
+
+## Role Management Messages
+
+### MSG35
+**Message:** `The role name is required.`  
+**Location:** CreateUpdRolRequestDTO validator  
+**Type:** Validation
+
+### MSG36
+**Message:** `Must contain at least 3 characters.`  
+**Location:** CreateUpdRolRequestDTO validator  
+**Type:** Validation
+
+### MSG37
+**Message:** `Must contain maximum 50 characters.`  
+**Location:** CreateUpdRolRequestDTO validator  
+**Type:** Validation
+
+### MSG38
+**Message:** `The description is required.`  
+**Location:** CreateUpdRolRequestDTO validator  
+**Type:** Validation
+
+### MSG39
+**Message:** `Must contain maximum 200 characters.`  
+**Location:** CreateUpdRolRequestDTO validator  
+**Type:** Validation
+
+### MSG40
+**Message:** `You must specify at least one permission id.`  
+**Location:** AssignPermissionsRequestDTO validator  
+**Type:** Validation
+
+### MSG41
+**Message:** `The permission list cannot be empty.`  
+**Location:** AssignPermissionsRequestDTO validator  
+**Type:** Validation
+
+### MSG42
+**Message:** `This role name already exists.`  
+**Location:** RoleService.CreateRole  
+**Type:** Exception
+
+### MSG43
+**Message:** `Role not found.`  
+**Location:** RoleService.GetRoleById  
+**Type:** Exception
+
+### MSG44
+**Message:** `System roles cannot be modified.`  
+**Location:** RoleService.UpdateRole  
+**Type:** Exception
+
+### MSG45
+**Message:** `The role name already exists.`  
+**Location:** RoleService.UpdateRole  
+**Type:** Exception
+
+### MSG46
+**Message:** `Role not found.`  
+**Location:** RoleService.AssignPermissionToRole  
+**Type:** Exception
+
+### MSG64
+**Message:** `Role not found.`  
+**Location:** RoleService.UpdateRole  
+**Type:** Exception
+
+---
+
+## Permission Management Messages
+
+### MSG48
+**Message:** `One or more permissions do not exist.`  
+**Location:** RoleService.AssignPermissionToRole  
+**Type:** Exception
+
+### MSG49
+**Message:** `Permissions to remove not found.`  
+**Location:** RoleService.RemovePermissionsFromRole  
+**Type:** Exception
+
+### MSG50
+**Message:** `System permissions cannot be removed.`  
+**Location:** RoleService.RemovePermissionsFromRole  
+**Type:** Exception
+
+---
+
+## System Error Messages
+
+### MSG63
+**Message:** `An internal server error occurred.`  
+**Location:** ExceptionHandlingMiddleware  
+**Type:** Exception
+
+---
+
+## Summary
+
+- **Total Messages:** 64
+- **Validation Messages:** 42
+- **Exception Messages:** 22
+- **Message Code Range:** MSG1 - MSG64
