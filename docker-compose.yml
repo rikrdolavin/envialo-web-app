@@ -1,0 +1,22 @@
+services:
+  envialo-web-app:
+    build:
+      context: ./envialo-web-app
+      dockerfile: Dockerfile
+    container_name: envialo-web-app-container
+    env_file: .env
+    environment:
+      - API_BASE_URL=${API_BASE_URL:-https://envialo.com}
+      - API_BASE_URL2=${API_BASE_URL2:-https://common-store-admin.com}
+      - SESSION_SECRET=${SESSION_SECRET:-asdasdsdsadasdasd}
+      - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED:-0}
+      - NODE_ENV=${NODE_ENV:-development}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    networks:
+      - envialo-network
+    restart: always
+
+networks:
+  envialo-network:
+    external: true
