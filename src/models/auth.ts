@@ -27,3 +27,9 @@ export interface SignUpRequest {
 export interface SignupResponse extends ApiResponse {
   data: null;
 }
+
+export interface ChangePasswordRequest {
+  token: string;
+  newPassword: string;
+  repeatNewPassword: string;
+}

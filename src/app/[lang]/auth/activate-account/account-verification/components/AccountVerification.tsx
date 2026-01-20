@@ -1,10 +1,10 @@
 "use client";
 
 import { activeAccountAction } from "@/app/actions/auth";
-import LinkButton from "@/common/LinkButton";
+import FeedbackPage from "@/common/FeedbackPage";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaCheckCircle, FaSpinner, FaTimesCircle } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa";
 
 export default function AccountVerification() {
   const searchParams = useSearchParams();
@@ -47,31 +47,27 @@ export default function AccountVerification() {
       )}
 
       {status === "success" && (
-        <div className="flex flex-col items-center gap-6">
-          <FaCheckCircle className="text-6xl text-brinco" />
-          <h2 className="text-2xl font-bold text-gray-800">
-            ¡Cuenta activada satisfactoriamente!
-          </h2>
-          <p className="text-gray-600 max-w-md">
-            Tu cuenta ha sido verificada correctamente. Ahora puedes iniciar
-            sesión para acceder a la plataforma.
-          </p>
-          <LinkButton
-            url="/auth/login"
-            text="Iniciar Sesión"
-            className="w-[200px]"
-          />
-        </div>
+        <FeedbackPage
+          title="¡Cuenta activada satisfactoriamente!"
+          description="Tu cuenta ha sido verificada correctamente. Ahora puedes iniciar sesión para acceder a la plataforma."
+          success
+          redirectButton={{
+            url: "/auth/login",
+            text: "Iniciar Sesión",
+          }}
+        />
       )}
 
       {status === "error" && (
-        <div className="flex flex-col items-center gap-4">
-          <FaTimesCircle className="text-6xl text-red-500" />
-          <h2 className="text-2xl font-bold text-gray-800">
-            Error de activación
-          </h2>
-          <p className="text-red-600 font-medium">{message}</p>
-        </div>
+        <FeedbackPage
+          title="Error de activación"
+          description={message}
+          success={false}
+          redirectButton={{
+            url: "/auth/login",
+            text: "Iniciar Sesión",
+          }}
+        />
       )}
     </div>
   );

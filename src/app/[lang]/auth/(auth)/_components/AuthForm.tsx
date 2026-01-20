@@ -208,7 +208,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Los correos electrónicos no coinciden")
+                      new Error("Los correos electrónicos no coinciden"),
                     );
                   },
                 }),
@@ -231,6 +231,14 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
           >
             <Input.Password />
           </Form.Item>
+          {!isSignUp && (
+            <Form.Item>
+              <Link href={`/${lang}/auth/forgot-password`}>
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </Form.Item>
+          )}
+
           {isSignUp && (
             <>
               <Form.Item
@@ -248,7 +256,7 @@ export function AuthForm({ lang, isSignUp }: Readonly<AuthFormProps>) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        new Error("Las contraseñas no coinciden")
+                        new Error("Las contraseñas no coinciden"),
                       );
                     },
                   }),

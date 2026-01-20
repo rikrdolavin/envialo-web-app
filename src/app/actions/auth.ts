@@ -2,17 +2,21 @@
 
 import {
   API_AUTH_ACTIVATE_USER,
+  API_AUTH_CHANGE_PASSWORD,
+  API_AUTH_FORGOT_PASSWORD,
   API_AUTH_LOGIN,
   API_AUTH_REGISTER,
 } from "@/constants/auth/endpoints";
 import { createSession } from "@/lib/session";
 import { doFetch } from "@/lib/utils";
 import {
+  ChangePasswordRequest,
   LoginRequest,
   LoginResponse,
   SignUpRequest,
   SignupResponse,
 } from "@/models/auth";
+import { ApiResponse } from "@/types/api";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -106,14 +110,12 @@ export const activeAccountAction = async (token: string) => {
         "Content-Type": "application/json",
       },
     });
-    console.log(response);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
-    console.log(data);
 
     return data;
   } catch (error) {
@@ -125,4 +127,45 @@ export const activeAccountAction = async (token: string) => {
       data: null,
     };
   }
+};
+
+export const forgotPasswordAction = async (email: string) => {
+  try {
+    const forgotPasswordResponse = await doFetch({
+      endpoint: API_AUTH_FORGOT_PASSWORD,
+      data: { email },
+      method: "POST",
+      apiBase: process.env.API_BASE_URL2,
+    });
+
+    if (forgotPasswordResponse.success === false) {
+      return forgotPasswordResponse;
+    }
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+
+  redirect("/auth/forgot-password/verify-email");
+};
+
+export const changePasswordAction = async (body: ChangePasswordRequest) => {
+  let response: ApiResponse;
+  try {
+    response = await doFetch({
+      endpoint: API_AUTH_CHANGE_PASSWORD,
+      data: body,
+      method: "POST",
+      apiBase: process.env.API_BASE_URL2,
+    });
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+
+  if (response.success === false && response.errorCode === "MSG25") {
+    redirect("/auth/forgot-password?reason=expired");
+  }
+
+  return response;
 };
