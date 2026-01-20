@@ -27,6 +27,7 @@ export async function getProducts({
     data: null,
     method: "GET",
     endpoint: endpointWithParams,
+    apiBase: process.env.API_BASE_URL2,
   });
 }
 

@@ -19,7 +19,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
     offset: 0,
   });
 
-  if (products.status == "success") {
+  if (products.results) {
     return (
       <WrapperContainer className="mx-auto py-10 px-4">
         <FilterSection products={products} lang={lang} />

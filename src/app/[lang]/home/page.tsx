@@ -8,7 +8,6 @@ import HomeCarousel from "./components/HomeCarousel";
 import WrapperContainer from "@/common/layout/WrapperContainer";
 import PromotionalBanner from "./components/PromotionalBanner";
 import PromotionalPayBanner from "./components/PromotionalPayBanner";
-import BreadCrumbs from "@/common/BreadCrumbs";
 import LinkButton from "@/common/LinkButton";
 
 interface PageProps {
@@ -24,7 +23,7 @@ export default async function Page({ params }: Readonly<PageProps>) {
     offset: 0,
   });
 
-  if (products.status == "success") {
+  if (products.results) {
     return (
       <div>
         <HomeCarousel />

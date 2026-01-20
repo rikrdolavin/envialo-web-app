@@ -34,7 +34,7 @@ export default function ProductsList({
           imageUrl={el.image ?? "/assets/no_image.png"}
           lang={lang}
           name={el.name}
-          price={el.price_cost}
+          price={el.priceCost}
           key={el.id}
         />
       ))}

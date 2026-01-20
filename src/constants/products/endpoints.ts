@@ -1,4 +1,4 @@
-export const API_PRODUCTS = "/api/Products";
+export const API_PRODUCTS = "/api/Product/get-all-products";
 
 export const API_PRODUCTS_DETAILS_PARAM = "productId";
 
