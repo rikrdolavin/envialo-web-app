@@ -1,5 +1,6 @@
 import LayoutClientWrapper from "@/common/layout/LayoutClientWrapper";
 import { Locale } from "@/models/language";
+import { getDictionary } from "./dictionaries";
 
 interface LayoutProps {
   params: Promise<{ lang: Locale["locale"] }>;
@@ -11,5 +12,11 @@ export default async function Layout({
   params,
 }: Readonly<LayoutProps>) {
   const { lang } = await params;
-  return <LayoutClientWrapper lang={lang}>{children}</LayoutClientWrapper>;
+  const dictionary = await getDictionary(lang);
+
+  return (
+    <LayoutClientWrapper lang={lang} dictionary={dictionary}>
+      {children}
+    </LayoutClientWrapper>
+  );
 }
