@@ -6,8 +6,7 @@ services:
     container_name: envialo-web-app-container
     env_file: .env
     environment:
-      - API_BASE_URL=${API_BASE_URL:-https://envialo.com}
-      - API_BASE_URL2=${API_BASE_URL2:-https://common-store-admin.com}
+      - API_BASE_URL=${API_BASE_URL:-https://api.envialo.brinxpress.com}
       - SESSION_SECRET=${SESSION_SECRET:-asdasdsdsadasdasd}
       - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED:-0}
       - NODE_ENV=${NODE_ENV:-development}
