@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Locale } from "@/models/language";
 import { Divider } from "antd";
 import MailIcon from "../icons/MailIcon";
 import PhoneIcon from "../icons/PhoneIcon";
@@ -8,12 +7,11 @@ import WhatsAppIcon from "../icons/WhatsAppIcon";
 import TelegramIcon from "../icons/TelegramIcon";
 import FooterSections from "./footer/FooterSections";
 import FooterSubscriptionForm from "./footer/FooterSubscriptionForm";
+import { useLang } from "@/context/LangContext";
 
-interface FooterProps {
-  lang: Locale["locale"];
-}
-
-export default function FooterCustom({ lang }: Readonly<FooterProps>) {
+export default function FooterCustom() {
+  const { dictionaries } = useLang();
+  const footer = dictionaries.footer;
   return (
     <footer>
       <div className="flex flex-col transition-shadow bg-[#EB593D] text-white gap-2 px-3 py-10">
@@ -21,19 +19,13 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
           <div className="flex justify-between flex-wrap gap-4 md:gap-25 md:flex-nowrap lg:gap-35">
             <div className="flex flex-col">
               <p className="text-[20px]">
-                <b>Suscríbete aquí para conocer más de nuestras ofertas</b>
+                <b>{footer.subcribe.title}</b>
               </p>
-              <p>
-                Regístrese ahora para recibir las últimas actualizaciones sobre
-                promociones y cupones. !No te preocupes, no enviamos spam!
-              </p>
+              <p>{footer.subcribe.subtitle}</p>
             </div>
             <div className="flex flex-col gap-2 items-center">
               <FooterSubscriptionForm></FooterSubscriptionForm>
-              <p>
-                Al suscribirte aceptas nuestros Términos y condiciones y
-                Política de privacidad
-              </p>
+              <p>{footer.subcribe.form_subtitle}</p>
             </div>
           </div>
 
@@ -58,7 +50,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
 
                   <div className="text-white">
                     <p className="text-[14px]">
-                      Lunes a sábado 8:00 am a 5:00 pm
+                      {footer.subcribe.support.schedule}
                     </p>
 
                     <p className="text-[18px]">
@@ -72,7 +64,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
 
                   <div>
                     <p className="text-[14px]">
-                      Necesitas ayuda con tu pedido?
+                      {footer.subcribe.support.help_message}
                     </p>
 
                     <p className="text-[18px]">
@@ -97,7 +89,7 @@ export default function FooterCustom({ lang }: Readonly<FooterProps>) {
           <Divider className="bg-white h-px" />
 
           <section className="flex justify-center text-center items-center text-[15px]">
-            <p>BrincoExpress &copy; 2025. Todos los derechos reservados</p>
+            <p>BrincoExpress &copy; 2025. {footer.copyright}</p>
           </section>
         </div>
       </div>

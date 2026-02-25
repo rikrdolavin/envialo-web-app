@@ -14,6 +14,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import WrapperContainer from "./WrapperContainer";
+import { useLang } from "@/context/LangContext";
 
 interface NavHeaderProps {
   lang: Locale["locale"];
@@ -22,6 +23,8 @@ interface NavHeaderProps {
 export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   const pathname = usePathname();
   const { user, loading, setUser } = useAuth();
+  const { dictionaries } = useLang();
+  const navbar = dictionaries.navbar as any;
 
   const getMenuItems = (): MenuProps["items"] => {
     if (loading) return [];
@@ -32,7 +35,9 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         {
           key: "profile",
           icon: <UserOutlined />,
-          label: <Link href={`/${lang}/profile`}>Mi perfil</Link>,
+          label: (
+            <Link href={`/${lang}/profile`}>{navbar.profile_menu.profile}</Link>
+          ),
         },
         {
           type: "divider",
@@ -40,7 +45,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         {
           key: "logout",
           icon: <LogoutOutlined />,
-          label: "Cerrar sesión",
+          label: navbar.profile_menu.logout,
           onClick: () => {
             try {
               setUser(null);
@@ -60,14 +65,18 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           icon: <LoginOutlined />,
           label: (
             <Link href={`/${lang}/auth/login?callbackUrl=${pathname}`}>
-              Iniciar sesión
+              {navbar.profile_menu.login}
             </Link>
           ),
         },
         {
           key: "signup",
           icon: <UserAddOutlined />,
-          label: <Link href={`/${lang}/auth/signup`}>Crear cuenta</Link>,
+          label: (
+            <Link href={`/${lang}/auth/signup`}>
+              {navbar.profile_menu.create_account}
+            </Link>
+          ),
         },
       ];
     }

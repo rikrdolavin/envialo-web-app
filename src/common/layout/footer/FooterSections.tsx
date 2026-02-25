@@ -1,36 +1,38 @@
+import { useLang } from "@/context/LangContext";
 import FooterLink from "./FooterLink";
 
-const sections = [
-  {
-    title: "Servicio al cliente",
-    links: [
-      { label: "Pagos", href: "/payments" },
-      { label: "Entregas", href: "/delivery" },
-      { label: "Preguntas Frecuentes", href: "/faq" },
-    ],
-  },
-  {
-    title: "Otros",
-    links: [
-      { label: "Política de privacidad", href: "/privacy-policies" },
-      { label: "Términos y condiciones", href: "/terms-conditions" },
-      { label: "Política de devoluciones", href: "/returns-and-refunds" },
-    ],
-  },
-  {
-    title: "Productos",
-    links: [
-      { label: "Alimentos y bebidas", href: "#" },
-      { label: "Electrodomésticos", href: "#" },
-      { label: "Ferretería y Construcción", href: "#" },
-      { label: "Aseo y Limpieza", href: "#" },
-      { label: "Hogar", href: "#" },
-      { label: "Automotriz", href: "#" },
-    ],
-  },
-];
-
 export default function FooterSections() {
+  const { dictionaries } = useLang();
+  const footerSections = (dictionaries as any).footer.links;
+
+  const sections = [
+    {
+      title: footerSections.section1.title,
+      links: [
+        { label: footerSections.section1.link1, href: "/payments" },
+        { label: footerSections.section1.link2, href: "/delivery" },
+        { label: footerSections.section1.link3, href: "/faq" },
+      ],
+    },
+    {
+      title: footerSections.section2.title,
+      links: [
+        { label: footerSections.section2.link1, href: "/privacy-policies" },
+        { label: footerSections.section2.link2, href: "/terms-conditions" },
+        { label: footerSections.section2.link3, href: "/returns-and-refunds" },
+      ],
+    },
+    {
+      title: footerSections.section3.title,
+      links: [
+        { label: footerSections.section3.link1, href: "#" },
+        { label: footerSections.section3.link2, href: "#" },
+        { label: footerSections.section3.link3, href: "#" },
+        { label: footerSections.section3.link4, href: "#" },
+      ],
+    },
+  ];
+
   return (
     <>
       {sections.map((section) => (
