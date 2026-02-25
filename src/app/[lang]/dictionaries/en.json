@@ -1,1 +1,65 @@
-{}
+{
+  "navbar": {
+    "profile_menu": {
+      "login": "Login",
+      "create_account": "Create account",
+      "profile": "My profile",
+      "orders": "My orders",
+      "addresses": "My addresses",
+      "payment_methods": "My payment methods",
+      "notifications": "My notifications",
+      "settings": "My settings",
+      "help": "Help",
+      "logout": "Logout"
+    }
+  },
+  "home": {
+    "see_more": "See more",
+    "promotional_banners": {
+      "banner1": {
+        "title": "What we do in",
+        "description": "We are an online sales store that offers a wide range of quality products from basic foods, personal care and cleaning products, appliances, hardware tools, to construction materials. Purchases can be made from anywhere in the world with direct deliveries to Cuba, we are at your disposal 24 hours a day, 365 days a year. We offer an easy, secure and borderless shopping experience. We work with the best brands that allow us to offer you the best quality products at the best price, making a reliable, comfortable and secure shopping experience right to your doorstep."
+      },
+      "banner2": {
+        "title": "How to pay in",
+        "description": "To make the payment in BrincoXpress, complete the required fields in the checkout and confirm your payment, using your preferred payment method."
+      }
+    },
+    "description": "Home"
+  },
+  "footer": {
+    "subcribe": {
+      "title": "Subscribe here to learn more about our offers",
+      "subtitle": "Register now to receive the latest updates on promotions and coupons. Don't worry, we don't send spam!",
+      "placeholder": "Email",
+      "send_button": "Send",
+      "form_subtitle": "By subscribing, you accept our Terms and conditions and Privacy policy",
+      "support": {
+        "schedule": "Monday to Saturday 8:00 am to 5:00 pm",
+        "help_message": "Need help with your order?"
+      }
+    },
+    "copyright": "All rights reserved",
+    "links": {
+      "section1": {
+        "title": "Customer service",
+        "link1": "Payments",
+        "link2": "Deliveries",
+        "link3": "Frequently asked questions"
+      },
+      "section2": {
+        "title": "Others",
+        "link1": "Privacy policy",
+        "link2": "Terms and conditions",
+        "link3": "Return policy"
+      },
+      "section3": {
+        "title": "Products",
+        "link1": "All",
+        "link2": "Categories",
+        "link3": "Brands",
+        "link4": "Promotions"
+      }
+    }
+  }
+}

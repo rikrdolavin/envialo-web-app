@@ -1,5 +1,4 @@
 import { Locale } from "@/models/language";
-import { getDictionary } from "../dictionaries";
 import { getProducts } from "@/lib/products";
 import { ProductsPaginatedResponse } from "@/models/products";
 import Link from "next/link";
@@ -12,17 +11,16 @@ interface PageProps {
 
 export default async function Page({ params }: Readonly<PageProps>) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
 
-  const products: ProductsPaginatedResponse = await getProducts({
-    limit: 20,
-    offset: 0,
+  const products: Promise<ProductsPaginatedResponse> = getProducts({
+    page: 1,
+    pageSize: 20,
   });
 
-  if (products.results) {
+  if ((await products).data) {
     return (
       <WrapperContainer className="mx-auto py-10 px-4">
-        <FilterSection products={products} lang={lang} />
+        <FilterSection products={products} />
       </WrapperContainer>
     );
   } else {

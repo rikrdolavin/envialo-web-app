@@ -29,7 +29,7 @@ export async function ProductDetailsCard({
 
         <p className="text-4xl font-semibold">{product.name}</p>
         <AddProductCart
-          price={product.price_unit}
+          price={product.priceUnit}
           productId={product.id.toString()}
           variant="product-detail"
         />

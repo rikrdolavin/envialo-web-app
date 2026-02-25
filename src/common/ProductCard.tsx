@@ -4,26 +4,21 @@ import { Card } from "antd";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AddProductCart from "./product-card/AddProductCart";
+import { Product } from "@/models/products";
 
 interface ProductCardProps {
-  id: string;
+  product: Product;
   lang: string;
-  name: string;
-  price: number;
-  imageUrl: string;
 }
 
 export default function ProductCard({
-  id,
+  product,
   lang,
-  name,
-  price,
-  imageUrl,
 }: Readonly<ProductCardProps>) {
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/${lang}/product-details/${id}`);
+    router.push(`/${lang}/product-details/${product.id}`);
   };
 
   return (
@@ -40,16 +35,19 @@ export default function ProductCard({
       <div className="flex flex-col h-full min-h-96">
         <div className="cursor-pointer" onClick={handleNavigate}>
           <Image
-            src={imageUrl}
-            alt={name}
+            src={product.image as string}
+            alt={product.name}
             width={300}
             height={300}
             className="object-contain w-full h-52"
           />
-          <p className="line-clamp-2 my-2">{name}</p>
+          <p className="line-clamp-2 my-2">{product.name}</p>
         </div>
 
-        <AddProductCart price={price} productId={id} />
+        <AddProductCart
+          price={product.priceUnit}
+          productId={product.id.toString()}
+        />
       </div>
     </Card>
   );

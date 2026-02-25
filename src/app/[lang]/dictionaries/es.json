@@ -1,1 +1,65 @@
-{}
+{
+  "navbar": {
+    "profile_menu": {
+      "login": "Iniciar sesión",
+      "create_account": "Crear cuenta",
+      "profile": "Mi perfil",
+      "orders": "Mis pedidos",
+      "addresses": "Mis direcciones",
+      "payment_methods": "Mis métodos de pago",
+      "notifications": "Mis notificaciones",
+      "settings": "Mi configuración",
+      "help": "Ayuda",
+      "logout": "Cerrar sesión"
+    }
+  },
+  "home": {
+    "see_more": "Ver más",
+    "promotional_banners": {
+      "banner1": {
+        "title": "Qué hacemos en",
+        "description": "Somos una tienda de ventas online que oferta una amplia gama de productos de calidad desde alimentos básicos, productos de aseo y limpieza, electrodomésticos, herramientas de ferretería, hasta materiales de la construcción. Las compras se pueden realizar desde cualquier parte del mundo con entregas directas a Cuba, estamos a su disposición las 24h del día los 365 días del año. Ofrecemos una experiencia de compra fácil, segura y sin fronteras. Trabajamos con las mejores marcas que nos permiten ofrecerle productos de la mejor calidad al mejor precio, haciendo una experiencia de compra confiable, cómoda y segura hasta la puerta de su casa."
+      },
+      "banner2": {
+        "title": "Cómo pagar en",
+        "description": "Para realizar el pago en BrincoXpress, completa los campos requeridos en el checkout y confirme su pago, utilizando su método de pago preferido."
+      }
+    },
+    "description": "Home"
+  },
+  "footer": {
+    "subcribe": {
+      "title": "Suscríbete aquí para conocer más de nuestras ofertas",
+      "subtitle": "Regístrese ahora para recibir las últimas actualizaciones sobre promociones y cupones. !No te preocupes, no enviamos spam!",
+      "placeholder": "Correo electrónico",
+      "send_button": "Enviar",
+      "form_subtitle": "Al suscribirte aceptas nuestros Términos y condiciones y Política de privacidad",
+      "support": {
+        "schedule": "Lunes a sábado 8:00 am a 5:00 pm",
+        "help_message": "Necesitas ayuda con tu pedido?"
+      }
+    },
+    "copyright": "Todos los derechos reservados",
+    "links": {
+      "section1": {
+        "title": "Servicio al cliente",
+        "link1": "Pagos",
+        "link2": "Entregas",
+        "link3": "Preguntas Frecuentes"
+      },
+      "section2": {
+        "title": "Otros",
+        "link1": "Política de privacidad",
+        "link2": "Términos y condiciones",
+        "link3": "Política de devoluciones"
+      },
+      "section3": {
+        "title": "Productos",
+        "link1": "Todos",
+        "link2": "Categorías",
+        "link3": "Marcas",
+        "link4": "Promociones"
+      }
+    }
+  }
+}

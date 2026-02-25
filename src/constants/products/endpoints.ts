@@ -1,4 +1,6 @@
-export const API_PRODUCTS = "/api/Product/get-all-products";
+export const API_PRODUCTS = "/api/Product";
+export const API_PRODUCTS_ALL = `${API_PRODUCTS}/all`;
+
 
 export const API_PRODUCTS_DETAILS_PARAM = "productId";
 

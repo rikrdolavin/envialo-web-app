@@ -1,5 +1,5 @@
 import {
-  API_PRODUCTS,
+  API_PRODUCTS_ALL,
   API_PRODUCTS_DETAILS,
   API_PRODUCTS_DETAILS_PARAM,
 } from "@/constants/products/endpoints";
@@ -7,27 +7,31 @@ import {
 import { doFetch } from "./utils";
 
 export async function getProducts({
-  limit,
-  offset,
+  page,
+  pageSize,
+  onlyExternalProducts,
 }: {
-  limit?: number;
-  offset?: number;
+  page?: number;
+  pageSize?: number;
+  onlyExternalProducts?: boolean;
 } = {}) {
   const queryParams = new URLSearchParams();
 
-  if (limit !== undefined) queryParams.append("limit", String(limit));
-  if (offset !== undefined) queryParams.append("offset", String(offset));
+  if (page !== undefined) queryParams.append("page", String(page));
+  if (pageSize !== undefined) queryParams.append("pageSize", String(pageSize));
+  if (onlyExternalProducts !== undefined)
+    queryParams.append("onlyExternalProducts", String(onlyExternalProducts));
 
+  // todo: cambiar all en dependencia de lo que se quiera con respecto a los productos mas adelante
   const endpointWithParams =
     queryParams.toString().length > 0
-      ? `${API_PRODUCTS}?${queryParams.toString()}`
-      : API_PRODUCTS;
+      ? `${API_PRODUCTS_ALL}?${queryParams.toString()}`
+      : API_PRODUCTS_ALL;
 
   return await doFetch({
     data: null,
     method: "GET",
     endpoint: endpointWithParams,
-    apiBase: process.env.API_BASE_URL2,
   });
 }
 

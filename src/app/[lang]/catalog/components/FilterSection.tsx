@@ -5,21 +5,19 @@ import { Button, Pagination } from "antd";
 import IconoFiltro from "./FilterIcon";
 import Filter from "./Filter";
 import { ProductsPaginatedResponse } from "@/models/products";
-import ProductsList from "../../home/components/ProductsList";
+import ProductsSection from "@/common/ProductsSection";
 
 interface FilterSectionProps {
-  products: ProductsPaginatedResponse;
-  lang: string;
+  products: Promise<ProductsPaginatedResponse>;
 }
 
 export default function FilterSection({
   products,
-  lang,
 }: Readonly<FilterSectionProps>) {
   const [showFilter, setShowFilter] = useState(true);
 
   return (
-    <div>
+    <>
       <div className="flex flex-col sm:flex-row justify-between items-center px-3 py-3 mb-10 bg-white text-shadow-black rounded-sm">
         <p className="flex flex-col">
           <span className="text-[22px] font-bold">Lista de Productos</span>
@@ -59,18 +57,19 @@ export default function FilterSection({
       <div className="flex flex-col  gap-5 sm:flex-row">
         {showFilter && <Filter />}
         <div className="flex flex-col0 flex-wrap gap-3 transition-all duration-300">
-          {products.results && (
+          <ProductsSection productsResponse1={products} />
+          {/* {products.results && (
             <ProductsList
               lang={lang}
               products={products.results}
               variant={`${showFilter ? "filtercatalog" : "catalog"}`}
             />
-          )}
+          )} */}
           <div className="flex justify-center">
             <Pagination defaultCurrent={1} total={products.total} />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

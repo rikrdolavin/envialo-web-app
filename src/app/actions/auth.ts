@@ -26,7 +26,6 @@ export const loginAction = async (body: LoginRequest) => {
       endpoint: API_AUTH_LOGIN,
       data: body,
       method: "POST",
-      apiBase: process.env.API_BASE_URL2,
     });
 
     if (loginResponse.success === false) {
@@ -85,7 +84,6 @@ export const signupAction = async (body: SignUpRequest) => {
       endpoint: API_AUTH_REGISTER,
       data: body,
       method: "POST",
-      apiBase: process.env.API_BASE_URL2,
     });
 
     if (signupResponse.success === false) {
@@ -100,7 +98,7 @@ export const signupAction = async (body: SignUpRequest) => {
 };
 
 export const activeAccountAction = async (token: string) => {
-  const url = process.env.API_BASE_URL2 + API_AUTH_ACTIVATE_USER;
+  const url = process.env.API_BASE_URL + API_AUTH_ACTIVATE_USER;
 
   try {
     const response = await fetch(url, {
@@ -135,7 +133,6 @@ export const forgotPasswordAction = async (email: string) => {
       endpoint: API_AUTH_FORGOT_PASSWORD,
       data: { email },
       method: "POST",
-      apiBase: process.env.API_BASE_URL2,
     });
 
     if (forgotPasswordResponse.success === false) {
@@ -156,7 +153,6 @@ export const changePasswordAction = async (body: ChangePasswordRequest) => {
       endpoint: API_AUTH_CHANGE_PASSWORD,
       data: body,
       method: "POST",
-      apiBase: process.env.API_BASE_URL2,
     });
   } catch (err) {
     console.error(err);

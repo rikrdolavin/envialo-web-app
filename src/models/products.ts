@@ -5,8 +5,8 @@ export interface Product {
   sku: string;
   name: string;
   description: string;
-  price_cost: number;
-  price_unit: number;
+  priceCost: number;
+  priceUnit: number;
   locations: ProductLocation[];
   categories: [];
   image: string | null;
@@ -22,7 +22,7 @@ export interface ProductLocation {
 }
 
 export interface ProductsPaginatedResponse extends ApiPaginationResponse {
-  results: Product[];
+  data: Product[];
 }
 
 export interface ProductDetailsResponse {

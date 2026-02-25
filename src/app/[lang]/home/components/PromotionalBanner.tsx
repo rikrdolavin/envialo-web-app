@@ -1,13 +1,18 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { getDictionary } from "../../dictionaries";
+import { use } from "react";
+import { Locale } from "@/models/language";
 
-export default function PromotionalBanner() {
+export default function PromotionalBanner({
+  lang,
+}: Readonly<{ lang: Locale["locale"] }>) {
+  const dict = use(getDictionary(lang));
+  const banner1 = dict.home.promotional_banners.banner1;
+
   return (
     <section className="w-full bg-transparent py-4 mt-3">
       <div className="container mx-auto flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center gap-5 px-5">
-        {/* Imagen */}
         <div className="w-full lg:w-1/2 relative rounded-lg overflow-hidden aspect-[1.2] lg:aspect-[1.1]">
           <Image
             src="/assets/images/banner/bn1_image.webp"
@@ -17,29 +22,19 @@ export default function PromotionalBanner() {
           />
         </div>
 
-        {/* Texto */}
         <div className="flex-1 flex flex-col items-start text-center h-auto md:text-left lg:w-1/2">
           <p className="text-[35px] lg:text-[70px] font-bold mb-3 leading-tight">
-            <span className="text-[#222]"> ¿Qué hacemos </span>
-            <span className="text-[#2c8254]"> en BrincoXpress?</span>
+            <span className="text-[#222]"> ¿{banner1.title} </span>
+            <span className="text-brinco"> BrincoXpress?</span>
           </p>
           <p className="text-[#757878] text-[15px] mb-4 text-justify">
-            Somos una tienda de ventas online que oferta una amplia gama de
-            productos de calidad desde alimentos básicos, productos de aseo y
-            limpieza, electrodomésticos, herramientas de ferretería, hasta
-            materiales de la construcción. Las compras se pueden realizar desde
-            cualquier parte del mundo con entregas directas a Cuba, estamos a su
-            disposición las 24h del día los 365 días del año. Ofrecemos una
-            experiencia de compra fácil, segura y sin fronteras. Trabajamos con
-            las mejores marcas que nos permiten ofrecerle productos de la mejor
-            calidad al mejor precio, haciendo una experiencia de compra
-            confiable, cómoda y segura hasta la puerta de su casa.
+            {banner1.description}
           </p>
 
           <div>
-            <button className="bg-[#2c8254] h-auto w-[150px] hover:bg-olive-700 text-white text-[17px]  py-2 px-6 rounded-full transition-all duration-200">
+            <button className="bg-brinco h-auto w-[150px] hover:bg-olive-700 text-white text-[17px]  py-2 px-6 rounded-full transition-all duration-200">
               <Link className="text-white!" href={"#"}>
-                Ver más
+                {dict.home.see_more}
               </Link>
             </button>
           </div>
