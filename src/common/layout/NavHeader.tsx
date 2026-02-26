@@ -23,7 +23,7 @@ interface NavHeaderProps {
 export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   const pathname = usePathname();
   const { user, loading, setUser } = useAuth();
-  const { dictionaries } = useLang();
+  const { dictionary: dictionaries } = useLang();
   const navbar = dictionaries.navbar as any;
 
   const getMenuItems = (): MenuProps["items"] => {

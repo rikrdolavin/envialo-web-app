@@ -10,7 +10,7 @@ import FooterSubscriptionForm from "./footer/FooterSubscriptionForm";
 import { useLang } from "@/context/LangContext";
 
 export default function FooterCustom() {
-  const { dictionaries } = useLang();
+  const { dictionary: dictionaries } = useLang();
   const footer = dictionaries.footer;
   return (
     <footer>

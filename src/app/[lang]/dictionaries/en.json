@@ -61,5 +61,42 @@
         "link4": "Promotions"
       }
     }
+  },
+  "auth_form": {
+    "login_title": "Login",
+    "signup_title": "Create account",
+    "subtitle": "Login to access your account",
+    "email": "Email",
+    "password": "Password",
+    "login_button": "Login",
+    "signup_button": "Create account",
+    "forgot_password": "Forgot password?",
+    "terms_and_conditions": "By logging in, you accept our Terms and conditions and Privacy policy",
+    "signup": "Don't have an account?",
+    "signup_link": "Register",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "repeat_password": "Repeat password",
+    "accept": "Accept",
+    "terms": "Terms and conditions",
+    "already_have_account": "Already have an account?",
+    "validation": {
+      "email": "Please enter your email",
+      "valid_email": "Please enter a valid email",
+      "password_required": "Please enter your password",
+      "repeat_password": "Please enter your password again",
+      "first_name": "Please enter your first name",
+      "last_name": "Please enter your last name",
+      "password_validation1": "Password must have at least 8 characters.",
+      "password_validation2": "Password must contain at least one uppercase letter.",
+      "password_validation3": "Password must contain at least one number.",
+      "password_validation4": "Password must contain at least one special character."
+    },
+    "errors": {
+      "connection_error": "An error occurred, please check your connection and try again.",
+      "existing_email": "The email already exists.",
+      "invalid_credentials": "You entered an invalid username or password.",
+      "password_not_matching": "Passwords do not match."
+    }
   }
 }

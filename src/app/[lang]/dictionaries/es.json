@@ -61,5 +61,42 @@
         "link4": "Promociones"
       }
     }
+  },
+  "auth_form": {
+    "login_title": "Inicia sesion",
+    "signup_title": "Crea tu cuenta",
+    "subtitle": "Inicia sesion para acceder a tu cuenta",
+    "email": "Correo electronico",
+    "password": "Contraseña",
+    "login_button": "Acceder",
+    "signup_button": "Registrarse",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "terms_and_conditions": "Al iniciar sesion, aceptas nuestros Términos y condiciones y Politica de privacidad",
+    "signup": "¿No tienes una cuenta?",
+    "signup_link": "Regístrate",
+    "first_name": "Nombre/s",
+    "last_name": "Apellido/s",
+    "repeat_password": "Repetir contraseña",
+    "accept": "Aceptar",
+    "terms": "Términos y condiciones",
+    "already_have_account": "¿Ya tienes una cuenta?",
+    "validation": {
+      "email": "Por favor, ingresa tu correo electrónico",
+      "valid_email": "Por favor, ingresa un correo electrónico válido",
+      "password_required": "Por favor, ingresa tu contraseña",
+      "repeat_password": "Por favor, ingresa tu contraseña de nuevo",
+      "first_name": "Por favor, ingresa tu nombre",
+      "last_name": "Por favor, ingresa tu apellido",
+      "password_validation1": "Debe tener al menos 8 caracteres.",
+      "password_validation2": "Debe contener al menos una letra mayúscula.",
+      "password_validation3": "Debe contener al menos un número.",
+      "password_validation4": "Debe contener al menos un carácter especial."
+    },
+    "errors": {
+      "connection_error": "Ha ocurrido un error, compruebe su conexión e inténtelo nuevamente.",
+      "existing_email": "El correo electrónico ya existe.",
+      "invalid_credentials": "Ingresó un usuario o contraseña incorrecta.",
+      "password_not_matching": "Las contraseñas no coinciden."
+    }
   }
 }

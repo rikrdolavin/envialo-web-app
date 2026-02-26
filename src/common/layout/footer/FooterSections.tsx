@@ -2,7 +2,7 @@ import { useLang } from "@/context/LangContext";
 import FooterLink from "./FooterLink";
 
 export default function FooterSections() {
-  const { dictionaries } = useLang();
+  const { dictionary: dictionaries } = useLang();
   const footerSections = (dictionaries as any).footer.links;
 
   const sections = [

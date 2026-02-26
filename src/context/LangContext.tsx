@@ -4,8 +4,8 @@ import { Locale } from "@/models/language";
 interface LanguageContextType {
   lang: Locale["locale"];
   setLang: (lang: Locale["locale"]) => void;
-  dictionaries: Record<string, unknown>;
-  setDictionaries: (dictionary: Record<string, unknown>) => void;
+  dictionary: Record<string, any>;
+  setDictionary: (dictionary: Record<string, any>) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -18,20 +18,20 @@ export const LanguageProvider = ({
   initLang,
 }: {
   children: ReactNode;
-  initDictionary: Record<string, unknown>;
+  initDictionary: Record<string, any>;
   initLang: Locale["locale"];
 }) => {
-  const [dictionaries, setDictionaries] = useState(initDictionary);
+  const [dictionary, setDictionary] = useState(initDictionary);
   const [lang, setLang] = useState<Locale["locale"]>(initLang);
 
   const contextValue = useMemo(() => {
     return {
-      setDictionaries,
-      dictionaries,
+      setDictionary,
+      dictionary,
       lang,
       setLang,
     };
-  }, [dictionaries, lang]);
+  }, [dictionary, lang]);
 
   return (
     <LanguageContext.Provider value={contextValue}>
