@@ -1,5 +1,3 @@
-import { ApiPaginationResponse } from "@/types/api";
-
 export interface Product {
   id: number;
   sku: string;
@@ -19,10 +17,6 @@ export interface Product {
 export interface ProductLocation {
   location: string;
   quantity: number;
-}
-
-export interface ProductsPaginatedResponse extends ApiPaginationResponse {
-  data: Product[];
 }
 
 export interface ProductDetailsResponse {

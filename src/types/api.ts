@@ -1,11 +1,9 @@
-export interface ApiPaginationResponse {
-  status: string;
-  total: number;
-  limit: number;
-  offset: number;
-  count: number;
-  results?: unknown[];
-  filters?: ApiPaginationResponseFilters;
+export interface ApiPaginationResponse<T> {
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+  data?: T[];
 }
 
 export interface ApiPaginationResponseFilters {

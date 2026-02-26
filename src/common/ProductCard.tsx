@@ -35,7 +35,7 @@ export default function ProductCard({
       <div className="flex flex-col h-full min-h-96">
         <div className="cursor-pointer" onClick={handleNavigate}>
           <Image
-            src={product.image as string}
+            src={(product.image as string) ?? "/assets/no_image.png"}
             alt={product.name}
             width={300}
             height={300}

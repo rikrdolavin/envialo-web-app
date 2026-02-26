@@ -2,7 +2,7 @@ import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { Locale } from "@/models/language";
 
 interface LanguageContextType {
-  lang: Locale["locale"] | null;
+  lang: Locale["locale"];
   setLang: (lang: Locale["locale"]) => void;
   dictionaries: Record<string, unknown>;
   setDictionaries: (dictionary: Record<string, unknown>) => void;
@@ -22,7 +22,7 @@ export const LanguageProvider = ({
   initLang: Locale["locale"];
 }) => {
   const [dictionaries, setDictionaries] = useState(initDictionary);
-  const [lang, setLang] = useState<Locale["locale"] | null>(initLang);
+  const [lang, setLang] = useState<Locale["locale"]>(initLang);
 
   const contextValue = useMemo(() => {
     return {
