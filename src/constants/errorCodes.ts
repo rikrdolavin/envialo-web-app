@@ -54,7 +54,7 @@ export enum ErrorCode {
   MSG44 = "MSG44",
   MSG45 = "MSG45",
   MSG46 = "MSG46",
-  // MSG47 is missing in the documented source
+  MSG47 = "MSG47",
   MSG48 = "MSG48",
   MSG49 = "MSG49",
   MSG50 = "MSG50",
@@ -129,6 +129,7 @@ export const ErrorMessages: Record<ErrorCode, string> = {
   [ErrorCode.MSG44]: "System roles cannot be modified.",
   [ErrorCode.MSG45]: "The role name already exists.",
   [ErrorCode.MSG46]: "Role not found.",
+  [ErrorCode.MSG47]: "Email not found.",
   [ErrorCode.MSG48]: "One or more permissions do not exist.",
   [ErrorCode.MSG49]: "Permissions to remove not found.",
   [ErrorCode.MSG50]: "System permissions cannot be removed.",

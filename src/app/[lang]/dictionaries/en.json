@@ -108,7 +108,8 @@
       "valid_email": "Please, enter a valid email"
     },
     "error": {
-      "invalid_code": "Invalid or expired code, please request a new code."
+      "invalid_code": "Invalid or expired code, please request a new code.",
+      "email_not_found": "The email does not exist. Please, verify the email and try again."
     },
     "verify_email": {
       "title": "Email verification",

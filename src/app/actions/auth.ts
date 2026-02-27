@@ -129,21 +129,18 @@ export const activeAccountAction = async (token: string) => {
 
 export const forgotPasswordAction = async (email: string) => {
   try {
-    const forgotPasswordResponse = await doFetch({
+    return await doFetch({
       endpoint: API_AUTH_FORGOT_PASSWORD,
       data: { email },
       method: "POST",
     });
-
-    if (forgotPasswordResponse.success === false) {
-      return forgotPasswordResponse;
-    }
   } catch (err) {
     console.error(err);
-    return err;
+    return {
+      success: false,
+      error: "Unexpected error. Please try again.",
+    };
   }
-
-  redirect("/auth/forgot-password/verify-email");
 };
 
 export const changePasswordAction = async (body: ChangePasswordRequest) => {

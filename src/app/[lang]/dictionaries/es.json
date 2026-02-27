@@ -108,7 +108,8 @@
       "valid_email": "Por favor, ingresa un correo electrónico válido"
     },
     "error": {
-      "invalid_code": "Código inválido o expirado, por favor solicite un nuevo código."
+      "invalid_code": "Código inválido o expirado, por favor solicite un nuevo código.",
+      "email_not_found": "El correo electrónico no se encuentra registrado. Por favor, verifica el correo electrónico y vuelve a intentarlo."
     },
     "verify_email": {
       "title": "Verificación de correo electrónico",
