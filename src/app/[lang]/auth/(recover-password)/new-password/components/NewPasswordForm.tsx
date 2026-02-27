@@ -2,6 +2,7 @@
 
 import { changePasswordAction } from "@/app/actions/auth";
 import FeedbackPage from "@/common/FeedbackPage";
+import { useLang } from "@/context/LangContext";
 import { ChangePasswordRequest } from "@/models/auth";
 import { ApiResponse } from "@/types/api";
 import { Button, Form, Input } from "antd";
@@ -11,6 +12,8 @@ import { useEffect, useMemo, useState } from "react";
 export default function NewPasswordForm() {
   const params = useSearchParams();
   const token = params.get("token");
+  const { dictionary } = useLang();
+  const newPasswordDict = dictionary.forgot_password.new_password;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
@@ -37,7 +40,7 @@ export default function NewPasswordForm() {
       setShowFeedback({
         feedbackType: "success",
         show: true,
-        message: "Contraseña cambiada exitosamente.",
+        message: newPasswordDict.success_message,
       });
     }
 
@@ -46,8 +49,7 @@ export default function NewPasswordForm() {
         setShowFeedback({
           feedbackType: "error",
           show: true,
-          message:
-            "Código inválido o expirado, por favor solicite un nuevo código.",
+          message: newPasswordDict.invalid_code,
         });
       }
     }
@@ -58,23 +60,23 @@ export default function NewPasswordForm() {
   const passwordRules = [
     {
       required: true,
-      message: "Por favor, ingresa tu contraseña",
+      message: newPasswordDict.password_validation0,
     },
     {
       min: 8,
-      message: "Debe tener al menos 8 caracteres.",
+      message: newPasswordDict.password_validation1,
     },
     {
       pattern: /(?=.*[A-Z])/,
-      message: "Debe contener al menos una letra mayúscula.",
+      message: newPasswordDict.password_validation2,
     },
     {
       pattern: /(?=.*\d)/,
-      message: "Debe contener al menos un número.",
+      message: newPasswordDict.password_validation3,
     },
     {
       pattern: /(?=.*[!@#$%^&*(),.?":{}|<>])/,
-      message: "Debe contener al menos un carácter especial.",
+      message: newPasswordDict.password_validation4,
     },
   ];
 
@@ -82,13 +84,13 @@ export default function NewPasswordForm() {
     return showFeedback.feedbackType === "success"
       ? {
           url: "/auth/login",
-          text: "Iniciar Sesión",
+          text: newPasswordDict.redirect_options.login,
         }
       : {
           url: "/auth/forgot-password",
-          text: "Volver",
+          text: newPasswordDict.redirect_options.go_back,
         };
-  }, [showFeedback]);
+  }, [showFeedback, newPasswordDict]);
 
   useEffect(() => {
     if (!token) {
@@ -96,12 +98,12 @@ export default function NewPasswordForm() {
         setShowFeedback({
           feedbackType: "error",
           show: true,
-          message: "Token inválido o expirado, por favor intenta de nuevo.",
+          message: newPasswordDict.invalid_token,
         });
       };
       validateToken();
     }
-  }, [token]);
+  }, [token, newPasswordDict]);
 
   return (
     <>
@@ -123,17 +125,21 @@ export default function NewPasswordForm() {
           layout="vertical"
           disabled={loading}
         >
-          <h1 className="text-2xl font-bold">Definir nueva contraseña</h1>
-          <Form.Item name="password" label="Contraseña" rules={passwordRules}>
-            <Input.Password placeholder="Contraseña" />
+          <h1 className="text-2xl font-bold">{newPasswordDict.title}</h1>
+          <Form.Item
+            name="password"
+            label={newPasswordDict.password}
+            rules={passwordRules}
+          >
+            <Input.Password placeholder={newPasswordDict.password} />
           </Form.Item>
           <Form.Item
             name="repeatPassword"
-            label="Confirmar contraseña"
+            label={newPasswordDict.confirm_password}
             rules={[
               {
                 required: true,
-                message: "Por favor, ingresa tu contraseña",
+                message: newPasswordDict.validation.password_validation0,
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
@@ -141,13 +147,13 @@ export default function NewPasswordForm() {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("Las contraseñas no coinciden"),
+                    new Error(newPasswordDict.errors.password_not_matching),
                   );
                 },
               }),
             ]}
           >
-            <Input.Password placeholder="Confirmar contraseña" />
+            <Input.Password placeholder={newPasswordDict.confirm_password} />
           </Form.Item>
           <Form.Item>
             <Button
@@ -156,7 +162,7 @@ export default function NewPasswordForm() {
               type="primary"
               htmlType="submit"
             >
-              Cambiar contraseña
+              {newPasswordDict.change_password}
             </Button>
           </Form.Item>
         </Form>

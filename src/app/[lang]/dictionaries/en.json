@@ -1,7 +1,7 @@
 {
   "navbar": {
     "profile_menu": {
-      "login": "Login",
+      "login": "Log in",
       "create_account": "Create account",
       "profile": "My profile",
       "orders": "My orders",
@@ -10,7 +10,7 @@
       "notifications": "My notifications",
       "settings": "My settings",
       "help": "Help",
-      "logout": "Logout"
+      "logout": "Log out"
     }
   },
   "home": {
@@ -18,7 +18,7 @@
     "promotional_banners": {
       "banner1": {
         "title": "What we do in",
-        "description": "We are an online sales store that offers a wide range of quality products from basic foods, personal care and cleaning products, appliances, hardware tools, to construction materials. Purchases can be made from anywhere in the world with direct deliveries to Cuba, we are at your disposal 24 hours a day, 365 days a year. We offer an easy, secure and borderless shopping experience. We work with the best brands that allow us to offer you the best quality products at the best price, making a reliable, comfortable and secure shopping experience right to your doorstep."
+        "description": "We are an online sales store that offers a wide range of quality products from basic foods, personal care and cleaning products, appliances, hardware tools, to construction materials. Purchases can be made from anywhere in the world with direct deliveries to Cuba, we are at your disposal 24 hours a day, 365 days a year. We offer an easy, secure, and borderless shopping experience. We work with the best brands that allow us to offer you the best quality products at the best price, making a reliable, comfortable, and secure shopping experience right to your doorstep."
       },
       "banner2": {
         "title": "How to pay in",
@@ -29,7 +29,7 @@
   },
   "footer": {
     "subcribe": {
-      "title": "Subscribe here to learn more about our offers",
+      "title": "Subscribe here to know more about our offers",
       "subtitle": "Register now to receive the latest updates on promotions and coupons. Don't worry, we don't send spam!",
       "placeholder": "Email",
       "send_button": "Send",
@@ -45,7 +45,7 @@
         "title": "Customer service",
         "link1": "Payments",
         "link2": "Deliveries",
-        "link3": "Frequently asked questions"
+        "link3": "FAQs"
       },
       "section2": {
         "title": "Others",
@@ -63,40 +63,94 @@
     }
   },
   "auth_form": {
-    "login_title": "Login",
-    "signup_title": "Create account",
-    "subtitle": "Login to access your account",
+    "login_title": "Log in",
+    "signup_title": "Create your account",
+    "subtitle": "Log in to access your account",
     "email": "Email",
     "password": "Password",
-    "login_button": "Login",
-    "signup_button": "Create account",
-    "forgot_password": "Forgot password?",
+    "login_button": "Access",
+    "signup_button": "Register",
+    "forgot_password": "Forgot your password?",
     "terms_and_conditions": "By logging in, you accept our Terms and conditions and Privacy policy",
     "signup": "Don't have an account?",
     "signup_link": "Register",
-    "first_name": "First name",
-    "last_name": "Last name",
+    "first_name": "First name(s)",
+    "last_name": "Last name(s)",
     "repeat_password": "Repeat password",
     "accept": "Accept",
     "terms": "Terms and conditions",
     "already_have_account": "Already have an account?",
     "validation": {
-      "email": "Please enter your email",
-      "valid_email": "Please enter a valid email",
-      "password_required": "Please enter your password",
-      "repeat_password": "Please enter your password again",
-      "first_name": "Please enter your first name",
-      "last_name": "Please enter your last name",
-      "password_validation1": "Password must have at least 8 characters.",
-      "password_validation2": "Password must contain at least one uppercase letter.",
-      "password_validation3": "Password must contain at least one number.",
-      "password_validation4": "Password must contain at least one special character."
+      "email": "Please, enter your email",
+      "valid_email": "Please, enter a valid email",
+      "password_required": "Please, enter your password",
+      "repeat_password": "Please, enter your password again",
+      "first_name": "Please, enter your first name",
+      "last_name": "Please, enter your last name",
+      "password_validation1": "It must have at least 8 characters.",
+      "password_validation2": "It must contain at least one uppercase letter.",
+      "password_validation3": "It must contain at least one number.",
+      "password_validation4": "It must contain at least one special character."
     },
     "errors": {
-      "connection_error": "An error occurred, please check your connection and try again.",
+      "connection_error": "An error occurred, check your connection and try again.",
       "existing_email": "The email already exists.",
-      "invalid_credentials": "You entered an invalid username or password.",
+      "invalid_credentials": "You entered an incorrect username or password.",
       "password_not_matching": "Passwords do not match."
+    }
+  },
+  "forgot_password": {
+    "recover_passowrd": "Recover password",
+    "email": "Email",
+    "send": "Send",
+    "validation": {
+      "email": "Please, enter your email",
+      "valid_email": "Please, enter a valid email"
+    },
+    "error": {
+      "invalid_code": "Invalid or expired code, please request a new code."
+    },
+    "verify_email": {
+      "title": "Email verification",
+      "description": "Verify your email to change your password."
+    },
+    "new_password": {
+      "title": "Set new password",
+      "password": "Password",
+      "confirm_password": "Confirm password",
+      "change_password": "Change password",
+      "success_message": "Password changed successfully.",
+      "invalid_code": "Invalid or expired code, please request a new code.",
+      "invalid_token": "Invalid or expired token, please try again.",
+      "redirect_options": {
+        "login": "Log in",
+        "go_back": "Go back"
+      },
+      "validation": {
+        "password_validation0": "Please, enter your password",
+        "password_validation1": "The password must have at least 8 characters.",
+        "password_validation2": "The password must contain at least one uppercase letter.",
+        "password_validation3": "The password must contain at least one number.",
+        "password_validation4": "The password must contain at least one special character."
+      },
+      "errors": {
+        "password_not_matching": "Passwords do not match."
+      }
+    }
+  },
+  "account_activation": {
+    "title": "Successful registration!",
+    "description": "Check your email to activate your account and complete the registration process.",
+    "account_verification": {
+      "activating_account": "Activating account...",
+      "account_activated": "Account activated successfully!",
+      "account_activated_description": "Your account has been verified correctly. Now you can log in to access the platform.",
+      "login": "Log in",
+      "errors": {
+        "activation_error": "There was an error activating your account",
+        "activation_error2": "Activation error",
+        "invalid_token": "Invalid token"
+      }
     }
   }
 }

@@ -1,10 +1,20 @@
 import FeedbackPage from "@/common/FeedbackPage";
+import { Locale } from "@/models/language";
+import { use } from "react";
+import { getDictionary } from "../../dictionaries";
 
-export default function Page() {
+interface PageProps {
+  params: Promise<{ lang: Locale["locale"] }>;
+}
+
+export default function Page({ params }: Readonly<PageProps>) {
+  const { lang } = use(params);
+  const dictionary = use(getDictionary(lang));
+
   return (
     <FeedbackPage
-      title="¡Registro satisfactorio!"
-      description="Revisa tu correo electrónico para activar tu cuenta y completar el proceso de registro."
+      title={dictionary.account_activation.title}
+      description={dictionary.account_activation.description}
       success
     />
   );

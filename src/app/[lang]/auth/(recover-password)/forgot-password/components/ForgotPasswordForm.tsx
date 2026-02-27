@@ -1,6 +1,7 @@
 "use client";
 
 import { forgotPasswordAction } from "@/app/actions/auth";
+import { useLang } from "@/context/LangContext";
 import { Alert, Button, Form, Input } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,10 +12,14 @@ export default function ForgotPasswordForm() {
   const reason = params.get("reason");
   const [showAlert, setShowAlert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { dictionary } = useLang();
+  const forgotPasswordDict = dictionary.forgot_password;
 
   const onFinish = async (values: { email: string }) => {
     setLoading(true);
     const res = await forgotPasswordAction(values.email);
+
+    // todo: implementar alerta para msg47 - email not found
     setLoading(false);
 
     if (res.success === false) {
@@ -42,7 +47,7 @@ export default function ForgotPasswordForm() {
     >
       {showAlert && (
         <Alert
-          title="Código inválido o expirado, por favor solicite un nuevo código."
+          title={forgotPasswordDict.error.invalid_code}
           type="error"
           closable={{
             closeIcon: true,
@@ -51,20 +56,20 @@ export default function ForgotPasswordForm() {
         />
       )}
       <Form.Item
-        label="Correo electrónico"
+        label={forgotPasswordDict.email}
         name="email"
         rules={[
           {
             required: true,
-            message: "Por favor, ingresa tu correo electrónico",
+            message: forgotPasswordDict.validation.email,
           },
           {
             type: "email",
-            message: "Por favor, ingresa un correo electrónico válido",
+            message: forgotPasswordDict.validation.valid_email,
           },
         ]}
       >
-        <Input type="email" placeholder="Correo electrónico" />
+        <Input type="email" placeholder={forgotPasswordDict.email} />
       </Form.Item>
       <Form.Item>
         <Button
@@ -73,7 +78,7 @@ export default function ForgotPasswordForm() {
           type="primary"
           htmlType="submit"
         >
-          Enviar
+          {forgotPasswordDict.send}
         </Button>
       </Form.Item>
     </Form>

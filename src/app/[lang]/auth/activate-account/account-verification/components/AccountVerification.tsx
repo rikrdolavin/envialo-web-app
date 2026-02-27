@@ -2,6 +2,7 @@
 
 import { activeAccountAction } from "@/app/actions/auth";
 import FeedbackPage from "@/common/FeedbackPage";
+import { useLang } from "@/context/LangContext";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
@@ -9,11 +10,16 @@ import { FaSpinner } from "react-icons/fa";
 export default function AccountVerification() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const { dictionary } = useLang();
+  const accountVerificationDict =
+    dictionary.account_activation.account_verification;
 
   const [status, setStatus] = useState<"loading" | "success" | "error">(
-    token ? "loading" : "error"
+    token ? "loading" : "error",
   );
-  const [message, setMessage] = useState(token ? "" : "Token no válido");
+  const [message, setMessage] = useState(
+    token ? "" : accountVerificationDict.errors.invalid_token,
+  );
 
   useEffect(() => {
     if (token) {
@@ -24,16 +30,17 @@ export default function AccountVerification() {
           } else {
             setStatus("error");
             setMessage(
-              response.message || "Hubo un error al activar su cuenta"
+              response.message ||
+                accountVerificationDict.errors.activation_error,
             );
           }
         })
         .catch(() => {
           setStatus("error");
-          setMessage("Hubo un error al activar su cuenta");
+          setMessage(accountVerificationDict.errors.activation_error);
         });
     }
-  }, [token]);
+  }, [token, accountVerificationDict]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] p-4 text-center">
@@ -41,31 +48,31 @@ export default function AccountVerification() {
         <div className="flex flex-col items-center gap-4">
           <FaSpinner className="animate-spin text-4xl text-brinco" />
           <p className="text-lg font-medium text-gray-700">
-            Activando cuenta...
+            {accountVerificationDict.activating_account}
           </p>
         </div>
       )}
 
       {status === "success" && (
         <FeedbackPage
-          title="¡Cuenta activada satisfactoriamente!"
-          description="Tu cuenta ha sido verificada correctamente. Ahora puedes iniciar sesión para acceder a la plataforma."
+          title={accountVerificationDict.account_activated}
+          description={accountVerificationDict.account_activated_description}
           success
           redirectButton={{
             url: "/auth/login",
-            text: "Iniciar Sesión",
+            text: accountVerificationDict.login,
           }}
         />
       )}
 
       {status === "error" && (
         <FeedbackPage
-          title="Error de activación"
+          title={accountVerificationDict.errors.activation_error2}
           description={message}
           success={false}
           redirectButton={{
             url: "/auth/login",
-            text: "Iniciar Sesión",
+            text: accountVerificationDict.login,
           }}
         />
       )}

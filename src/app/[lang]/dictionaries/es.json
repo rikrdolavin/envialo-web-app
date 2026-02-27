@@ -25,7 +25,7 @@
         "description": "Para realizar el pago en BrincoXpress, completa los campos requeridos en el checkout y confirme su pago, utilizando su método de pago preferido."
       }
     },
-    "description": "Home"
+    "description": "Inicio"
   },
   "footer": {
     "subcribe": {
@@ -97,6 +97,60 @@
       "existing_email": "El correo electrónico ya existe.",
       "invalid_credentials": "Ingresó un usuario o contraseña incorrecta.",
       "password_not_matching": "Las contraseñas no coinciden."
+    }
+  },
+  "forgot_password": {
+    "recover_passowrd": "Recuperar contraseña",
+    "email": "Correo electrónico",
+    "send": "Enviar",
+    "validation": {
+      "email": "Por favor, ingresa tu correo electrónico",
+      "valid_email": "Por favor, ingresa un correo electrónico válido"
+    },
+    "error": {
+      "invalid_code": "Código inválido o expirado, por favor solicite un nuevo código."
+    },
+    "verify_email": {
+      "title": "Verificación de correo electrónico",
+      "description": "Verifica tu correo electrónico para realizar el cambio de contraseña."
+    },
+    "new_password": {
+      "title": "Definir nueva contraseña",
+      "password": "Contraseña",
+      "confirm_password": "Confirmar contraseña",
+      "change_password": "Cambiar contraseña",
+      "success_message": "Contraseña cambiada exitosamente.",
+      "invalid_code": "Código inválido o expirado, por favor solicite un nuevo código.",
+      "invalid_token": "Token inválido o expirado, por favor intenta de nuevo.",
+      "redirect_options": {
+        "login": "Iniciar Sesión",
+        "go_back": "Volver"
+      },
+      "validation": {
+        "password_validation0": "Por favor, ingresa tu contraseña",
+        "password_validation1": "La contraseña debe tener al menos 8 caracteres.",
+        "password_validation2": "La contraseña debe contener al menos una letra mayúscula.",
+        "password_validation3": "La contraseña debe contener al menos un número.",
+        "password_validation4": "La contraseña debe contener al menos un carácter especial."
+      },
+      "errors": {
+        "password_not_matching": "Las contraseñas no coinciden."
+      }
+    }
+  },
+  "account_activation": {
+    "title": "¡Registro satisfactorio!",
+    "description": "Revisa tu correo electrónico para activar tu cuenta y completar el proceso de registro.",
+    "account_verification": {
+      "activating_account": "Activando cuenta...",
+      "account_activated": "¡Cuenta activada satisfactoriamente!",
+      "account_activated_description": "Tu cuenta ha sido verificada correctamente. Ahora puedes iniciar sesión para acceder a la plataforma.",
+      "login": "Iniciar Sesión",
+      "errors": {
+        "activation_error": "Hubo un error al activar su cuenta",
+        "activation_error2": "Error de activación",
+        "invalid_token": "Token no válido"
+      }
     }
   }
 }
