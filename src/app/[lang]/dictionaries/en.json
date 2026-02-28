@@ -153,5 +153,36 @@
         "invalid_token": "Invalid token"
       }
     }
+  },
+  "catalog": {
+    "title": "Product list",
+    "subtitle_p1": "Found",
+    "subtitle_p2": "results",
+    "filters": {
+      "hide_filters": "Hide filters",
+      "show_filters": "Show filters",
+      "title": "Filters",
+      "clear_all": "Clear all",
+      "categories": "Categories",
+      "brands": "Brands",
+      "price": "Price",
+      "sort_by": "Sort by",
+      "no_categories": "No categories",
+      "no_brands": "No brands",
+      "clear_rating": "Limpiar puntuación",
+      "rating_more": "y más",
+      "promotions": "Promociones",
+      "rating": "Puntuación"
+    },
+    "sort_by_options": {
+      "relevance": "Relevance",
+      "price_asc": "Price (ascending)",
+      "price_desc": "Price (descending)",
+      "name_asc": "Name (ascending)",
+      "name_desc": "Name (descending)"
+    },
+    "no_products": "No products found",
+    "no_products_description": "No products found matching your search.",
+    "try_adjusting_filters": "Try adjusting the filters or search."
   }
 }

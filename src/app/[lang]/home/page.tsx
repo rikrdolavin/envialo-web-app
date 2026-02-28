@@ -19,12 +19,16 @@ export default function Page({ params }: Readonly<PageProps>) {
   const { lang } = use(params);
   const see_more_text = use(getDictionary(lang)).home.see_more;
 
-  const products: ApiResponse<ApiPaginationResponse<Product>> = use(
+  const productsResponse: ApiResponse<ApiPaginationResponse<Product>> = use(
     getProducts({
       page: 1,
       pageSize: 10,
     }),
   );
+
+  const products = productsResponse.success
+    ? productsResponse.data
+    : { page: 1, pageSize: 0, totalCount: 0, totalPages: 0, data: [] };
 
   return (
     <div>
@@ -37,11 +41,11 @@ export default function Page({ params }: Readonly<PageProps>) {
             className="ml-auto"
           />
         </div>
-        <ProductsSection products={products.data!} lang={lang} />
+        <ProductsSection products={products!} lang={lang} />
         <PromotionalBanner lang={lang} />
-        <ProductsSection products={products.data!} lang={lang} />
+        <ProductsSection products={products!} lang={lang} />
         <PromotionalPayBanner lang={lang} />
-        <ProductsSection products={products.data!} lang={lang} />
+        <ProductsSection products={products!} lang={lang} />
       </WrapperContainer>
     </div>
   );

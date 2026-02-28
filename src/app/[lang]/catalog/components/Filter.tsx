@@ -14,9 +14,12 @@ import {
   PROMOTION_OPTIONS,
   RATING_ROWS,
 } from "./filterConstants";
+import { useLang } from "@/context/LangContext";
 
 const Filter: React.FC = () => {
-  const [activeKeys, setActiveKeys] = useState<string[]>([]);
+  const { dictionary } = useLang();
+  const filterDict = dictionary.catalog.filters;
+  const [activeKeys, setActiveKeys] = useState<string[]>(["0", "1", "2", "3"]);
   const [checkedPromos, setCheckedPromos] = useState([false, false, false]);
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
@@ -67,12 +70,12 @@ const Filter: React.FC = () => {
     return [
       {
         key: "0",
-        label: <b className="text-[18px]">Precio</b>,
+        label: <b className="text-[18px]">{filterDict.price}</b>,
         children: <RangePriceSlider />,
       },
       {
         key: "1",
-        label: <b className="text-[18px]">Categorías</b>,
+        label: <b className="text-[18px]">{filterDict.categories}</b>,
         children: (
           <div className="flex flex-col gap-1 ">
             {CATEGORIES.map((category) => (
@@ -89,11 +92,14 @@ const Filter: React.FC = () => {
       },
       {
         key: "2",
-        label: <b className="text-[18px]">Promociones</b>,
+        label: <b className="text-[18px]">{filterDict.promotions}</b>,
         children: (
           <div className="flex flex-col gap-3 text-[16px]">
             {PROMOTION_OPTIONS.map((texto, i) => (
-              <label key={i} className="flex items-center gap-2 cursor-pointer">
+              <label
+                key={i + "-options"}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   checked={checkedPromos[i]}
@@ -111,7 +117,7 @@ const Filter: React.FC = () => {
         key: "3",
         label: (
           <div className="flex items-center justify-between w-full">
-            <b className="text-[18px] flex items-center">Puntuación</b>
+            <b className="text-[18px] flex items-center">{filterDict.rating}</b>
             <div className="flex items-center gap-1">
               {ratingPanelOpen && anyRatingChecked && (
                 <button
@@ -121,7 +127,7 @@ const Filter: React.FC = () => {
                     clearRatings();
                   }}
                   className="p-1 hover:bg-red-50 rounded-full transition-all flex items-center justify-center"
-                  title="Limpiar puntuación"
+                  title={filterDict.clear_rating}
                 >
                   <FaTrash
                     size={18}
@@ -136,7 +142,10 @@ const Filter: React.FC = () => {
         children: (
           <div className="flex flex-col justify-center items-center gap-3 text-[18px]">
             {RATING_ROWS.map((filledStars, i) => (
-              <label key={i} className="flex items-center gap-2 cursor-pointer">
+              <label
+                key={i + "-rating"}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   checked={selectedRating === i}
@@ -161,7 +170,9 @@ const Filter: React.FC = () => {
                     );
                   })}
                 </div>
-                <span className="text-gray-700 text-[15px]">y más</span>
+                <span className="text-gray-700 text-[15px]">
+                  {filterDict.rating_more}
+                </span>
               </label>
             ))}
           </div>
@@ -176,21 +187,22 @@ const Filter: React.FC = () => {
     clearRatings,
     handlePromoCheck,
     handleRatingCheck,
+    filterDict,
   ]);
 
   // Memoized expand icon to prevent recreation on every render
   const renderExpandIcon = useCallback(
-    ({ isActive }: { isActive?: boolean }) => (
+    (props: { isActive?: boolean }) => (
       <span
         style={{
           ...EXPAND_ICON_STYLE,
-          transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
+          transform: props.isActive ? "rotate(180deg)" : "rotate(0deg)",
         }}
       >
         ⌵
       </span>
     ),
-    []
+    [],
   );
 
   // region JSX
@@ -217,7 +229,7 @@ const Filter: React.FC = () => {
             src="/assets/icons/filterp.svg"
             alt="Icono de Sustítulo de filtro"
           />
-          <span className="text-[28px]">Filtros</span>
+          <span className="text-[28px]">{filterDict.title}</span>
         </div>
 
         <Collapse
@@ -226,8 +238,7 @@ const Filter: React.FC = () => {
           onChange={handleCollapseChange}
           expandIcon={renderExpandIcon}
           expandIconPlacement="end"
-          bordered={false}
-          ghost={true}
+          ghost
           items={collapseItems}
         />
 
@@ -254,7 +265,9 @@ const Filter: React.FC = () => {
             font-size: 22px !important;
             color: #2d2d2d !important;
             text-decoration: none !important;
-            transition: color 0.2s, text-decoration 0.2s;
+            transition:
+              color 0.2s,
+              text-decoration 0.2s;
             cursor: pointer;
           }
           :global(.categoria-link:hover) {

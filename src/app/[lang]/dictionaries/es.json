@@ -153,5 +153,36 @@
         "invalid_token": "Token no válido"
       }
     }
+  },
+  "catalog": {
+    "title": "Lista de productos",
+    "subtitle_p1": "Se encontraron",
+    "subtitle_p2": "resultados",
+    "filters": {
+      "hide_filters": "Ocultar filtros",
+      "show_filters": "Mostrar filtros",
+      "title": "Filtros",
+      "clear_all": "Limpiar todo",
+      "categories": "Categorías",
+      "brands": "Marcas",
+      "price": "Precio",
+      "sort_by": "Ordenar por",
+      "no_categories": "No hay categorías",
+      "no_brands": "No hay marcas",
+      "clear_rating": "Limpiar puntuación",
+      "rating_more": "y más",
+      "promotions": "Promociones",
+      "rating": "Puntuación"
+    },
+    "sort_by_options": {
+      "relevance": "Relevancia",
+      "price_asc": "Precio (ascendente)",
+      "price_desc": "Precio (descendente)",
+      "name_asc": "Nombre (ascendente)",
+      "name_desc": "Nombre (descendente)"
+    },
+    "no_products": "No hay productos",
+    "no_products_description": "No se encontraron productos que coincidan con tu búsqueda.",
+    "try_adjusting_filters": "Intenta ajustar los filtros o la búsqueda."
   }
 }

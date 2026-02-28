@@ -1,37 +1,25 @@
-import { Locale } from "@/models/language";
 import { getProducts } from "@/lib/products";
-import { ProductsPaginatedResponse } from "@/models/products";
-import Link from "next/link";
-import FilterSection from "./components/FilterSection";
+import Catalog from "./components/Catalog";
 import WrapperContainer from "@/common/layout/WrapperContainer";
+import { use } from "react";
+import { ApiPaginationResponse, ApiResponse } from "@/types/api";
+import { Product } from "@/models/products";
 
-interface PageProps {
-  params: Promise<{ lang: Locale["locale"] }>;
-}
+export default function Page() {
+  const productsResponse: ApiResponse<ApiPaginationResponse<Product>> = use(
+    getProducts({
+      page: 1,
+      pageSize: 24,
+    }),
+  );
 
-export default async function Page({ params }: Readonly<PageProps>) {
-  const { lang } = await params;
+  const products = productsResponse.success
+    ? (productsResponse.data as ApiPaginationResponse<Product>)
+    : { page: 1, pageSize: 0, totalCount: 0, totalPages: 0, data: [] };
 
-  const products: Promise<ProductsPaginatedResponse> = getProducts({
-    page: 1,
-    pageSize: 20,
-  });
-
-  if ((await products).data) {
-    return (
-      <WrapperContainer className="mx-auto py-10 px-4">
-        <FilterSection products={products} />
-      </WrapperContainer>
-    );
-  } else {
-    // temporal para cuando no carguen los productos
-    return (
-      <WrapperContainer className="mx-auto py-10 px-4">
-        <div className="h-screen">
-          Hubo un error al cargar los productos{" "}
-          <Link href={`/${lang}/home`}>Recargar</Link>
-        </div>
-      </WrapperContainer>
-    );
-  }
+  return (
+    <WrapperContainer className="mx-auto py-10 px-4">
+      <Catalog initialProducts={products} />
+    </WrapperContainer>
+  );
 }

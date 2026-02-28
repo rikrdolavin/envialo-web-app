@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AddProductCart from "./product-card/AddProductCart";
 import { Product } from "@/models/products";
+import Paragraph from "antd/es/typography/Paragraph";
 
 interface ProductCardProps {
   product: Product;
@@ -28,25 +29,34 @@ export default function ProductCard({
       styles={{
         body: {
           padding: "1rem",
-          height: "100%",
         },
       }}
+      cover={
+        <Image
+          src={(product.image as string) ?? "/assets/no_image.png"}
+          alt={product.name}
+          width={300}
+          height={300}
+        />
+      }
+      hoverable
+      onClick={handleNavigate}
     >
-      <div className="flex flex-col h-full min-h-96">
-        <div className="cursor-pointer" onClick={handleNavigate}>
-          <Image
-            src={(product.image as string) ?? "/assets/no_image.png"}
-            alt={product.name}
-            width={300}
-            height={300}
-            className="object-contain w-full h-52"
-          />
-          <p className="line-clamp-2 my-2">{product.name}</p>
-        </div>
-
+      <div className="mb-1 min-h-12">
+        <Paragraph
+          ellipsis={{ rows: 2 }}
+          style={{ marginBottom: 0 }}
+          className="font-semibold text-base"
+          title={product.name}
+        >
+          {product.name}
+        </Paragraph>
+      </div>
+      <div onClick={(e) => e.stopPropagation()}>
         <AddProductCart
           price={product.priceUnit}
           productId={product.id.toString()}
+          variant="small-card"
         />
       </div>
     </Card>

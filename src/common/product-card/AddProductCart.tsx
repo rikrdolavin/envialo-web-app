@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingOutlined } from "@ant-design/icons";
 import { Button, InputNumber } from "antd";
+import { TbShoppingBag } from "react-icons/tb";
 
 interface AddProductCartProps {
   price: number;
@@ -97,14 +97,19 @@ export default function AddProductCart({
             onClick={handleAddToCart}
             style={{
               width: "100%",
-              padding: `${variant === "small-card" ? "0 4px" : "0"}`,
+              padding: `${variant === "small-card" ? "0 10px" : "0"}`,
               boxShadow: "none",
             }}
             styles={{
               icon: { fontSize: 25 },
             }}
             size="middle"
-            icon={variant === "small-card" ? <ShoppingOutlined /> : null}
+            icon={
+              variant === "small-card" ? (
+                <TbShoppingBag size={25} className="" />
+              ) : null
+            }
+            className="aspect-square"
           >
             {variant === "product-detail" && (
               <p className="text-xl py-1 px-5 font-semibold rounded-xl w-full sm:w-auto">

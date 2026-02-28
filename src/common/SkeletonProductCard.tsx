@@ -8,9 +8,10 @@ export default function SkeletonProductCard() {
       hoverable
       style={{
         backgroundColor: "gray",
-        borderColor: "#333",
+        // borderColor: "#333",
       }}
-      cover={<Skeleton.Image active className="h-32" />}
+      cover={<Skeleton.Image active className="h-36 w-96" />}
+      styles={{ body: { background: "white" } }}
     >
       <Card.Meta
         title={
@@ -22,7 +23,6 @@ export default function SkeletonProductCard() {
           <Space orientation="vertical" className="w-full">
             <Skeleton.Input size="small" block active />
             <Skeleton.Input size="small" block active />
-            <Skeleton.Input block active className="mt-20" />
           </Space>
         }
       />
