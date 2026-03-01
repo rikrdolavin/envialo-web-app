@@ -7,12 +7,16 @@ export async function doFetch({
   method,
   lang,
   apiBase = process.env.API_BASE_URL,
+  cache = "no-cache",
+  cached,
 }: {
   endpoint: string;
   data: unknown;
   method: HTTP_METHOD;
   lang?: Locale["locale"];
   apiBase?: string;
+  cache?: RequestCache;
+  cached?: boolean;
 }) {
   const url = apiBase ?? process.env.API_BASE_URL;
 
@@ -26,6 +30,7 @@ export async function doFetch({
         "Content-Type": "application/json",
         "Accept-Language": lang ?? "",
       },
+      ...(cached ? { cache } : {}),
     });
 
     if (response.status == 204) {
@@ -36,5 +41,20 @@ export async function doFetch({
   } catch (error) {
     console.error(error);
     return { success: false, error: error };
+  }
+}
+
+export function getBackRoute(referer: string | null): string {
+  if (!referer) return "";
+  try {
+    const url = new URL(referer);
+    const pathname = url.pathname;
+    const parts = pathname.split("/").filter(Boolean);
+    if (parts.length > 1) {
+      return parts.slice(1).join("/") + url.search;
+    }
+    return "";
+  } catch {
+    return "";
   }
 }

@@ -19,7 +19,7 @@ export default function ProductCard({
   const router = useRouter();
 
   const handleNavigate = () => {
-    router.push(`/${lang}/product-details/${product.id}`);
+    router.push(`/${lang}/catalog/${product.id}`);
   };
 
   return (

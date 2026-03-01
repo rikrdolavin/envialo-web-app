@@ -22,7 +22,6 @@ export async function getProducts({
   if (onlyExternalProducts !== undefined)
     queryParams.append("onlyExternalProducts", String(onlyExternalProducts));
 
-  // todo: cambiar all en dependencia de lo que se quiera con respecto a los productos mas adelante
   const endpointWithParams =
     queryParams.toString().length > 0
       ? `${API_PRODUCTS_ALL}?${queryParams.toString()}`
@@ -40,5 +39,7 @@ export async function getProductDetails(id: string) {
     data: null,
     method: "GET",
     endpoint: API_PRODUCTS_DETAILS.replace(API_PRODUCTS_DETAILS_PARAM, id),
+    cached: true,
+    cache: "no-store",
   });
 }

@@ -6,7 +6,7 @@ export interface Product {
   priceCost: number;
   priceUnit: number;
   locations: ProductLocation[];
-  categories: [];
+  categories: string[];
   image: string | null;
   image2: string | null;
   image3: string | null;
