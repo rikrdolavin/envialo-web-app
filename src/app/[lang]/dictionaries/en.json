@@ -184,5 +184,54 @@
     "no_products": "No products found",
     "no_products_description": "No products found matching your search.",
     "try_adjusting_filters": "Try adjusting the filters or search."
+  },
+  "profile": {
+    "sidebar": {
+      "profile": "Profile",
+      "favorites": "Favorites",
+      "orders": "Orders",
+      "my_recipients": "My recipients",
+      "security": "Security",
+      "my_wallet": "My wallet",
+      "credit_history": "Credit history",
+      "logout": "Log out"
+    },
+    "sections": {
+      "profile": {
+        "hello": "Hello",
+        "welcome": "Welcome to your profile, you can edit your details and find out about your orders from here.",
+        "edit_form": {
+          "name": "First name",
+          "lastName": "Last name",
+          "phone": "Phone",
+          "email": "Email",
+          "cancel": "Cancel",
+          "save": "Save changes"
+        }
+      },
+      "security": {
+        "title": "Security",
+        "subtitle": "You can modify your password or delete your account whenever you wish",
+        "form": {
+          "title": "Change password",
+          "current_password": "Current password",
+          "new_password": "New password",
+          "repeat_password": "Confirm password",
+          "save": "Save changes"
+        },
+        "cancel_account": {
+          "title": "Cancel account",
+          "warning": "Please note that all your data associated with the account will be deleted in accordance with our privacy policy. If you decide to return in the future, we will be happy to welcome you again.",
+          "request_cancelation": "Request account cancellation",
+          "modal": {
+            "title": "Cancel account",
+            "description": "Are you sure you want to delete your account? You will lose all associated data, including your history. Enter your password to confirm this operation.",
+            "current_password": "Current password",
+            "cancel": "Cancel",
+            "request": "Request account cancellation"
+          }
+        }
+      }
+    }
   }
 }

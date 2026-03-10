@@ -23,8 +23,8 @@ interface NavHeaderProps {
 export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   const pathname = usePathname();
   const { user, loading, setUser } = useAuth();
-  const { dictionary: dictionaries } = useLang();
-  const navbar = dictionaries.navbar as any;
+  const { dictionary } = useLang();
+  const navbar = dictionary.navbar;
 
   const getMenuItems = (): MenuProps["items"] => {
     if (loading) return [];
@@ -118,7 +118,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         </Link>
         <div className="flex items-center gap-4">
           <LanguageSwitcher currentLang={lang} />
-          <Dropdown menu={{ items: getMenuItems() }} trigger={["click"]}>
+          <Dropdown menu={{ items: getMenuItems() }} trigger={["click"]} placement="bottomRight">
             <Avatar size="large" icon={<UserOutlined />} />
           </Dropdown>
         </div>

@@ -184,5 +184,54 @@
     "no_products": "No hay productos",
     "no_products_description": "No se encontraron productos que coincidan con tu búsqueda.",
     "try_adjusting_filters": "Intenta ajustar los filtros o la búsqueda."
+  },
+  "profile": {
+    "sidebar": {
+      "profile": "Perfil",
+      "favorites": "Favoritos",
+      "orders": "Ordenes",
+      "my_recipients": "Mis destinatarios",
+      "security": "Seguridad",
+      "my_wallet": "Mi billetera",
+      "credit_history": "Historial de crédito",
+      "logout": "Cerrar sesión"
+    },
+    "sections": {
+      "profile": {
+        "hello": "Hola",
+        "welcome": "Bienvenido a tu perfil, puedes editar tus datos e informarte sobre tus órdenes desde aquí.",
+        "edit_form": {
+          "name": "Nombre",
+          "lastName": "Apellidos",
+          "phone": "Telefono",
+          "email": "Correo electrónico",
+          "cancel": "Cancelar",
+          "save": "Guardar cambios"
+        }
+      },
+      "security": {
+        "title": "Seguridad",
+        "subtitle": "Puedes modificar tu contraseña o eliminar tu cuenta cuando desees",
+        "form": {
+          "title": "Cambiar contraseña",
+          "current_password": "Contraseña actual",
+          "new_password": "Nueva contraseña",
+          "repeat_password": "Confirmar contraseña",
+          "save": "Guardar cambios"
+        },
+        "cancel_account": {
+          "title": "Cancelar cuenta",
+          "warning": "Ten en cuenta que todos tus datos asociados a la cuenta serán eliminados de acuerdo con nuestra política de privacidad. Si en el futuro decides regresar, estaremos encantados de darte la bienvenida nuevamente.",
+          "request_cancelation": "Solicitar cancelar cuenta",
+          "modal": {
+            "title": "Cancelar cuenta",
+            "description": "¿Estás seguro de borrar tu cuenta? Perderás todos los datos asociados, incluyendo tu historial. Ingresa tu contraseña para confirmar esta operación.",
+            "current_password": "Contraseña actual",
+            "cancel": "Cancelar",
+            "request": "Solicitar cancelar cuenta"
+          }
+        }
+      }
+    }
   }
 }
