@@ -5,12 +5,12 @@ import { loginAction, signupAction } from "@/app/actions/auth";
 import { LoginRequest, LoginResponse, SignUpRequest } from "@/models/auth";
 import { ApiResponse } from "@/types/api";
 import { Alert, Button, Form, Input, Switch } from "antd";
-import type { Rule } from "antd/es/form";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { ErrorCode } from "@/constants/errorCodes";
 import { useState } from "react";
 import { useLang } from "@/context/LangContext";
+import { getPasswordRules } from "@/lib/utils";
 
 interface AuthFormProps {
   isSignUp: boolean;
@@ -95,25 +95,6 @@ export function AuthForm({ isSignUp }: Readonly<AuthFormProps>) {
     setSubmitting(false);
   };
 
-  const signupRules: Rule[] = [
-    {
-      min: 8,
-      message: dictionary.auth_form.validation.password_validation1,
-    },
-    {
-      pattern: /(?=.*[A-Z])/,
-      message: dictionary.auth_form.validation.password_validation2,
-    },
-    {
-      pattern: /(?=.*\d)/,
-      message: dictionary.auth_form.validation.password_validation3,
-    },
-    {
-      pattern: /(?=.*[!@#$%^&*(),.?":{}|<>])/,
-      message: dictionary.auth_form.validation.password_validation4,
-    },
-  ];
-
   return (
     <Form
       onFinish={onFinish}
@@ -194,14 +175,11 @@ export function AuthForm({ isSignUp }: Readonly<AuthFormProps>) {
       <Form.Item
         name="password"
         label={dictionary.auth_form.password}
-        rules={(
-          [
-            {
-              required: true,
-              message: dictionary.auth_form.validation.password_required,
-            },
-          ] as Rule[]
-        ).concat(isSignUp ? signupRules : [])}
+        rules={getPasswordRules({
+          dictionary,
+          type: isSignUp ? "new" : "required-only",
+          includeRequired: true,
+        })}
       >
         <Input.Password />
       </Form.Item>
@@ -219,22 +197,11 @@ export function AuthForm({ isSignUp }: Readonly<AuthFormProps>) {
             name="repeatPassword"
             label={dictionary.auth_form.repeat_password}
             dependencies={["password"]}
-            rules={[
-              {
-                required: true,
-                message: dictionary.auth_form.validation.repeat_password,
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(dictionary.auth_form.errors.passwords_dont_match),
-                  );
-                },
-              }),
-            ]}
+            rules={getPasswordRules({
+              dictionary,
+              type: "confirm",
+              includeRequired: true,
+            })}
           >
             <Input.Password />
           </Form.Item>
