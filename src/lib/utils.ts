@@ -1,6 +1,26 @@
 import { Locale } from "@/models/language";
 import { Rule } from "antd/es/form";
 import { HTTP_METHOD } from "next/dist/server/web/http";
+import { permanentRedirect } from "next/navigation";
+import { API_AUTH_LOGIN } from "@/constants/auth/endpoints";
+import { unstable_rethrow } from "next/dist/client/components/unstable-rethrow.server";
+
+export async function logout(lang?: Locale["locale"]) {
+  if (globalThis.window === undefined) {
+    try {
+      const { cookies } = await import("next/headers");
+      const cookieStore = await cookies();
+      cookieStore.delete("session");
+      cookieStore.delete("access_token");
+      cookieStore.delete("refresh_token");
+    } catch (err) {
+      console.error("Error clearing cookies on server:", err);
+    }
+  } else {
+    await fetch("/api/auth/logout");
+  }
+  return permanentRedirect(lang ? `/${lang}/auth/login` : "/auth/login");
+}
 
 export async function doFetch({
   data,
@@ -37,12 +57,17 @@ export async function doFetch({
       ...(cached ? { cache } : {}),
     });
 
+    if (response.status == 401 && endpoint !== API_AUTH_LOGIN) {
+      logout(lang);
+    }
+
     if (response.status == 204) {
       return { success: true };
     } else {
       return await response.json();
     }
   } catch (error) {
+    unstable_rethrow(error);
     console.error(error);
     return { success: false, error: error };
   }
