@@ -2,7 +2,13 @@
 
 import { Card, Skeleton, Space } from "antd";
 
-export default function SkeletonProductCard() {
+interface SkeletonProductCardProps {
+  wFull?: boolean;
+}
+
+export default function SkeletonProductCard({
+  wFull,
+}: Readonly<SkeletonProductCardProps>) {
   return (
     <Card
       hoverable
@@ -10,7 +16,12 @@ export default function SkeletonProductCard() {
         backgroundColor: "gray",
         // borderColor: "#333",
       }}
-      cover={<Skeleton.Image active className="h-36 w-96" />}
+      cover={
+        <Skeleton.Image
+          active
+          className={`h-36 ${wFull ? "w-full" : "w-96"}`}
+        />
+      }
       styles={{ body: { background: "white" } }}
     >
       <Card.Meta

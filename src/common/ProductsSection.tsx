@@ -20,7 +20,7 @@ export default function ProductsSection({
         fallback={
           <>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el, i) => (
-              <SkeletonProductCard key={i + el} />
+              <SkeletonProductCard key={i + el} wFull />
             ))}
           </>
         }
@@ -32,7 +32,7 @@ export default function ProductsSection({
         ) : (
           <>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el, i) => (
-              <SkeletonProductCard key={i + el} />
+              <SkeletonProductCard key={i + el} wFull />
             ))}
           </>
         )}
