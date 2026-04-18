@@ -1,14 +1,15 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { Button, Pagination } from "antd";
+import { Button } from "antd";
 import IconoFiltro from "./FilterIcon";
 import Filter from "./Filter";
-import { Product } from "@/models/products";
+import { Product, ProductVariant } from "@/models/products";
 import { ApiPaginationResponse } from "@/types/api";
 import { useLang } from "@/context/LangContext";
 import SkeletonProductCard from "@/common/SkeletonProductCard";
 import ProductCard from "@/common/ProductCard";
+import Pagination from "./Pagination";
 
 interface CatalogProps {
   initialProducts: ApiPaginationResponse<Product>;
@@ -87,7 +88,10 @@ export default function Catalog({ initialProducts }: Readonly<CatalogProps>) {
             productsResponse.data.length > 0 ? (
               productsResponse.data.map((product, idx) => (
                 <div key={idx + "-product"} className="flex justify-center">
-                  <ProductCard lang={lang} product={product} />
+                  <ProductCard
+                    lang={lang}
+                    product={product as unknown as ProductVariant}
+                  />
                 </div>
               ))
             ) : (
@@ -98,10 +102,10 @@ export default function Catalog({ initialProducts }: Readonly<CatalogProps>) {
               </>
             )}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-5">
             <Pagination
-              current={filtersControl.page}
-              total={productsResponse.totalCount}
+              page={filtersControl.page}
+              totalCount={productsResponse.totalCount}
               pageSize={productsResponse.pageSize}
               onChange={(page) => {
                 setFiltersControl((prev) => ({ ...prev, page }));
