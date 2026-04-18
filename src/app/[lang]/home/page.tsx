@@ -15,6 +15,8 @@ interface PageProps {
   params: Promise<{ lang: Locale["locale"] }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export default function Page({ params }: Readonly<PageProps>) {
   const { lang } = use(params);
   const see_more_text = use(getDictionary(lang)).home.see_more;
