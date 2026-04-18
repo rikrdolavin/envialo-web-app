@@ -40,6 +40,6 @@ export async function getProductDetails(id: string) {
     method: "GET",
     endpoint: API_PRODUCTS_DETAILS.replace(API_PRODUCTS_DETAILS_PARAM, id),
     cached: true,
-    cache: "no-store",
+    revalidateTime: 60,
   });
 }

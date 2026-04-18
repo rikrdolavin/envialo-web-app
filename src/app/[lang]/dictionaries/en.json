@@ -11,6 +11,10 @@
       "settings": "My settings",
       "help": "Help",
       "logout": "Log out"
+    },
+    "items": {
+      "shopping_cart": "Shopping cart",
+      "whish_list": "Wishlist"
     }
   },
   "home": {
@@ -233,5 +237,21 @@
         }
       }
     }
+  },
+  "cart": {
+    "title": "My Cart",
+    "empty": {
+      "title": "Your cart is empty",
+      "description": "It seems you haven't added anything yet. Explore our store and find what you need!",
+      "button": "Back to store"
+    },
+    "clear_cart": "Clear cart",
+    "total_products": "Total products",
+    "order_summary": "Order summary",
+    "amount_products": "Total in products",
+    "discount_saved": "Discount savings",
+    "total_cost": "TOTAL",
+    "back_to_store": "Back to store",
+    "go_to_checkout": "Proceed to checkout"
   }
 }

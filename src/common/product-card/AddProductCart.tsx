@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { Button, InputNumber } from "antd";
 import { TbShoppingBag } from "react-icons/tb";
+import { ProductVariant } from "@/models/products";
+import { useCart } from "@/context/CartContext";
 
 interface AddProductCartProps {
   price: number;
   productId: string;
   variant?: "small-card" | "product-detail";
   onAddToCart?: (productId: string, quantity: number) => void;
+  product: ProductVariant;
 }
 
 export default function AddProductCart({
@@ -16,10 +19,13 @@ export default function AddProductCart({
   productId,
   variant = "small-card",
   onAddToCart,
+  product,
 }: Readonly<AddProductCartProps>) {
   const [quantity, setQuantity] = useState(1);
+  const { loading, addToCart } = useCart();
 
   const handleAddToCart = () => {
+    addToCart(product, quantity);
     if (onAddToCart) onAddToCart(productId, quantity);
   };
 
@@ -95,6 +101,7 @@ export default function AddProductCart({
           <Button
             type="primary"
             onClick={handleAddToCart}
+            loading={loading}
             style={{
               width: "100%",
               padding: `${variant === "small-card" ? "0 10px" : "0"}`,

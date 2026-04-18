@@ -28,9 +28,10 @@ export async function doFetch({
   method,
   lang,
   apiBase = process.env.API_BASE_URL,
-  cache = "no-cache",
   cached,
   token,
+  revalidateTime,
+  extraCookies,
 }: {
   endpoint: string;
   data: unknown;
@@ -40,21 +41,34 @@ export async function doFetch({
   apiBase?: string;
   cache?: RequestCache;
   cached?: boolean;
+  revalidateTime?: number;
+  extraCookies?: string;
 }) {
   const url = apiBase ?? process.env.API_BASE_URL;
 
   const hasBody = method != "GET";
 
   try {
+    const headers: Record<string, string> = {
+      Authorization: token ? `Bearer ${token}` : "",
+      "Content-Type": "application/json",
+      "Accept-Language": lang ?? "",
+    };
+
+    if (extraCookies) {
+      headers["Cookie"] = extraCookies;
+    }
+
     const response = await fetch(`${url}${endpoint}`, {
       method: method,
       body: hasBody ? JSON.stringify(data) : null,
-      headers: {
-        "Content-Type": "application/json",
-        "Accept-Language": lang ?? "",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-      ...(cached ? { cache } : {}),
+      headers: headers,
+      ...(cached && {
+        cache: "force-cache",
+        next: {
+          revalidate: revalidateTime ?? 60,
+        },
+      }),
     });
 
     if (response.status == 401 && endpoint !== API_AUTH_LOGIN) {

@@ -4,11 +4,11 @@ import { Card } from "antd";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AddProductCart from "./product-card/AddProductCart";
-import { Product } from "@/models/products";
+import { ProductVariant } from "@/models/products";
 import Paragraph from "antd/es/typography/Paragraph";
 
 interface ProductCardProps {
-  product: Product;
+  product: ProductVariant;
   lang: string;
 }
 
@@ -37,6 +37,8 @@ export default function ProductCard({
           alt={product.name}
           width={300}
           height={300}
+          className="p-2 rounded-2xl"
+          draggable={false}
         />
       }
       hoverable
@@ -54,7 +56,8 @@ export default function ProductCard({
       </div>
       <div onClick={(e) => e.stopPropagation()}>
         <AddProductCart
-          price={product.priceUnit}
+          product={product}
+          price={product.priceUnit ?? 0}
           productId={product.id.toString()}
           variant="small-card"
         />

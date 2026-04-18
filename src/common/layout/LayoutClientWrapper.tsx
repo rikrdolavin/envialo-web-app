@@ -6,11 +6,11 @@ import FooterCustom from "./FooterCustom";
 
 import { AuthProvider } from "@/context/AuthContext";
 import { App as AntdApp, ConfigProvider } from "antd";
-import { StyleProvider } from "@ant-design/cssinjs";
 import { LanguageProvider } from "@/context/LangContext";
 
 import enUS from "antd/locale/en_US";
 import esEs from "antd/locale/es_ES";
+import { CartProvider } from "@/context/CartContext";
 
 interface LayoutClientWrapperProps {
   children: React.ReactNode;
@@ -24,28 +24,28 @@ export default function LayoutClientWrapper({
   dictionary,
 }: Readonly<LayoutClientWrapperProps>) {
   return (
-    <StyleProvider layer>
-      <ConfigProvider
-        locale={lang === "es" ? esEs : enUS}
-        theme={{
-          token: {
-            colorPrimary: "#2C8254",
-          },
-        }}
-        tooltip={{
-          unique: true,
-        }}
-      >
-        <AntdApp>
-          <LanguageProvider initLang={lang} initDictionary={dictionary}>
-            <AuthProvider>
+    <ConfigProvider
+      locale={lang === "es" ? esEs : enUS}
+      theme={{
+        token: {
+          colorPrimary: "#2C8254",
+        },
+      }}
+      tooltip={{
+        unique: true,
+      }}
+    >
+      <AntdApp>
+        <LanguageProvider initLang={lang} initDictionary={dictionary}>
+          <AuthProvider>
+            <CartProvider>
               <NavHeader lang={lang} />
               <main className="bg-brinco-bg">{children}</main>
               <FooterCustom />
-            </AuthProvider>
-          </LanguageProvider>
-        </AntdApp>
-      </ConfigProvider>
-    </StyleProvider>
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </AntdApp>
+    </ConfigProvider>
   );
 }

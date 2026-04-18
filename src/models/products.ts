@@ -23,3 +23,26 @@ export interface ProductDetailsResponse {
   status: string;
   result: Product;
 }
+
+export interface ProductVariant {
+  id: string;
+  productId: string;
+  sku: string;
+  slug: string;
+  price: number;
+  priceCost?: number;
+  priceUnit?: number;
+  name: string;
+  description: string;
+  isActive: boolean;
+  viaNotification: string;
+  previousPrice: number | null;
+  costPrice: number;
+  weight: number;
+  height: number;
+  width: number;
+  length: number;
+  stockAlert: boolean;
+  umbralStockAlert: number;
+  image?: string;
+}

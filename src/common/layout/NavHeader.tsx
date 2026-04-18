@@ -8,13 +8,15 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Dropdown, MenuProps } from "antd";
+import { Avatar, Badge, Dropdown, MenuProps, Tooltip } from "antd";
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import WrapperContainer from "./WrapperContainer";
 import { useLang } from "@/context/LangContext";
+import { TbShoppingBag } from "react-icons/tb";
+import { useCart } from "@/context/CartContext";
 
 interface NavHeaderProps {
   lang: Locale["locale"];
@@ -24,7 +26,8 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   const pathname = usePathname();
   const { user, loading, setUser } = useAuth();
   const { dictionary } = useLang();
-  const navbar = dictionary.navbar;
+  const { cartCount } = useCart();
+  const t = dictionary.navbar;
 
   const getMenuItems = (): MenuProps["items"] => {
     if (loading) return [];
@@ -36,7 +39,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           key: "profile",
           icon: <UserOutlined />,
           label: (
-            <Link href={`/${lang}/profile`}>{navbar.profile_menu.profile}</Link>
+            <Link href={`/${lang}/profile`}>{t.profile_menu.profile}</Link>
           ),
         },
         {
@@ -45,7 +48,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
         {
           key: "logout",
           icon: <LogoutOutlined />,
-          label: navbar.profile_menu.logout,
+          label: t.profile_menu.logout,
           onClick: () => {
             try {
               setUser(null);
@@ -65,7 +68,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           icon: <LoginOutlined />,
           label: (
             <Link href={`/${lang}/auth/login?callbackUrl=${pathname}`}>
-              {navbar.profile_menu.login}
+              {t.profile_menu.login}
             </Link>
           ),
         },
@@ -74,7 +77,7 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           icon: <UserAddOutlined />,
           label: (
             <Link href={`/${lang}/auth/signup`}>
-              {navbar.profile_menu.create_account}
+              {t.profile_menu.create_account}
             </Link>
           ),
         },
@@ -83,6 +86,15 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
   };
 
   useEffect(() => {
+    const cart = globalThis.sessionStorage.getItem("cart");
+    if (cart) {
+      if (typeof JSON.parse(cart) !== "object") {
+        globalThis.sessionStorage.setItem("cart", JSON.stringify([]));
+      }
+    } else {
+      globalThis.sessionStorage.setItem("cart", JSON.stringify([]));
+    }
+
     const handleScroll = () => {
       const header = document.getElementById("main-header");
       if (!header) return;
@@ -117,8 +129,29 @@ export default function NavHeader({ lang }: Readonly<NavHeaderProps>) {
           <Image src="/assets/logo.png" alt="Logo" width={200} height={200} />
         </Link>
         <div className="flex items-center gap-4">
+          <Tooltip
+            title={t.items.shopping_cart}
+            placement="bottom"
+            classNames={{ container: "bg-gray-950/20" }}
+          >
+            <Badge
+              count={cartCount}
+              size="small"
+            >
+              <Link
+                href={`/${lang}/cart`}
+                className="text-brinco cursor-pointer"
+              >
+                <TbShoppingBag size={24} className="hover:text-brinco/80 " />
+              </Link>
+            </Badge>
+          </Tooltip>
           <LanguageSwitcher currentLang={lang} />
-          <Dropdown menu={{ items: getMenuItems() }} trigger={["click"]} placement="bottomRight">
+          <Dropdown
+            menu={{ items: getMenuItems() }}
+            trigger={["click"]}
+            placement="bottomRight"
+          >
             <Avatar size="large" icon={<UserOutlined />} />
           </Dropdown>
         </div>

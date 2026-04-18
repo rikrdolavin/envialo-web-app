@@ -14,6 +14,7 @@
   --font-mono: var(--font-geist-mono);
   --color-brinco: #2c8254;
   --color-brinco-bg: #e7efef;
+  --color-brinco-dark: #1e5b3a;
 }
 
 body {

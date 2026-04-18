@@ -11,6 +11,10 @@
       "settings": "Mi configuración",
       "help": "Ayuda",
       "logout": "Cerrar sesión"
+    },
+    "items": {
+      "shopping_cart": "Carrito de compras",
+      "whish_list": "Lista de deseos"
     }
   },
   "home": {
@@ -233,5 +237,21 @@
         }
       }
     }
+  },
+  "cart": {
+    "title": "Mi Carrito",
+    "empty": {
+      "title": "Su carrito se encuentra vacío",
+      "description": "Parece que aún no has añadido nada. ¡Explora nuestra tienda y encuentra lo que necesitas!",
+      "button": "Volver a la tienda"
+    },
+    "clear_cart": "Vaciar carrito",
+    "total_products": "Total de productos",
+    "order_summary": "Resumen del pedido",
+    "amount_products": "Total en productos",
+    "discount_saved": "Ahorro en descuento",
+    "total_cost": "TOTAL",
+    "back_to_store": "Volver a la tienda",
+    "go_to_checkout": "Proceder a pagar"
   }
 }

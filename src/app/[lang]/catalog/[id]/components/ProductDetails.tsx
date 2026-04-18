@@ -2,7 +2,7 @@ import WrapperContainer from "@/common/layout/WrapperContainer";
 import AddProductCart from "@/common/product-card/AddProductCart";
 import { TextWithLineBreaks } from "@/common/TextWithLineBreaks";
 import { getProductDetails } from "@/lib/products";
-import { Product } from "@/models/products";
+import { Product, ProductVariant } from "@/models/products";
 import { ApiResponse } from "@/types/api";
 import Image from "next/image";
 import { use } from "react";
@@ -53,6 +53,7 @@ export function ProductDetails({ id, lang }: Readonly<ProductDetailsProps>) {
 
             <p className="text-4xl font-semibold">{product.name}</p>
             <AddProductCart
+              product={product as unknown as ProductVariant}
               price={product.priceUnit}
               productId={product.id.toString()}
               variant="product-detail"
