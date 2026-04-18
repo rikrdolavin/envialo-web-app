@@ -1,15 +1,8 @@
 services:
   envialo-web-app:
-    build:
-      context: ./envialo-web-app
-      dockerfile: Dockerfile
+    image: carlosmca/envialo-web-app:dev
     container_name: envialo-web-app-container
     env_file: .env
-    environment:
-      - API_BASE_URL=${API_BASE_URL:-https://api.envialo.brinxpress.com}
-      - SESSION_SECRET=${SESSION_SECRET:-asdasdsdsadasdasd}
-      - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED:-0}
-      - NODE_ENV=${NODE_ENV:-development}
     ports:
       - "${APP_PORT:-3000}:3000"
     networks:
