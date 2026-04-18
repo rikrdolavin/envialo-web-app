@@ -24,6 +24,8 @@ The intention of this project is replicate the functionality and design of the w
 
 The API for this project is documented in the `api.scalar.json` file. Use it to understand the API and how to use it.
 
+For the moment the dev API url is `https://api.task.envialo.brinxpress.com`. Make calls to this API using the api.scalar.json endpoints to analyze the responses and understand the API when the situation is not clear.
+
 ## Project structure
 
 The project is structured in the following way:
