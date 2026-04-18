@@ -8,18 +8,29 @@ import { useEffect, useMemo } from "react";
 
 export default function CartProducts() {
   const { lang, dictionary } = useLang();
-  const { cart, clearCart, addToCart } = useCart();
+  const { cart, clearCart, addToCart, cartCount } = useCart();
   const t = dictionary.cart;
 
-  const subtotal = useMemo(() => {
+  const { subtotal, discount } = useMemo(() => {
     return cart.reduce(
-      (acc, item) => acc + (item.product?.price ?? 0) * item.quantity,
-      0,
+      (acc, item) => {
+        const product = item.product;
+        if (!product) return acc;
+
+        const currentPrice = product.priceUnit ?? product.price ?? 0;
+        const originalPrice =
+          product.previousPrice && product.previousPrice > currentPrice
+            ? product.previousPrice
+            : currentPrice;
+
+        acc.subtotal += originalPrice * item.quantity;
+        acc.discount += (originalPrice - currentPrice) * item.quantity;
+        return acc;
+      },
+      { subtotal: 0, discount: 0 },
     );
   }, [cart]);
 
-  // Assuming no discount for now as it's not in context
-  const discount = 0;
   const total = subtotal - discount;
 
   const handleClearCart = async () => {
@@ -56,7 +67,7 @@ export default function CartProducts() {
     <div>
       <div className="flex items-center gap-4">
         <p className="text-base">
-          {t.total_products} ({cart.length})
+          {t.total_products} ({cartCount})
         </p>
         <Button
           type="primary"
