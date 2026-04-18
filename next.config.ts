@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  logging: {
+    browserToTerminal: true,
+  },
 };
 
 export default nextConfig;
