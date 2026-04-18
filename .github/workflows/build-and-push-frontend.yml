@@ -53,8 +53,7 @@ jobs:
         id: tag-suffix
         run: |
           # If it's a pull_request merged to main, use prod
-          # If it's a push to develop, use dev
-          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ github.event.pull_request.merged }}" = "true" ] && [ "${{ github.event.pull_request.base.ref }}" = "main" ]; then
             echo "suffix=prod" >> $GITHUB_OUTPUT
           else
             echo "suffix=dev" >> $GITHUB_OUTPUT
@@ -78,47 +77,26 @@ jobs:
             type=raw,value=${{ steps.tag-suffix.outputs.suffix }}
             type=raw,value=${{ steps.tag-suffix.outputs.suffix }}-${{ steps.sha.outputs.sha }}
 
-      - name: Set build args with environment-specific values
+      - name: Set build args
         id: build-args
         run: |
           ENV_SUFFIX="${{ steps.tag-suffix.outputs.suffix }}"
           
           if [ "$ENV_SUFFIX" = "prod" ]; then
-            # PRODUCTION
             API_BASE_URL="${API_BASE_URL_PROD:-${API_BASE_URL:-https://api.envialo.brinxpress.com}}"
-            SESSION_SECRET="${SESSION_SECRET_PROD:-${SESSION_SECRET:-}}"
-            NODE_ENV="production"
           else
-            # DEVELOPMENT
             API_BASE_URL="${API_BASE_URL_DEV:-${API_BASE_URL:-https://api.envialo.brinxpress.com}}"
-            SESSION_SECRET="${SESSION_SECRET_DEV:-${SESSION_SECRET:-}}"
-            NODE_ENV="development"
           fi
           
-          # COMMON
-          NODE_TLS_REJECT_UNAUTHORIZED="${NODE_TLS_REJECT_UNAUTHORIZED:-0}"
-          
-          # Export to GITHUB_ENV
           echo "API_BASE_URL=$API_BASE_URL" >> $GITHUB_ENV
-          echo "SESSION_SECRET=$SESSION_SECRET" >> $GITHUB_ENV
-          echo "NODE_ENV=$NODE_ENV" >> $GITHUB_ENV
-          echo "NODE_TLS_REJECT_UNAUTHORIZED=$NODE_TLS_REJECT_UNAUTHORIZED" >> $GITHUB_ENV
-          
-          echo "=== Variables to be used for $ENV_SUFFIX ==="
+          echo "=== Build Environment: $ENV_SUFFIX ==="
           echo "API_BASE_URL=$API_BASE_URL"
         env:
-          # GitHub Vars (not secrets) - Dev
           API_BASE_URL_DEV: ${{ vars.API_BASE_URL_DEV }}
-          SESSION_SECRET_DEV: ${{ secrets.SESSION_SECRET_DEV }}
-          # GitHub Vars (not secrets) - Prod
           API_BASE_URL_PROD: ${{ vars.API_BASE_URL_PROD }}
-          SESSION_SECRET_PROD: ${{ secrets.SESSION_SECRET_PROD }}
-          # Fallbacks
           API_BASE_URL: ${{ vars.API_BASE_URL }}
-          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-          NODE_TLS_REJECT_UNAUTHORIZED: ${{ vars.NODE_TLS_REJECT_UNAUTHORIZED }}
 
-      - name: Build and push Frontend Application image
+      - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -129,6 +107,3 @@ jobs:
           no-cache: true
           build-args: |
             API_BASE_URL=${{ env.API_BASE_URL }}
-            SESSION_SECRET=${{ env.SESSION_SECRET }}
-            NODE_ENV=${{ env.NODE_ENV }}
-            NODE_TLS_REJECT_UNAUTHORIZED=${{ env.NODE_TLS_REJECT_UNAUTHORIZED }}
