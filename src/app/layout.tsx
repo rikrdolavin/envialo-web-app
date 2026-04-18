@@ -14,9 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <AntdRegistry>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <AntdRegistry layer>
           {children}
           <FloatingWhatsAppButton />
         </AntdRegistry>
