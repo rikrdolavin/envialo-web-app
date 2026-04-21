@@ -5,6 +5,7 @@ import LinkButton from "@/common/LinkButton";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LangContext";
 import { useEffect, useMemo } from "react";
+import CheckoutProcessing from "./CheckoutProcessing";
 
 export default function CartProducts() {
   const { lang, dictionary } = useLang();
@@ -115,11 +116,7 @@ export default function CartProducts() {
               url={`/${lang}/catalog`}
               className="rounded-full w-full py-3 bg-brinco/70! hover:bg-brinco/50!"
             />
-            <LinkButton
-              text={t.go_to_checkout}
-              url={`/${lang}/checkout`}
-              className="rounded-full w-full py-3 bg-brinco hover:bg-brinco-dark"
-            />
+            <CheckoutProcessing />
           </div>
         </Card>
       </div>

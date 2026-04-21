@@ -5,6 +5,7 @@ import {
   API_CART_ITEMS,
   API_CART_DELETE_ITEM,
   API_CART_ITEMS_PARAM,
+  API_CART_CHECKOUT,
 } from "@/constants/cart/endpoints";
 import { doFetch } from "./utils";
 import { cookies } from "next/headers";
@@ -93,4 +94,18 @@ export async function clearCartApi() {
     extraCookies: guestCookie,
     token,
   });
+}
+
+export async function checkout() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token")?.value;
+
+  const res = await doFetch({
+    data: {},
+    method: "POST",
+    endpoint: API_CART_CHECKOUT,
+    token,
+  });
+
+  return res;
 }
